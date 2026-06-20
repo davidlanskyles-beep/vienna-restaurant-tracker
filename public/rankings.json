@@ -1,42 +1,408 @@
 {
-  "generated_at": "2026-06-01T01:00:00Z",
+  "generated_at": "2026-06-20T21:32:17.126111Z",
   "week_start_date": "2026-06-01",
   "blue_chips": [
     {
-      "name": "Steirereck im Stadtpark",
-      "rating": 4.7,
-      "review_count": 4120,
-      "primary_type": "fine_dining_restaurant",
-      "growth_abs": 31,
-      "growth_rate": 0.0076
+      "name": "Schnitzel One",
+      "rating": 4.8,
+      "review_count": 15498,
+      "primary_type": "restaurant",
+      "growth_abs": null,
+      "growth_rate": null
     },
     {
-      "name": "Plachutta Wollzeile",
-      "rating": 4.5,
-      "review_count": 9870,
-      "primary_type": "restaurant",
-      "growth_abs": 44,
-      "growth_rate": 0.0045
-    }
-  ],
-  "rising_stars": [
+      "name": "PETER PANE Burgergrill & Bar",
+      "rating": 4.7,
+      "review_count": 13829,
+      "primary_type": "hamburger_restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
     {
-      "name": "Gasthaus Beispiel",
-      "rating": 4.6,
-      "review_count": 2310,
-      "primary_type": "restaurant",
-      "growth_abs": 128,
-      "growth_rate": 0.0587
-    }
-  ],
-  "breakouts": [
-    {
-      "name": "Neues Lokal Demo",
+      "name": "Restaurant Vienne/OnurChefs",
       "rating": 4.8,
-      "review_count": 540,
+      "review_count": 9960,
       "primary_type": "restaurant",
-      "growth_abs": 96,
-      "growth_rate": 0.2162
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Arizona Burger & Bar",
+      "rating": 4.8,
+      "review_count": 7796,
+      "primary_type": "american_restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Safran Pizza - Kebap",
+      "rating": 4.8,
+      "review_count": 6694,
+      "primary_type": "restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Marchfelderhof",
+      "rating": 4.7,
+      "review_count": 4839,
+      "primary_type": "restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Bauernbräu",
+      "rating": 4.8,
+      "review_count": 4075,
+      "primary_type": "austrian_restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "hans im glück",
+      "rating": 4.7,
+      "review_count": 3826,
+      "primary_type": "hamburger_restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Kurze Pause GmbH",
+      "rating": 4.8,
+      "review_count": 3822,
+      "primary_type": "kebab_shop",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Mochi Ramen Bar",
+      "rating": 4.7,
+      "review_count": 3781,
+      "primary_type": "ramen_restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Leberkas-Pepi Wien Operngasse",
+      "rating": 4.7,
+      "review_count": 3573,
+      "primary_type": "austrian_restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Cavaliere Pizzeria Ristorante",
+      "rating": 4.7,
+      "review_count": 3511,
+      "primary_type": "italian_restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Das Augustin",
+      "rating": 4.7,
+      "review_count": 3467,
+      "primary_type": "restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Bella Compagnia Erdbergstraße",
+      "rating": 4.7,
+      "review_count": 3280,
+      "primary_type": "italian_restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Zum alten Fassl",
+      "rating": 4.7,
+      "review_count": 3271,
+      "primary_type": "austrian_restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Pulkautaler Winehouse and Restaurant",
+      "rating": 4.7,
+      "review_count": 3251,
+      "primary_type": "restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Gasthaus Schwaigerwirt",
+      "rating": 4.7,
+      "review_count": 3214,
+      "primary_type": "restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Wolfgang Puck Kitchen & Bar",
+      "rating": 4.8,
+      "review_count": 3168,
+      "primary_type": "restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Stadthallenbräu",
+      "rating": 4.8,
+      "review_count": 3115,
+      "primary_type": "restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Wiener Wiazhaus",
+      "rating": 4.7,
+      "review_count": 3023,
+      "primary_type": "austrian_restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Yume",
+      "rating": 4.7,
+      "review_count": 2936,
+      "primary_type": "asian_restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Stadtsaal",
+      "rating": 4.7,
+      "review_count": 2855,
+      "primary_type": "comedy_club",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Nalin KeepUp",
+      "rating": 4.7,
+      "review_count": 2826,
+      "primary_type": "kebab_shop",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Buffet Trzesniewski Dorotheergasse",
+      "rating": 4.7,
+      "review_count": 2722,
+      "primary_type": "sandwich_shop",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Pizzeria Pummarò",
+      "rating": 4.8,
+      "review_count": 2640,
+      "primary_type": "pizza_restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "SIXTA",
+      "rating": 4.9,
+      "review_count": 2622,
+      "primary_type": "austrian_restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "DOOR No. 8 - The Steakhouse",
+      "rating": 4.7,
+      "review_count": 2621,
+      "primary_type": "steak_house",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "mani im vierten",
+      "rating": 4.7,
+      "review_count": 2546,
+      "primary_type": "restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Vienna Sausage",
+      "rating": 4.9,
+      "review_count": 2501,
+      "primary_type": "hot_dog_restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Ferhatovic Austria",
+      "rating": 4.7,
+      "review_count": 2325,
+      "primary_type": "wholesaler",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "THE DISTRICT KEBAB | PIDE | LAHMACUN | PIZZA",
+      "rating": 4.7,
+      "review_count": 2252,
+      "primary_type": "turkish_restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "CHICKEN PLUS",
+      "rating": 4.8,
+      "review_count": 2251,
+      "primary_type": "fast_food_restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Smash King Burger",
+      "rating": 4.8,
+      "review_count": 2208,
+      "primary_type": "restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "MOZAIK Cafe & Restaurant Vienna",
+      "rating": 4.7,
+      "review_count": 2194,
+      "primary_type": "restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Ariston Hellenic",
+      "rating": 4.8,
+      "review_count": 2184,
+      "primary_type": "greek_restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Coconut Curry Praterstrasse",
+      "rating": 4.7,
+      "review_count": 2158,
+      "primary_type": "restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Passione-Da Ferdinando",
+      "rating": 4.7,
+      "review_count": 2097,
+      "primary_type": "italian_restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Medl-Bräu Penzinger Gasthofbrauerei",
+      "rating": 4.7,
+      "review_count": 2028,
+      "primary_type": "restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Adriano",
+      "rating": 4.7,
+      "review_count": 1932,
+      "primary_type": "pizza_restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Hoskar Restaurant",
+      "rating": 4.8,
+      "review_count": 1915,
+      "primary_type": "restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Chinacy",
+      "rating": 4.7,
+      "review_count": 1907,
+      "primary_type": "chinese_restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Restaurant Wiener",
+      "rating": 4.7,
+      "review_count": 1906,
+      "primary_type": "austrian_restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Vamos Kebap Pizza",
+      "rating": 4.9,
+      "review_count": 1883,
+      "primary_type": "restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Nara",
+      "rating": 4.7,
+      "review_count": 1829,
+      "primary_type": "restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Moment Cafe and Restaurant",
+      "rating": 4.9,
+      "review_count": 1824,
+      "primary_type": "restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Gasthaus Quell",
+      "rating": 4.7,
+      "review_count": 1777,
+      "primary_type": "restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "DonMono Ramen Donauzentrum",
+      "rating": 4.8,
+      "review_count": 1734,
+      "primary_type": "japanese_restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "La Taquería Chiquitita - Authentic Mexican Tacos in Vienna",
+      "rating": 4.8,
+      "review_count": 1713,
+      "primary_type": "taco_restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Konoba Restaurant",
+      "rating": 4.8,
+      "review_count": 1672,
+      "primary_type": "croatian_restaurant",
+      "growth_abs": null,
+      "growth_rate": null
+    },
+    {
+      "name": "Ugis Gemüsekebap®",
+      "rating": 4.8,
+      "review_count": 1626,
+      "primary_type": "turkish_restaurant",
+      "growth_abs": null,
+      "growth_rate": null
     }
-  ]
+  ],
+  "rising_stars": [],
+  "breakouts": []
 }
