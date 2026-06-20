@@ -1,0 +1,42 @@
+{
+  "generated_at": "2026-06-01T01:00:00Z",
+  "week_start_date": "2026-06-01",
+  "blue_chips": [
+    {
+      "name": "Steirereck im Stadtpark",
+      "rating": 4.7,
+      "review_count": 4120,
+      "primary_type": "fine_dining_restaurant",
+      "growth_abs": 31,
+      "growth_rate": 0.0076
+    },
+    {
+      "name": "Plachutta Wollzeile",
+      "rating": 4.5,
+      "review_count": 9870,
+      "primary_type": "restaurant",
+      "growth_abs": 44,
+      "growth_rate": 0.0045
+    }
+  ],
+  "rising_stars": [
+    {
+      "name": "Gasthaus Beispiel",
+      "rating": 4.6,
+      "review_count": 2310,
+      "primary_type": "restaurant",
+      "growth_abs": 128,
+      "growth_rate": 0.0587
+    }
+  ],
+  "breakouts": [
+    {
+      "name": "Neues Lokal Demo",
+      "rating": 4.8,
+      "review_count": 540,
+      "primary_type": "restaurant",
+      "growth_abs": 96,
+      "growth_rate": 0.2162
+    }
+  ]
+}
