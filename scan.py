@@ -1,9 +1,17 @@
 #!/usr/bin/env python3
 """
-Vienna Restaurant Trend Tracker — weekly scan.
+Vienna Restaurant Trend Tracker — monthly scan.
 
-ONE job does both discovery and the weekly snapshot, because Nearby Search (New)
+ONE job does both discovery and the monthly snapshot, because Nearby Search (New)
 already returns rating + userRatingCount. There is no separate Place Details job.
+
+Cost-saving cache (added after the first successful run)
+-------------------------------------------------------
+Mapping the whole city (~2,268 grid cells) is the expensive part. Most of those
+cells are empty (parks, rail yards, the river). So we remember which cells
+actually returned restaurants and, on normal months, only re-check those.
+A FULL re-map runs every few months (and always when the cache is empty) to
+pick up newly-opened areas. This keeps a typical month near the free allowance.
 
 Env vars required:
   GOOGLE_MAPS_API_KEY   Places API (New) enabled, billing on
@@ -48,6 +56,11 @@ RADIUS_M  = 400.0
 # Keep the genuine restaurant set; drop the obvious non-restaurants at the API.
 EXCLUDED_PRIMARY = ["cafe", "bar", "bakery", "coffee_shop",
                     "meal_takeaway", "meal_delivery", "night_club"]
+
+# Months in which we do a FULL re-map of the whole grid (quarterly). Every other
+# month scans only the cached productive cells. The cache is also rebuilt from
+# scratch whenever it is empty (e.g. the very first run after this change).
+FULL_REMAP_MONTHS = {1, 4, 7, 10}
 
 M_PER_DEG_LAT = 111_320.0
 def m_per_deg_lng(lat):  # longitude shrinks with latitude
@@ -100,16 +113,69 @@ def first_of_this_month():
     return today.replace(day=1)
 
 
+def ensure_cache_table(conn):
+    """Create the productive-cell cache table if it does not exist yet."""
+    cur = conn.cursor()
+    cur.execute("""
+        create table if not exists productive_cells (
+          lat        double precision not null,
+          lng        double precision not null,
+          last_seen  date not null default current_date,
+          primary key (lat, lng)
+        )
+    """)
+    conn.commit()
+    cur.close()
+
+
+def load_productive_cells(conn):
+    cur = conn.cursor()
+    cur.execute("select lat, lng from productive_cells")
+    rows = cur.fetchall()
+    cur.close()
+    return [(float(la), float(ln)) for la, ln in rows]
+
+
+def save_productive_cells(conn, cells, day):
+    if not cells:
+        return
+    cur = conn.cursor()
+    execute_values(cur, """
+        insert into productive_cells (lat, lng, last_seen)
+        values %s
+        on conflict (lat, lng) do update set last_seen = excluded.last_seen
+    """, [(la, ln, day) for (la, ln) in cells])
+    conn.commit()
+    cur.close()
+
+
 def main():
-    week = first_of_this_month()   # one snapshot per month; stored in week_start_date
-    seen = {}          # place_id -> record (dedup across overlapping cells)
+    month_start = first_of_this_month()   # one snapshot per month (week_start_date)
+
+    conn = psycopg2.connect(DB_URL)
+    ensure_cache_table(conn)
+    cached = load_productive_cells(conn)
+
+    full_remap = (not cached) or (dt.date.today().month in FULL_REMAP_MONTHS)
+    if full_remap:
+        cells = list(grid_centers())
+        why = "cache empty" if not cached else "scheduled quarterly re-map"
+        print(f"FULL re-map ({why}): scanning {len(cells)} grid cells "
+              f"for month {month_start} …")
+    else:
+        cells = cached
+        print(f"Incremental: scanning {len(cells)} cached productive cells "
+              f"for month {month_start} …")
+
+    seen = {}            # place_id -> record (dedup across overlapping cells)
+    productive = []      # cells that returned at least one restaurant
     calls = 0
-    cells = list(grid_centers())
-    print(f"Scanning {len(cells)} grid cells for week {week} …")
 
     for i, (lat, lng) in enumerate(cells, 1):
         places = search_cell(lat, lng)
         calls += 1
+        if places:
+            productive.append((round(lat, 6), round(lng, 6)))
         for p in places:
             pid = p.get("id")
             if not pid or pid in seen:
@@ -129,8 +195,16 @@ def main():
             print(f"  {i}/{len(cells)} cells, {len(seen)} unique places, {calls} calls")
         time.sleep(0.05)   # be gentle on the per-minute quota
 
-    print(f"Done scanning. {len(seen)} unique restaurants, {calls} API calls.")
-    write_db(week, list(seen.values()))
+    print(f"Done scanning. {len(seen)} unique restaurants, {calls} API calls, "
+          f"{len(productive)} productive cells.")
+
+    write_db(month_start, list(seen.values()))
+
+    # Only (re)write the cache on a full map, when we have seen the whole grid.
+    if full_remap:
+        save_productive_cells(conn, productive, month_start)
+        print(f"Cache updated: {len(productive)} productive cells stored.")
+    conn.close()
 
 
 def write_db(week, records):
@@ -154,7 +228,7 @@ def write_db(week, records):
     """, [(r["place_id"], r["name"], r["primary_type"], r["business_status"],
            r["lat"], r["lng"], week, week) for r in records])
 
-    # Insert this week's snapshots (idempotent on re-run).
+    # Insert this month's snapshots (idempotent on re-run).
     execute_values(cur, """
         insert into weekly_snapshots (place_id, week_start_date, rating, review_count)
         values %s
