@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
 <title>Wien Restaurant-Bewegung</title>
 <style>
   :root{
@@ -22,7 +25,7 @@
     font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     line-height:1.45; -webkit-font-smoothing:antialiased;
   }
-  .wrap{max-width:920px; margin:0 auto; padding:0 20px 80px}
+  .wrap{max-width:920px; margin:0 auto; padding:0 20px 40px}
   header{
     position:sticky; top:0; z-index:5; background:color-mix(in srgb, var(--ground) 88%, transparent);
     backdrop-filter:saturate(1.1) blur(8px);
@@ -45,7 +48,7 @@
     appearance:none; -webkit-appearance:none;
     font:inherit; font-size:14px; color:var(--ink);
     background:var(--ground); border:1px solid var(--line); border-radius:9px;
-    padding:8px 30px 8px 11px; min-width:190px; cursor:pointer;
+    padding:8px 30px 8px 11px; min-width:180px; cursor:pointer;
     background-image:linear-gradient(45deg, transparent 50%, var(--ink-soft) 50%),
       linear-gradient(135deg, var(--ink-soft) 50%, transparent 50%);
     background-position:calc(100% - 16px) 17px, calc(100% - 11px) 17px;
@@ -85,12 +88,16 @@
   .empty b{color:var(--ink); font-weight:600}
   .rank{color:var(--flat); width:24px; font-size:12.5px}
 
+  .site-foot{max-width:920px; margin:8px auto 0; padding:22px 20px 0;
+    border-top:1px solid var(--line); color:var(--ink-soft); font-size:13px}
+  .site-foot a{color:var(--up)}
+
   @media (max-width:620px){
     .hide-sm{display:none}
     td,th{padding-left:8px; padding-right:8px}
     h2{font-size:19px}
     .field select{min-width:0; width:100%}
-    .field{flex:1 1 140px}
+    .field{flex:1 1 130px}
   }
 </style>
 </head>
@@ -117,6 +124,10 @@
         <label for="f-district">Bezirk</label>
         <select id="f-district"><option value="">Alle Bezirke</option></select>
       </div>
+      <div class="field hidden" id="field-price">
+        <label for="f-price">Preis</label>
+        <select id="f-price"><option value="">Alle Preise</option></select>
+      </div>
       <button class="reset" id="reset" type="button">Filter zur&uuml;cksetzen</button>
     </div>
     <div class="count" id="count"></div>
@@ -125,6 +136,11 @@
     <section id="rising"></section>
     <section id="breakout"></section>
   </div>
+
+  <footer class="site-foot">
+    Fragen, Hinweise oder Korrekturen? Schreib an
+    <a id="contact" href="#">&#8230;</a>.
+  </footer>
 
 <script>
 const SECTIONS = [
@@ -167,24 +183,23 @@ const CUISINE = {
 function cuisineLabel(type){
   if(!type) return "Sonstige";
   if(CUISINE[type]) return CUISINE[type];
-  // Fallback: prettify the raw type (e.g. "lebanese_restaurant" -> "Lebanese").
   let t = type.replace(/_restaurant$/,"").replace(/_/g," ").trim();
   return t.charAt(0).toUpperCase() + t.slice(1);
 }
+function priceSymbol(n){ return (n>=1 && n<=4) ? "€".repeat(n) : ""; }
 
 const fmt = n => (n==null? "—" : n.toLocaleString("de-AT"));
 const pct = r => (r==null? "—" : (r*100).toFixed(1).replace(".",",")+"%");
 
-let DATA = null;                       // raw fetched data
-const state = { cuisine:"", district:"" };
+let DATA = null;
+const state = { cuisine:"", district:"", price:"" };
 
-function allRows(){
-  return SECTIONS.flatMap(s => DATA[s.srcKey||s.key] || []);
-}
+function allRows(){ return SECTIONS.flatMap(s => DATA[s.srcKey||s.key] || []); }
 
 function rowMatches(r){
   if(state.cuisine && (r.primary_type||"") !== state.cuisine) return false;
   if(state.district && String(r.district||"") !== state.district) return false;
+  if(state.price && String(r.price_level||"") !== state.price) return false;
   return true;
 }
 
@@ -203,6 +218,13 @@ function momentumCell(row, mode, maxAbs, maxRate){
   return `<span class="mom ${cls}">${arrow} ${a>0?"+":""}${fmt(a)}<span class="bar" style="width:${w}px"></span></span>`;
 }
 
+function subline(r){
+  const bits = [cuisineLabel(r.primary_type)];
+  if(r.price_level) bits.push(priceSymbol(r.price_level));
+  if(r.district) bits.push(`${r.district}. ${BEZIRKE[r.district]||""}`);
+  return bits.join(" · ");
+}
+
 function render(sec, rows, week){
   const node = document.getElementById(sec.el);
   const rateMode = sec.momentum==="rate";
@@ -214,7 +236,7 @@ function render(sec, rows, week){
     <h2>${sec.title}</h2>
     <p class="def">${sec.def}</p>`;
 
-  const filtered = (state.cuisine||state.district);
+  const filtered = (state.cuisine||state.district||state.price);
   if(!rows.length){
     const msg = filtered
       ? `<p class="empty">Keine Treffer für diese Filter in dieser Liste.</p>`
@@ -231,7 +253,7 @@ function render(sec, rows, week){
     <tr>
       <td class="l rank num">${i+1}</td>
       <td class="l"><span class="name">${r.name||"—"}</span>
-        <div class="cuisine hide-sm">${cuisineLabel(r.primary_type)}${r.district?` · ${r.district}. ${BEZIRKE[r.district]||""}`:""}</div></td>
+        <div class="cuisine hide-sm">${subline(r)}</div></td>
       <td class="rating num hide-sm">${r.rating!=null? r.rating.toFixed(1).replace(".",","):"—"}</td>
       <td class="num">${fmt(r.review_count)}</td>
       <td>${momentumCell(r, sec.momentum, maxAbs, maxRate)}</td>
@@ -259,51 +281,62 @@ function apply(){
     render(sec, rows, week);
   });
   const cnt = document.getElementById("count");
-  if(state.cuisine || state.district){
-    const bits = [];
-    if(state.cuisine) bits.push(cuisineLabel(state.cuisine));
-    if(state.district) bits.push(`${state.district}. ${BEZIRKE[state.district]||""}`);
-    cnt.textContent = `${shown} Treffer für: ${bits.join(" · ")}`;
-  } else {
-    cnt.textContent = "";
-  }
+  const bits = [];
+  if(state.cuisine) bits.push(cuisineLabel(state.cuisine));
+  if(state.district) bits.push(`${state.district}. ${BEZIRKE[state.district]||""}`);
+  if(state.price) bits.push(priceSymbol(Number(state.price)));
+  cnt.textContent = bits.length ? `${shown} Treffer für: ${bits.join(" · ")}` : "";
+}
+
+function fillSelect(sel, values, labelFn){
+  values.forEach(v => {
+    const o = document.createElement("option");
+    o.value = String(v); o.textContent = labelFn(v);
+    sel.appendChild(o);
+  });
 }
 
 function buildFilters(){
   const rows = allRows();
 
-  // Cuisine options: every primaryType present in the data, sorted by German label.
-  const types = [...new Set(rows.map(r => r.primary_type).filter(Boolean))];
-  types.sort((a,b)=> cuisineLabel(a).localeCompare(cuisineLabel(b),"de"));
+  const types = [...new Set(rows.map(r => r.primary_type).filter(Boolean))]
+    .sort((a,b)=> cuisineLabel(a).localeCompare(cuisineLabel(b),"de"));
   const csel = document.getElementById("f-cuisine");
-  types.forEach(t => {
-    const o = document.createElement("option");
-    o.value = t; o.textContent = cuisineLabel(t);
-    csel.appendChild(o);
-  });
+  fillSelect(csel, types, cuisineLabel);
   csel.addEventListener("change", e => { state.cuisine = e.target.value; apply(); });
 
-  // District options: only shown once the data actually carries districts.
   const districts = [...new Set(rows.map(r => r.district).filter(d => d!=null))]
     .map(Number).sort((a,b)=>a-b);
-  const dwrap = document.getElementById("field-district");
   const dsel = document.getElementById("f-district");
   if(districts.length){
-    districts.forEach(d => {
-      const o = document.createElement("option");
-      o.value = String(d); o.textContent = `${d}. ${BEZIRKE[d]||""}`;
-      dsel.appendChild(o);
-    });
+    fillSelect(dsel, districts, d => `${d}. ${BEZIRKE[d]||""}`);
     dsel.addEventListener("change", e => { state.district = e.target.value; apply(); });
-    dwrap.classList.remove("hidden");
+    document.getElementById("field-district").classList.remove("hidden");
+  }
+
+  const prices = [...new Set(rows.map(r => r.price_level).filter(p => p!=null))]
+    .map(Number).sort((a,b)=>a-b);
+  const psel = document.getElementById("f-price");
+  if(prices.length){
+    fillSelect(psel, prices, p => priceSymbol(p));
+    psel.addEventListener("change", e => { state.price = e.target.value; apply(); });
+    document.getElementById("field-price").classList.remove("hidden");
   }
 
   document.getElementById("reset").addEventListener("click", () => {
-    state.cuisine = ""; state.district = "";
-    csel.value = ""; dsel.value = "";
+    state.cuisine = ""; state.district = ""; state.price = "";
+    csel.value = ""; dsel.value = ""; psel.value = "";
     apply();
   });
 }
+
+// Assemble the contact link at runtime (light spam-bot deterrent).
+(function(){
+  const u = "davidlanskyles", d = "gmail.com";
+  const a = document.getElementById("contact");
+  a.href = "mailto:" + u + "@" + d;
+  a.textContent = u + "@" + d;
+})();
 
 fetch("rankings.json", {cache:"no-store"})
   .then(r => { if(!r.ok) throw new Error(r.status); return r.json(); })
