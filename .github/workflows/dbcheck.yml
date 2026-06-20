@@ -1,0 +1,25 @@
+name: db-check
+
+# One-off helper: confirms the DATABASE_URL secret can actually connect to
+# Supabase. Safe to delete once the first scan has saved data successfully.
+on:
+  workflow_dispatch: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install driver
+        run: pip install psycopg2-binary
+      - name: Test database connection
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          python - <<'PY'
+          import os, psycopg2
+          conn = psycopg2.connect(os.environ["DATABASE_URL"])
+          cur = conn.cursor()
+          cur.execute("select count(*) from restaurants")
+          print("DB OK - restaurants rows:", cur.fetchone()[0])
+          cur.close(); conn.close()
+          PY
