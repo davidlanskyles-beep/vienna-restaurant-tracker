@@ -1,0 +1,40 @@
+name: monthly-scan
+
+on:
+  schedule:
+    # 1st of each month, ~03:00 Vienna time. GitHub cron is UTC-only:
+    # 01:00 UTC = 03:00 in summer (CEST) / 02:00 in winter (CET). Both fine.
+    - cron: "0 1 1 * *"
+  workflow_dispatch: {}   # lets you trigger a run manually from the Actions tab
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install -r requirements.txt
+
+      - name: Run monthly scan (discovery + snapshot)
+        env:
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: python scan.py
+
+      - name: Export rankings.json
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: python export.py
+
+      - name: Commit updated rankings
+        run: |
+          git config user.name  "trend-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add public/rankings.json
+          git diff --staged --quiet || git commit -m "monthly rankings $(date -u +%Y-%m)"
+          git push
