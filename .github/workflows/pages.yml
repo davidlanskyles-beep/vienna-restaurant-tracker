@@ -1,12 +1,20 @@
 name: deploy-pages
 
-# Publishes the public/ folder to GitHub Pages. Runs on every push to main
-# (so the site refreshes right after the monthly scan commits new rankings)
-# and can be triggered by hand from the Actions tab.
+# Publishes the public/ folder to GitHub Pages.
+# Triggers:
+#  - push to main (manual content edits)
+#  - by hand from the Actions tab
+#  - automatically after the monthly-scan workflow finishes. This last one is
+#    required because a workflow's own commit (the scan pushing rankings.json
+#    with the built-in token) does NOT trigger the push event, so without the
+#    workflow_run trigger the site would never refresh after a monthly scan.
 on:
   push:
     branches: [main]
   workflow_dispatch: {}
+  workflow_run:
+    workflows: ["monthly-scan"]
+    types: [completed]
 
 permissions:
   contents: read
