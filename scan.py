@@ -5,13 +5,17 @@ Vienna Restaurant Trend Tracker — monthly scan.
 ONE job does both discovery and the monthly snapshot, because Nearby Search (New)
 already returns rating + userRatingCount. There is no separate Place Details job.
 
-Cost-saving cache (added after the first successful run)
--------------------------------------------------------
-Mapping the whole city (~2,268 grid cells) is the expensive part. Most of those
-cells are empty (parks, rail yards, the river). So we remember which cells
-actually returned restaurants and, on normal months, only re-check those.
-A FULL re-map runs every few months (and always when the cache is empty) to
-pick up newly-opened areas. This keeps a typical month near the free allowance.
+It also captures, in the SAME call (no extra cost, because rating/userRatingCount
+already put us on the top field tier):
+  - district  — derived from the Vienna postal code (1XX0 -> district XX, 1..23)
+  - price_level — Google's price band, 1 (€) .. 4 (€€€€)
+
+Cost-saving cache
+-----------------
+Mapping the whole city (~2,268 grid cells) is the expensive part. Most cells are
+empty, so we remember which cells returned restaurants and, on normal months,
+only re-check those. A FULL re-map runs every few months (and always when the
+cache is empty) to pick up newly-opened areas.
 
 Env vars required:
   GOOGLE_MAPS_API_KEY   Places API (New) enabled, billing on
@@ -32,7 +36,8 @@ DB_URL  = os.environ["DATABASE_URL"]
 
 NEARBY_URL = "https://places.googleapis.com/v1/places:searchNearby"
 
-# Fields we ask for. rating + userRatingCount push this to the Enterprise SKU.
+# Fields we ask for. rating + userRatingCount push this to the Enterprise SKU;
+# addressComponents + priceLevel ride along at no extra per-call cost.
 FIELD_MASK = ",".join([
     "places.id",
     "places.displayName",
@@ -41,29 +46,32 @@ FIELD_MASK = ",".join([
     "places.businessStatus",
     "places.rating",
     "places.userRatingCount",
+    "places.priceLevel",
+    "places.addressComponents",
 ])
 
 # Vienna bounding box (rough). Trim corners later to cut empty calls.
 LAT_MIN, LAT_MAX = 48.118, 48.323
 LNG_MIN, LNG_MAX = 16.182, 16.578
 
-# Grid: ~550 m spacing, 400 m search radius. Inner districts are dense and
-# Nearby Search (New) caps at 20 results with NO pagination — if you see cells
-# returning exactly 20, densify the grid there (drop SPACING_M to ~300).
 SPACING_M = 550
 RADIUS_M  = 400.0
 
-# Keep the genuine restaurant set; drop the obvious non-restaurants at the API.
 EXCLUDED_PRIMARY = ["cafe", "bar", "bakery", "coffee_shop",
                     "meal_takeaway", "meal_delivery", "night_club"]
 
-# Months in which we do a FULL re-map of the whole grid (quarterly). Every other
-# month scans only the cached productive cells. The cache is also rebuilt from
-# scratch whenever it is empty (e.g. the very first run after this change).
+# Months in which we do a FULL re-map of the whole grid (quarterly).
 FULL_REMAP_MONTHS = {1, 4, 7, 10}
 
+PRICE_MAP = {
+    "PRICE_LEVEL_INEXPENSIVE": 1,
+    "PRICE_LEVEL_MODERATE": 2,
+    "PRICE_LEVEL_EXPENSIVE": 3,
+    "PRICE_LEVEL_VERY_EXPENSIVE": 4,
+}
+
 M_PER_DEG_LAT = 111_320.0
-def m_per_deg_lng(lat):  # longitude shrinks with latitude
+def m_per_deg_lng(lat):
     import math
     return 111_320.0 * math.cos(math.radians(lat))
 
@@ -78,6 +86,25 @@ def grid_centers():
             yield round(lat, 6), round(lng, 6)
             lng += dlng
         lat += dlat
+
+
+def parse_price(p):
+    return PRICE_MAP.get(p.get("priceLevel"))
+
+
+def parse_district(p):
+    """Vienna postal codes are 1XX0, where XX is the district (01..23)."""
+    try:
+        for comp in p.get("addressComponents", []) or []:
+            if "postal_code" in (comp.get("types") or []):
+                pc = (comp.get("longText") or comp.get("shortText") or "").strip()
+                if len(pc) == 4 and pc.isdigit() and pc[0] == "1":
+                    d = int(pc[1:3])
+                    if 1 <= d <= 23:
+                        return d
+    except Exception:
+        pass
+    return None
 
 
 def search_cell(lat, lng):
@@ -99,30 +126,75 @@ def search_cell(lat, lng):
         r = requests.post(NEARBY_URL, json=body, headers=headers, timeout=30)
         if r.status_code == 200:
             return r.json().get("places", [])
-        if r.status_code in (429, 500, 503):       # backoff & retry
+        if r.status_code in (429, 500, 503):
             time.sleep(2 ** attempt)
             continue
-        # Anything else is a real error — surface it once and skip the cell.
         sys.stderr.write(f"cell {lat},{lng} -> {r.status_code} {r.text[:200]}\n")
         return []
     return []
 
 
 def first_of_this_month():
-    today = dt.date.today()
-    return today.replace(day=1)
+    return dt.date.today().replace(day=1)
 
 
-def ensure_cache_table(conn):
-    """Create the productive-cell cache table if it does not exist yet."""
+def ensure_schema(conn):
+    """Self-migration: make sure the district/price columns and the ranking
+    views exist with the latest shape. Safe to run every time."""
     cur = conn.cursor()
     cur.execute("""
         create table if not exists productive_cells (
-          lat        double precision not null,
-          lng        double precision not null,
-          last_seen  date not null default current_date,
+          lat double precision not null, lng double precision not null,
+          last_seen date not null default current_date,
           primary key (lat, lng)
-        )
+        );
+        alter table restaurants add column if not exists district smallint;
+        alter table restaurants add column if not exists price_level smallint;
+
+        create or replace view v_current as
+          select s.place_id, r.name, r.primary_type, r.district, r.price_level,
+                 s.rating, s.review_count, s.week_start_date
+          from weekly_snapshots s
+          join restaurants r using (place_id)
+          join v_weeks_ranked w on w.week_start_date = s.week_start_date and w.wk_rank = 1
+          where r.business_status = 'OPERATIONAL' and s.review_count is not null;
+
+        create or replace view v_growth as
+          select c.*, p.review_count as review_count_prior,
+                 (c.review_count - p.review_count) as growth_abs,
+                 case when p.review_count > 0
+                      then (c.review_count - p.review_count)::numeric / p.review_count
+                      else null end as growth_rate
+          from v_current c left join v_prior p using (place_id);
+
+        create or replace view v_blue_chips as
+        with thresholds as (
+          select percentile_cont(0.85) within group (order by rating)       as rating_thr,
+                 percentile_cont(0.85) within group (order by review_count) as review_thr
+          from v_current )
+        select g.name, g.rating, g.review_count, g.primary_type, g.district, g.price_level,
+               g.growth_abs, g.growth_rate
+        from v_growth g, thresholds t
+        where g.rating >= t.rating_thr and g.review_count >= t.review_thr
+        order by g.review_count desc;
+
+        create or replace view v_rising_stars as
+        with thr as (
+          select percentile_cont(0.60) within group (order by rating) as rating_thr
+          from v_current )
+        select g.name, g.rating, g.review_count, g.primary_type, g.district, g.price_level,
+               g.growth_abs, g.growth_rate
+        from v_growth g, thr
+        where g.rating >= thr.rating_thr and g.growth_abs is not null and g.growth_abs > 0
+        order by g.growth_abs desc;
+
+        create or replace view v_breakouts as
+        select g.name, g.rating, g.review_count, g.primary_type, g.district, g.price_level,
+               g.growth_abs, g.growth_rate
+        from v_growth g
+        where g.review_count between 100 and 1500
+          and g.growth_abs is not null and g.growth_abs >= 10 and g.growth_rate is not null
+        order by g.growth_rate desc;
     """)
     conn.commit()
     cur.close()
@@ -141,8 +213,7 @@ def save_productive_cells(conn, cells, day):
         return
     cur = conn.cursor()
     execute_values(cur, """
-        insert into productive_cells (lat, lng, last_seen)
-        values %s
+        insert into productive_cells (lat, lng, last_seen) values %s
         on conflict (lat, lng) do update set last_seen = excluded.last_seen
     """, [(la, ln, day) for (la, ln) in cells])
     conn.commit()
@@ -150,25 +221,23 @@ def save_productive_cells(conn, cells, day):
 
 
 def main():
-    month_start = first_of_this_month()   # one snapshot per month (week_start_date)
+    month_start = first_of_this_month()
 
     conn = psycopg2.connect(DB_URL)
-    ensure_cache_table(conn)
+    ensure_schema(conn)
     cached = load_productive_cells(conn)
 
     full_remap = (not cached) or (dt.date.today().month in FULL_REMAP_MONTHS)
     if full_remap:
         cells = list(grid_centers())
         why = "cache empty" if not cached else "scheduled quarterly re-map"
-        print(f"FULL re-map ({why}): scanning {len(cells)} grid cells "
-              f"for month {month_start} …")
+        print(f"FULL re-map ({why}): scanning {len(cells)} grid cells for month {month_start} …")
     else:
         cells = cached
-        print(f"Incremental: scanning {len(cells)} cached productive cells "
-              f"for month {month_start} …")
+        print(f"Incremental: scanning {len(cells)} cached productive cells for month {month_start} …")
 
-    seen = {}            # place_id -> record (dedup across overlapping cells)
-    productive = []      # cells that returned at least one restaurant
+    seen = {}
+    productive = []
     calls = 0
 
     for i, (lat, lng) in enumerate(cells, 1):
@@ -190,17 +259,18 @@ def main():
                 "lng": loc.get("longitude"),
                 "rating": p.get("rating"),
                 "review_count": p.get("userRatingCount"),
+                "district": parse_district(p),
+                "price_level": parse_price(p),
             }
         if i % 100 == 0:
             print(f"  {i}/{len(cells)} cells, {len(seen)} unique places, {calls} calls")
-        time.sleep(0.05)   # be gentle on the per-minute quota
+        time.sleep(0.05)
 
     print(f"Done scanning. {len(seen)} unique restaurants, {calls} API calls, "
           f"{len(productive)} productive cells.")
 
     write_db(month_start, list(seen.values()))
 
-    # Only (re)write the cache on a full map, when we have seen the whole grid.
     if full_remap:
         save_productive_cells(conn, productive, month_start)
         print(f"Cache updated: {len(productive)} productive cells stored.")
@@ -212,11 +282,10 @@ def write_db(week, records):
     conn.autocommit = False
     cur = conn.cursor()
 
-    # Upsert restaurants (refresh last_seen, name, status, location).
     execute_values(cur, """
         insert into restaurants
           (place_id, name, primary_type, business_status, latitude, longitude,
-           first_seen, last_seen)
+           district, price_level, first_seen, last_seen)
         values %s
         on conflict (place_id) do update set
           name = excluded.name,
@@ -224,11 +293,12 @@ def write_db(week, records):
           business_status = excluded.business_status,
           latitude = excluded.latitude,
           longitude = excluded.longitude,
+          district = excluded.district,
+          price_level = excluded.price_level,
           last_seen = excluded.last_seen
     """, [(r["place_id"], r["name"], r["primary_type"], r["business_status"],
-           r["lat"], r["lng"], week, week) for r in records])
+           r["lat"], r["lng"], r["district"], r["price_level"], week, week) for r in records])
 
-    # Insert this month's snapshots (idempotent on re-run).
     execute_values(cur, """
         insert into weekly_snapshots (place_id, week_start_date, rating, review_count)
         values %s

@@ -11,7 +11,7 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 
 DB_URL = os.environ["DATABASE_URL"]
-LIMIT = 50  # per section
+LIMIT = 300  # per section (higher so the cuisine/district/price filters have depth)
 
 QUERIES = {
     "blue_chips":   "select * from v_blue_chips   limit %s",
