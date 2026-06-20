@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="de">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Vienna Restaurant Movement</title>
+<title>Wien Restaurant-Bewegung</title>
 <style>
   :root{
     --ground:#F1F3EF; --panel:#FBFCFA; --ink:#15171B; --ink-soft:#5C6066;
@@ -33,7 +33,28 @@
   .mark{font-weight:680; letter-spacing:-.02em; font-size:18px}
   .mark span{color:var(--up)}
   .meta{font-size:12.5px; color:var(--ink-soft); font-variant-numeric:tabular-nums}
-  .lede{max-width:60ch; color:var(--ink-soft); font-size:14px; margin:20px 0 28px}
+  .lede{max-width:62ch; color:var(--ink-soft); font-size:14px; margin:20px 0 18px}
+
+  .filters{display:flex; gap:14px 18px; flex-wrap:wrap; align-items:flex-end;
+    margin:0 0 8px; padding:14px 16px; background:var(--panel);
+    border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow)}
+  .field{display:flex; flex-direction:column; gap:5px}
+  .field label{font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--ink-soft); font-weight:600}
+  .field select{
+    appearance:none; -webkit-appearance:none;
+    font:inherit; font-size:14px; color:var(--ink);
+    background:var(--ground); border:1px solid var(--line); border-radius:9px;
+    padding:8px 30px 8px 11px; min-width:190px; cursor:pointer;
+    background-image:linear-gradient(45deg, transparent 50%, var(--ink-soft) 50%),
+      linear-gradient(135deg, var(--ink-soft) 50%, transparent 50%);
+    background-position:calc(100% - 16px) 17px, calc(100% - 11px) 17px;
+    background-size:5px 5px, 5px 5px; background-repeat:no-repeat;
+  }
+  .field.hidden{display:none}
+  .reset{font:inherit; font-size:13px; color:var(--up); background:none; border:none;
+    cursor:pointer; padding:8px 4px; text-decoration:underline; text-underline-offset:3px}
+  .count{font-size:12.5px; color:var(--ink-soft); margin:2px 2px 18px}
 
   section{
     background:var(--panel); border:1px solid var(--line); border-radius:14px;
@@ -51,8 +72,8 @@
   td{padding:11px 10px; border-bottom:1px solid var(--line-soft); font-size:14.5px}
   tr:last-child td{border-bottom:none}
   .name{font-weight:560; letter-spacing:-.01em}
-  .cuisine{color:var(--ink-soft); font-size:12.5px; text-transform:capitalize}
-  .rating::before{content:"★ "; color:var(--hot)}
+  .cuisine{color:var(--ink-soft); font-size:12.5px}
+  .rating::before{content:"\2605 "; color:var(--hot)}
   .num{font-feature-settings:"tnum" 1}
 
   .mom{font-weight:600; white-space:nowrap}
@@ -60,7 +81,7 @@
   .mom .bar{display:inline-block; height:6px; border-radius:3px; vertical-align:middle;
     margin-left:8px; background:currentColor; opacity:.35}
 
-  .empty{color:var(--ink-soft); font-size:13.5px; padding:6px 10px 16px; max-width:55ch}
+  .empty{color:var(--ink-soft); font-size:13.5px; padding:6px 10px 16px; max-width:60ch}
   .empty b{color:var(--ink); font-weight:600}
   .rank{color:var(--flat); width:24px; font-size:12.5px}
 
@@ -68,21 +89,37 @@
     .hide-sm{display:none}
     td,th{padding-left:8px; padding-right:8px}
     h2{font-size:19px}
+    .field select{min-width:0; width:100%}
+    .field{flex:1 1 140px}
   }
 </style>
 </head>
 <body>
   <header>
     <div class="head-inner">
-      <div class="mark">Vienna Restaurant <span>Movement</span></div>
-      <div class="meta" id="meta">loading…</div>
+      <div class="mark">Wien Restaurant-<span>Bewegung</span></div>
+      <div class="meta" id="meta">lädt &hellip;</div>
     </div>
   </header>
 
   <div class="wrap">
-    <p class="lede">Three reads on where Vienna's dining attention is going, rebuilt
-      monthly from Google review counts. Thresholds are relative to the city each month,
-      not fixed numbers — so the bar moves as the scene does.</p>
+    <p class="lede">Drei Blickwinkel darauf, wohin sich die kulinarische Aufmerksamkeit
+      in Wien bewegt, monatlich neu aus den Google-Bewertungszahlen berechnet. Die
+      Schwellenwerte beziehen sich auf die ganze Stadt im jeweiligen Monat, nicht auf
+      feste Zahlen &ndash; die Messlatte wandert also mit der Szene mit.</p>
+
+    <div class="filters" id="filters">
+      <div class="field" id="field-cuisine">
+        <label for="f-cuisine">K&uuml;che</label>
+        <select id="f-cuisine"><option value="">Alle K&uuml;chen</option></select>
+      </div>
+      <div class="field hidden" id="field-district">
+        <label for="f-district">Bezirk</label>
+        <select id="f-district"><option value="">Alle Bezirke</option></select>
+      </div>
+      <button class="reset" id="reset" type="button">Filter zur&uuml;cksetzen</button>
+    </div>
+    <div class="count" id="count"></div>
 
     <section id="blue"></section>
     <section id="rising"></section>
@@ -91,19 +128,65 @@
 
 <script>
 const SECTIONS = [
-  { key:"blue_chips", el:"blue", eyebrow:"Established · top 15% on rating & reviews",
-    title:"Blue Chips", def:"The reliably-loved institutions — high rated and heavily reviewed.",
+  { key:"blue_chips", el:"blue", eyebrow:"Etabliert · Top 15% bei Bewertung & Anzahl",
+    title:"Etablierte Favoriten", def:"Die verlässlich beliebten Institutionen – hoch bewertet und vielfach besucht.",
     momentum:"abs" },
-  { key:"rising_stars", el:"rising", eyebrow:"Momentum · quality + fastest review gain",
-    title:"Rising Stars", def:"Already well-rated, and adding reviews faster than the rest.",
+  { key:"rising_stars", el:"rising", eyebrow:"Dynamik · Qualität + schnellster Bewertungszuwachs",
+    title:"Aufsteiger", def:"Schon gut bewertet – und sammeln Bewertungen schneller als der Rest.",
     momentum:"abs" },
-  { key:"breakout", el:"breakout", eyebrow:"Early signal · 100–1,500 reviews, accelerating",
-    title:"Breakouts", def:"Smaller rooms with the steepest month-over-month acceleration.",
+  { key:"breakout", el:"breakout", eyebrow:"Frühsignal · 100–1.500 Bewertungen, beschleunigend",
+    title:"Geheimtipps", def:"Kleinere Lokale mit dem steilsten Wachstum von Monat zu Monat.",
     momentum:"rate", srcKey:"breakouts" },
 ];
 
-const fmt = n => (n==null? "—" : n.toLocaleString("en-US"));
-const pct = r => (r==null? "—" : (r*100).toFixed(1)+"%");
+// Vienna districts (Bezirke), number -> name.
+const BEZIRKE = {
+  1:"Innere Stadt", 2:"Leopoldstadt", 3:"Landstraße", 4:"Wieden", 5:"Margareten",
+  6:"Mariahilf", 7:"Neubau", 8:"Josefstadt", 9:"Alsergrund", 10:"Favoriten",
+  11:"Simmering", 12:"Meidling", 13:"Hietzing", 14:"Penzing", 15:"Rudolfsheim-Fünfhaus",
+  16:"Ottakring", 17:"Hernals", 18:"Währing", 19:"Döbling", 20:"Brigittenau",
+  21:"Floridsdorf", 22:"Donaustadt", 23:"Liesing"
+};
+
+// Google primaryType -> friendly German label.
+const CUISINE = {
+  restaurant:"Restaurant (allgemein)", austrian_restaurant:"Österreichisch",
+  italian_restaurant:"Italienisch", pizza_restaurant:"Pizza", hamburger_restaurant:"Burger",
+  american_restaurant:"Amerikanisch", turkish_restaurant:"Türkisch", kebab_shop:"Kebab",
+  japanese_restaurant:"Japanisch", ramen_restaurant:"Ramen", sushi_restaurant:"Sushi",
+  chinese_restaurant:"Chinesisch", asian_restaurant:"Asiatisch", thai_restaurant:"Thailändisch",
+  vietnamese_restaurant:"Vietnamesisch", korean_restaurant:"Koreanisch", indian_restaurant:"Indisch",
+  greek_restaurant:"Griechisch", croatian_restaurant:"Kroatisch", spanish_restaurant:"Spanisch",
+  french_restaurant:"Französisch", mexican_restaurant:"Mexikanisch", taco_restaurant:"Tacos",
+  steak_house:"Steakhouse", barbecue_restaurant:"BBQ", seafood_restaurant:"Fisch & Meeresfrüchte",
+  sandwich_shop:"Sandwiches", hot_dog_restaurant:"Hot Dog", fast_food_restaurant:"Fast Food",
+  fine_dining_restaurant:"Fine Dining", breakfast_restaurant:"Frühstück",
+  brunch_restaurant:"Brunch", vegetarian_restaurant:"Vegetarisch", vegan_restaurant:"Vegan"
+};
+
+function cuisineLabel(type){
+  if(!type) return "Sonstige";
+  if(CUISINE[type]) return CUISINE[type];
+  // Fallback: prettify the raw type (e.g. "lebanese_restaurant" -> "Lebanese").
+  let t = type.replace(/_restaurant$/,"").replace(/_/g," ").trim();
+  return t.charAt(0).toUpperCase() + t.slice(1);
+}
+
+const fmt = n => (n==null? "—" : n.toLocaleString("de-AT"));
+const pct = r => (r==null? "—" : (r*100).toFixed(1).replace(".",",")+"%");
+
+let DATA = null;                       // raw fetched data
+const state = { cuisine:"", district:"" };
+
+function allRows(){
+  return SECTIONS.flatMap(s => DATA[s.srcKey||s.key] || []);
+}
+
+function rowMatches(r){
+  if(state.cuisine && (r.primary_type||"") !== state.cuisine) return false;
+  if(state.district && String(r.district||"") !== state.district) return false;
+  return true;
+}
 
 function momentumCell(row, mode, maxAbs, maxRate){
   if(mode==="rate"){
@@ -131,20 +214,25 @@ function render(sec, rows, week){
     <h2>${sec.title}</h2>
     <p class="def">${sec.def}</p>`;
 
+  const filtered = (state.cuisine||state.district);
   if(!rows.length){
-    node.innerHTML = head + `<p class="empty"><b>Nothing here yet.</b> Momentum lists
-      need two monthly snapshots before they mean anything. Blue Chips work from the
-      first month; this list fills in once there's a previous month to compare${week?` (collecting since ${week})`:""}.</p>`;
+    const msg = filtered
+      ? `<p class="empty">Keine Treffer für diese Filter in dieser Liste.</p>`
+      : `<p class="empty"><b>Hier noch nichts.</b> Dynamik-Listen brauchen zwei
+         Monats-Schnappschüsse, bevor sie aussagekräftig sind. Die etablierten
+         Favoriten funktionieren ab dem ersten Monat; diese Liste füllt sich, sobald
+         es einen Vormonat zum Vergleich gibt${week?` (Erfassung seit ${week})`:""}.</p>`;
+    node.innerHTML = head + msg;
     return;
   }
 
-  const momHead = rateMode? "Accel." : "Δ reviews";
+  const momHead = rateMode? "Tempo" : "Δ Bewertungen";
   const rowsHtml = rows.map((r,i)=>`
     <tr>
       <td class="l rank num">${i+1}</td>
       <td class="l"><span class="name">${r.name||"—"}</span>
-        <div class="cuisine hide-sm">${(r.primary_type||"").replaceAll("_"," ")}</div></td>
-      <td class="rating num hide-sm">${r.rating!=null? r.rating.toFixed(1):"—"}</td>
+        <div class="cuisine hide-sm">${cuisineLabel(r.primary_type)}${r.district?` · ${r.district}. ${BEZIRKE[r.district]||""}`:""}</div></td>
+      <td class="rating num hide-sm">${r.rating!=null? r.rating.toFixed(1).replace(".",","):"—"}</td>
       <td class="num">${fmt(r.review_count)}</td>
       <td>${momentumCell(r, sec.momentum, maxAbs, maxRate)}</td>
     </tr>`).join("");
@@ -154,30 +242,87 @@ function render(sec, rows, week){
       <thead><tr>
         <th class="l rank"></th>
         <th class="l">Restaurant</th>
-        <th class="hide-sm">Rating</th>
-        <th>Reviews</th>
+        <th class="hide-sm">Bewertung</th>
+        <th>Bewertungen</th>
         <th>${momHead}</th>
       </tr></thead>
       <tbody>${rowsHtml}</tbody>
     </table>`;
 }
 
+function apply(){
+  const week = DATA.week_start_date;
+  let shown = 0;
+  SECTIONS.forEach(sec => {
+    const rows = (DATA[sec.srcKey||sec.key]||[]).filter(rowMatches);
+    shown += rows.length;
+    render(sec, rows, week);
+  });
+  const cnt = document.getElementById("count");
+  if(state.cuisine || state.district){
+    const bits = [];
+    if(state.cuisine) bits.push(cuisineLabel(state.cuisine));
+    if(state.district) bits.push(`${state.district}. ${BEZIRKE[state.district]||""}`);
+    cnt.textContent = `${shown} Treffer für: ${bits.join(" · ")}`;
+  } else {
+    cnt.textContent = "";
+  }
+}
+
+function buildFilters(){
+  const rows = allRows();
+
+  // Cuisine options: every primaryType present in the data, sorted by German label.
+  const types = [...new Set(rows.map(r => r.primary_type).filter(Boolean))];
+  types.sort((a,b)=> cuisineLabel(a).localeCompare(cuisineLabel(b),"de"));
+  const csel = document.getElementById("f-cuisine");
+  types.forEach(t => {
+    const o = document.createElement("option");
+    o.value = t; o.textContent = cuisineLabel(t);
+    csel.appendChild(o);
+  });
+  csel.addEventListener("change", e => { state.cuisine = e.target.value; apply(); });
+
+  // District options: only shown once the data actually carries districts.
+  const districts = [...new Set(rows.map(r => r.district).filter(d => d!=null))]
+    .map(Number).sort((a,b)=>a-b);
+  const dwrap = document.getElementById("field-district");
+  const dsel = document.getElementById("f-district");
+  if(districts.length){
+    districts.forEach(d => {
+      const o = document.createElement("option");
+      o.value = String(d); o.textContent = `${d}. ${BEZIRKE[d]||""}`;
+      dsel.appendChild(o);
+    });
+    dsel.addEventListener("change", e => { state.district = e.target.value; apply(); });
+    dwrap.classList.remove("hidden");
+  }
+
+  document.getElementById("reset").addEventListener("click", () => {
+    state.cuisine = ""; state.district = "";
+    csel.value = ""; dsel.value = "";
+    apply();
+  });
+}
+
 fetch("rankings.json", {cache:"no-store"})
   .then(r => { if(!r.ok) throw new Error(r.status); return r.json(); })
   .then(data => {
+    DATA = data;
     const week = data.week_start_date;
-    const gen = data.generated_at? new Date(data.generated_at).toLocaleString("en-GB",
+    const gen = data.generated_at? new Date(data.generated_at).toLocaleString("de-AT",
       {day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}) : "";
-    const monthLabel = week? new Date(week).toLocaleString("en-GB",{month:"long",year:"numeric"}) : null;
+    const monthLabel = week? new Date(week).toLocaleString("de-AT",{month:"long",year:"numeric"}) : null;
     document.getElementById("meta").textContent =
-      (monthLabel? `${monthLabel}` : "No data yet") + (gen? ` · built ${gen}`:"");
-    SECTIONS.forEach(sec => render(sec, data[sec.srcKey||sec.key]||[], week));
+      (monthLabel? `${monthLabel}` : "Noch keine Daten") + (gen? ` · erstellt ${gen}`:"");
+    buildFilters();
+    apply();
   })
   .catch(err => {
-    document.getElementById("meta").textContent = "rankings.json not found";
+    document.getElementById("meta").textContent = "rankings.json nicht gefunden";
     document.getElementById("blue").innerHTML =
-      `<p class="empty"><b>No data file yet.</b> Run the weekly scan and export once,
-       then this page fills in. (fetch error: ${err.message})</p>`;
+      `<p class="empty"><b>Noch keine Datendatei.</b> Führe den Monats-Scan und Export
+       einmal aus, dann füllt sich diese Seite. (Fehler: ${err.message})</p>`;
   });
 </script>
 </body>
