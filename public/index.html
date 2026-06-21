@@ -377,7 +377,10 @@ function initNewsletter(){
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ status.style.color="var(--ink-faint)"; status.textContent="Bitte gib eine gültige E-Mail-Adresse ein."; return; }
     if(!FORM_ENDPOINT){ status.style.color="var(--ink-soft)"; status.textContent="Danke für dein Interesse! Die Anmeldung wird gerade eingerichtet und ist in Kürze aktiv."; return; }
     try{ const res=await fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({email})});
-      if(res.ok){ status.style.color="var(--ink)"; status.textContent="Danke! Du bist eingetragen."; form.reset(); }
+      if(res.ok){ status.style.color="var(--ink)";
+        const first=new Date(); first.setMonth(first.getMonth()+1, 1);
+        const ds=first.toLocaleDateString("de-AT",{day:"numeric",month:"long",year:"numeric"});
+        status.textContent="Danke! Deine erste Ausgabe bekommst du am "+ds+"."; form.reset(); }
       else { status.style.color="var(--ink-faint)"; status.textContent="Hat nicht geklappt – bitte später nochmal versuchen."; }
     }catch(err){ status.style.color="var(--ink-faint)"; status.textContent="Hat nicht geklappt – bitte später nochmal versuchen."; }
   });
