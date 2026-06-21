@@ -58,7 +58,8 @@ SPACING_M = 550
 RADIUS_M  = 400.0
 
 EXCLUDED_PRIMARY = ["cafe", "bar", "bakery", "coffee_shop",
-                    "meal_takeaway", "meal_delivery", "night_club"]
+                    "meal_takeaway", "meal_delivery", "night_club",
+                    "amusement_park", "comedy_club"]
 
 # Months in which we do a FULL re-map of the whole grid (quarterly).
 FULL_REMAP_MONTHS = {1, 4, 7, 10}
@@ -163,7 +164,9 @@ def ensure_schema(conn):
           from weekly_snapshots s
           join restaurants r using (place_id)
           join v_weeks_ranked w on w.week_start_date = s.week_start_date and w.wk_rank = 1
-          where r.business_status = 'OPERATIONAL' and s.review_count is not null;
+          where r.business_status = 'OPERATIONAL' and s.review_count is not null
+            and (r.primary_type is null or
+                 r.primary_type not in ('amusement_park','comedy_club'));
 
         create view v_growth as
           select c.*, p.review_count as review_count_prior,
