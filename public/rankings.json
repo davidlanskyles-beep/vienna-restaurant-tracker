@@ -1,408 +1,2710 @@
 {
-  "generated_at": "2026-06-20T21:32:17.126111Z",
+  "generated_at": "2026-06-21T11:53:26.120878Z",
   "week_start_date": "2026-06-01",
-  "blue_chips": [
-    {
-      "name": "Schnitzel One",
-      "rating": 4.8,
-      "review_count": 15498,
-      "primary_type": "restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "PETER PANE Burgergrill & Bar",
-      "rating": 4.7,
-      "review_count": 13829,
-      "primary_type": "hamburger_restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Restaurant Vienne/OnurChefs",
-      "rating": 4.8,
-      "review_count": 9960,
-      "primary_type": "restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Arizona Burger & Bar",
-      "rating": 4.8,
-      "review_count": 7796,
-      "primary_type": "american_restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Safran Pizza - Kebap",
-      "rating": 4.8,
-      "review_count": 6694,
-      "primary_type": "restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Marchfelderhof",
-      "rating": 4.7,
-      "review_count": 4839,
-      "primary_type": "restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Bauernbräu",
-      "rating": 4.8,
-      "review_count": 4075,
-      "primary_type": "austrian_restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "hans im glück",
-      "rating": 4.7,
-      "review_count": 3826,
-      "primary_type": "hamburger_restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Kurze Pause GmbH",
-      "rating": 4.8,
-      "review_count": 3822,
-      "primary_type": "kebab_shop",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Mochi Ramen Bar",
-      "rating": 4.7,
-      "review_count": 3781,
-      "primary_type": "ramen_restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Leberkas-Pepi Wien Operngasse",
-      "rating": 4.7,
-      "review_count": 3573,
-      "primary_type": "austrian_restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Cavaliere Pizzeria Ristorante",
-      "rating": 4.7,
-      "review_count": 3511,
-      "primary_type": "italian_restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Das Augustin",
-      "rating": 4.7,
-      "review_count": 3467,
-      "primary_type": "restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Bella Compagnia Erdbergstraße",
-      "rating": 4.7,
-      "review_count": 3280,
-      "primary_type": "italian_restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Zum alten Fassl",
-      "rating": 4.7,
-      "review_count": 3271,
-      "primary_type": "austrian_restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Pulkautaler Winehouse and Restaurant",
-      "rating": 4.7,
-      "review_count": 3251,
-      "primary_type": "restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Gasthaus Schwaigerwirt",
-      "rating": 4.7,
-      "review_count": 3214,
-      "primary_type": "restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Wolfgang Puck Kitchen & Bar",
-      "rating": 4.8,
-      "review_count": 3168,
-      "primary_type": "restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Stadthallenbräu",
-      "rating": 4.8,
-      "review_count": 3115,
-      "primary_type": "restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Wiener Wiazhaus",
-      "rating": 4.7,
-      "review_count": 3023,
-      "primary_type": "austrian_restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Yume",
-      "rating": 4.7,
-      "review_count": 2936,
-      "primary_type": "asian_restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Stadtsaal",
-      "rating": 4.7,
-      "review_count": 2855,
-      "primary_type": "comedy_club",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Nalin KeepUp",
-      "rating": 4.7,
-      "review_count": 2826,
-      "primary_type": "kebab_shop",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Buffet Trzesniewski Dorotheergasse",
-      "rating": 4.7,
-      "review_count": 2722,
-      "primary_type": "sandwich_shop",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Pizzeria Pummarò",
-      "rating": 4.8,
-      "review_count": 2640,
-      "primary_type": "pizza_restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
+  "city_avg_rating": 4.34,
+  "restaurant_count": 3367,
+  "bayes_m": 400,
+  "best_overall": [
     {
       "name": "SIXTA",
       "rating": 4.9,
       "review_count": 2622,
       "primary_type": "austrian_restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "DOOR No. 8 - The Steakhouse",
-      "rating": 4.7,
-      "review_count": 2621,
-      "primary_type": "steak_house",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "mani im vierten",
-      "rating": 4.7,
-      "review_count": 2546,
-      "primary_type": "restaurant",
-      "growth_abs": null,
-      "growth_rate": null
+      "district": null,
+      "price_level": null,
+      "score": 4.8262
     },
     {
       "name": "Vienna Sausage",
       "rating": 4.9,
       "review_count": 2501,
       "primary_type": "hot_dog_restaurant",
-      "growth_abs": null,
-      "growth_rate": null
+      "district": null,
+      "price_level": null,
+      "score": 4.8231
     },
     {
-      "name": "Ferhatovic Austria",
-      "rating": 4.7,
-      "review_count": 2325,
-      "primary_type": "wholesaler",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "THE DISTRICT KEBAB | PIDE | LAHMACUN | PIZZA",
-      "rating": 4.7,
-      "review_count": 2252,
-      "primary_type": "turkish_restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "CHICKEN PLUS",
-      "rating": 4.8,
-      "review_count": 2251,
-      "primary_type": "fast_food_restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Smash King Burger",
-      "rating": 4.8,
-      "review_count": 2208,
-      "primary_type": "restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "MOZAIK Cafe & Restaurant Vienna",
-      "rating": 4.7,
-      "review_count": 2194,
-      "primary_type": "restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Ariston Hellenic",
-      "rating": 4.8,
-      "review_count": 2184,
-      "primary_type": "greek_restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Coconut Curry Praterstrasse",
-      "rating": 4.7,
-      "review_count": 2158,
-      "primary_type": "restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Passione-Da Ferdinando",
-      "rating": 4.7,
-      "review_count": 2097,
-      "primary_type": "italian_restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Medl-Bräu Penzinger Gasthofbrauerei",
-      "rating": 4.7,
-      "review_count": 2028,
-      "primary_type": "restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Adriano",
-      "rating": 4.7,
-      "review_count": 1932,
-      "primary_type": "pizza_restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Hoskar Restaurant",
-      "rating": 4.8,
-      "review_count": 1915,
-      "primary_type": "restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Chinacy",
-      "rating": 4.7,
-      "review_count": 1907,
-      "primary_type": "chinese_restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Restaurant Wiener",
-      "rating": 4.7,
-      "review_count": 1906,
-      "primary_type": "austrian_restaurant",
-      "growth_abs": null,
-      "growth_rate": null
+      "name": "Rhulo Cigköfte Ottakring",
+      "rating": 5.0,
+      "review_count": 1076,
+      "primary_type": "vegan_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.8218
     },
     {
       "name": "Vamos Kebap Pizza",
       "rating": 4.9,
       "review_count": 1883,
       "primary_type": "restaurant",
-      "growth_abs": null,
-      "growth_rate": null
-    },
-    {
-      "name": "Nara",
-      "rating": 4.7,
-      "review_count": 1829,
-      "primary_type": "restaurant",
-      "growth_abs": null,
-      "growth_rate": null
+      "district": null,
+      "price_level": null,
+      "score": 4.8023
     },
     {
       "name": "Moment Cafe and Restaurant",
       "rating": 4.9,
       "review_count": 1824,
       "primary_type": "restaurant",
-      "growth_abs": null,
-      "growth_rate": null
+      "district": null,
+      "price_level": null,
+      "score": 4.7997
     },
     {
-      "name": "Gasthaus Quell",
-      "rating": 4.7,
-      "review_count": 1777,
+      "name": "La Strada 27/29",
+      "rating": 4.9,
+      "review_count": 1615,
+      "primary_type": "pizza_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.7893
+    },
+    {
+      "name": "Schnitzel One",
+      "rating": 4.8,
+      "review_count": 15498,
       "primary_type": "restaurant",
-      "growth_abs": null,
-      "growth_rate": null
+      "district": null,
+      "price_level": null,
+      "score": 4.7885
+    },
+    {
+      "name": "Metropolitan Restaurant",
+      "rating": 4.9,
+      "review_count": 1564,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.7864
+    },
+    {
+      "name": "Restaurant Vienne/OnurChefs",
+      "rating": 4.8,
+      "review_count": 9960,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.7823
+    },
+    {
+      "name": "Arizona Burger & Bar",
+      "rating": 4.8,
+      "review_count": 7796,
+      "primary_type": "american_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.7777
+    },
+    {
+      "name": "GUTE BURGER",
+      "rating": 4.9,
+      "review_count": 1392,
+      "primary_type": "hamburger_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.7755
+    },
+    {
+      "name": "Anna's Schnitzel Stube Wien",
+      "rating": 4.9,
+      "review_count": 1379,
+      "primary_type": "fast_food_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.7746
+    },
+    {
+      "name": "Safran Pizza - Kebap",
+      "rating": 4.8,
+      "review_count": 6694,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.7742
+    },
+    {
+      "name": "Bauernbräu",
+      "rating": 4.8,
+      "review_count": 4075,
+      "primary_type": "austrian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.7591
+    },
+    {
+      "name": "Kurze Pause GmbH",
+      "rating": 4.8,
+      "review_count": 3822,
+      "primary_type": "kebab_shop",
+      "district": null,
+      "price_level": null,
+      "score": 4.7566
+    },
+    {
+      "name": "Fat Monk - Biz Zwei",
+      "rating": 4.9,
+      "review_count": 1117,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.753
+    },
+    {
+      "name": "Wolfgang Puck Kitchen & Bar",
+      "rating": 4.8,
+      "review_count": 3168,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.7487
+    },
+    {
+      "name": "Stadthallenbräu",
+      "rating": 4.8,
+      "review_count": 3115,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.7479
+    },
+    {
+      "name": "Burgallio",
+      "rating": 4.9,
+      "review_count": 1047,
+      "primary_type": "hamburger_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.7459
+    },
+    {
+      "name": "Bolena - Restaurant | Weinbar | Partyraum",
+      "rating": 4.9,
+      "review_count": 1029,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.7439
+    },
+    {
+      "name": "Pizzeria Pummarò",
+      "rating": 4.8,
+      "review_count": 2640,
+      "primary_type": "pizza_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.7398
+    },
+    {
+      "name": "Kebap Art",
+      "rating": 4.9,
+      "review_count": 923,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.7314
+    },
+    {
+      "name": "CHICKEN PLUS",
+      "rating": 4.8,
+      "review_count": 2251,
+      "primary_type": "fast_food_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.731
+    },
+    {
+      "name": "Smash King Burger",
+      "rating": 4.8,
+      "review_count": 2208,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.7298
+    },
+    {
+      "name": "Ariston Hellenic",
+      "rating": 4.8,
+      "review_count": 2184,
+      "primary_type": "greek_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.7292
+    },
+    {
+      "name": "Hoskar Restaurant",
+      "rating": 4.8,
+      "review_count": 1915,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.7209
     },
     {
       "name": "DonMono Ramen Donauzentrum",
       "rating": 4.8,
       "review_count": 1734,
       "primary_type": "japanese_restaurant",
-      "growth_abs": null,
-      "growth_rate": null
+      "district": null,
+      "price_level": null,
+      "score": 4.7142
     },
     {
       "name": "La Taquería Chiquitita - Authentic Mexican Tacos in Vienna",
       "rating": 4.8,
       "review_count": 1713,
       "primary_type": "taco_restaurant",
-      "growth_abs": null,
-      "growth_rate": null
+      "district": null,
+      "price_level": null,
+      "score": 4.7134
     },
     {
       "name": "Konoba Restaurant",
       "rating": 4.8,
       "review_count": 1672,
       "primary_type": "croatian_restaurant",
-      "growth_abs": null,
-      "growth_rate": null
+      "district": null,
+      "price_level": null,
+      "score": 4.7117
+    },
+    {
+      "name": "Restaurant Das Essen FM",
+      "rating": 4.9,
+      "review_count": 776,
+      "primary_type": "ukrainian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.7103
     },
     {
       "name": "Ugis Gemüsekebap®",
       "rating": 4.8,
       "review_count": 1626,
       "primary_type": "turkish_restaurant",
-      "growth_abs": null,
-      "growth_rate": null
+      "district": null,
+      "price_level": null,
+      "score": 4.7097
+    },
+    {
+      "name": "Subway",
+      "rating": 4.8,
+      "review_count": 1494,
+      "primary_type": "sandwich_shop",
+      "district": null,
+      "price_level": null,
+      "score": 4.7034
+    },
+    {
+      "name": "Il Forno Pizzeria 1040",
+      "rating": 4.9,
+      "review_count": 734,
+      "primary_type": "pizza_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.7033
+    },
+    {
+      "name": "TAPAS MAYAS - mexikanisches Restaurant und Cocktail-Bar",
+      "rating": 4.8,
+      "review_count": 1437,
+      "primary_type": "tex_mex_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.7004
+    },
+    {
+      "name": "Wilheim",
+      "rating": 4.9,
+      "review_count": 712,
+      "primary_type": "bistro",
+      "district": null,
+      "price_level": null,
+      "score": 4.6994
+    },
+    {
+      "name": "Meiwei Chinese Cuisine Vienna",
+      "rating": 4.9,
+      "review_count": 695,
+      "primary_type": "chinese_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6963
+    },
+    {
+      "name": "I Bellissimi",
+      "rating": 4.9,
+      "review_count": 690,
+      "primary_type": "pizza_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6954
+    },
+    {
+      "name": "Boutiquehotel Stadthalle by Cocoon",
+      "rating": 4.8,
+      "review_count": 1341,
+      "primary_type": "hotel",
+      "district": null,
+      "price_level": null,
+      "score": 4.6949
+    },
+    {
+      "name": "La Tana Della Volpe",
+      "rating": 4.8,
+      "review_count": 1299,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6923
+    },
+    {
+      "name": "Ethiopian Restaurant - Cafe Lalibela",
+      "rating": 4.8,
+      "review_count": 1297,
+      "primary_type": "ethiopian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6921
+    },
+    {
+      "name": "China Restaurant Jasmin",
+      "rating": 4.8,
+      "review_count": 1279,
+      "primary_type": "chinese_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.691
+    },
+    {
+      "name": "Le Bistrot",
+      "rating": 4.9,
+      "review_count": 662,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.69
+    },
+    {
+      "name": "Ensu Kitchen",
+      "rating": 4.9,
+      "review_count": 662,
+      "primary_type": "hamburger_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.69
+    },
+    {
+      "name": "PETER PANE Burgergrill & Bar",
+      "rating": 4.7,
+      "review_count": 13829,
+      "primary_type": "hamburger_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6899
+    },
+    {
+      "name": "Gastwirtschaft Heidenkummer",
+      "rating": 4.8,
+      "review_count": 1230,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6877
+    },
+    {
+      "name": "Hotel Sans Souci Wien",
+      "rating": 4.8,
+      "review_count": 1225,
+      "primary_type": "hotel",
+      "district": null,
+      "price_level": null,
+      "score": 4.6874
+    },
+    {
+      "name": "Kenks",
+      "rating": 4.9,
+      "review_count": 639,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6853
+    },
+    {
+      "name": "Ali&Baba Restaurant",
+      "rating": 4.8,
+      "review_count": 1195,
+      "primary_type": "persian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6852
+    },
+    {
+      "name": "Pizza Preferita",
+      "rating": 4.8,
+      "review_count": 1142,
+      "primary_type": "pizza_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6813
+    },
+    {
+      "name": "Triangolo",
+      "rating": 4.9,
+      "review_count": 614,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.68
+    },
+    {
+      "name": "VIER SINNE | Dinner in the Dark | Lunch | Brunch",
+      "rating": 4.8,
+      "review_count": 1092,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6773
+    },
+    {
+      "name": "Cibo Colorato",
+      "rating": 4.8,
+      "review_count": 1085,
+      "primary_type": "pizza_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6767
+    },
+    {
+      "name": "Landstein",
+      "rating": 4.8,
+      "review_count": 1082,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6765
+    },
+    {
+      "name": "Chili & Cheesy",
+      "rating": 4.8,
+      "review_count": 1076,
+      "primary_type": "hamburger_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.676
+    },
+    {
+      "name": "China Restaurant Asia Garten",
+      "rating": 4.8,
+      "review_count": 1071,
+      "primary_type": "chinese_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6756
+    },
+    {
+      "name": "Pause am Berg",
+      "rating": 4.8,
+      "review_count": 1063,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6749
+    },
+    {
+      "name": "TEPE",
+      "rating": 4.9,
+      "review_count": 585,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6736
+    },
+    {
+      "name": "MAST Weinbistro",
+      "rating": 4.8,
+      "review_count": 1045,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6733
+    },
+    {
+      "name": "Arya Kebap",
+      "rating": 4.8,
+      "review_count": 1042,
+      "primary_type": "kebab_shop",
+      "district": null,
+      "price_level": null,
+      "score": 4.6731
+    },
+    {
+      "name": "Marchfelderhof",
+      "rating": 4.7,
+      "review_count": 4839,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6727
+    },
+    {
+      "name": "ZANO Fusion Asia",
+      "rating": 4.9,
+      "review_count": 577,
+      "primary_type": "asian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6717
+    },
+    {
+      "name": "Asahimoto",
+      "rating": 4.9,
+      "review_count": 570,
+      "primary_type": "japanese_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6701
+    },
+    {
+      "name": "Hermann's Würstelstand",
+      "rating": 4.8,
+      "review_count": 994,
+      "primary_type": "hot_dog_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6687
+    },
+    {
+      "name": "Xalos Kebab",
+      "rating": 4.8,
+      "review_count": 990,
+      "primary_type": "kebab_shop",
+      "district": null,
+      "price_level": null,
+      "score": 4.6683
+    },
+    {
+      "name": "ShooLoongKan 小龙坎 XiaoLongKan Wien",
+      "rating": 4.8,
+      "review_count": 972,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6666
+    },
+    {
+      "name": "hans im glück",
+      "rating": 4.7,
+      "review_count": 3826,
+      "primary_type": "hamburger_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6662
+    },
+    {
+      "name": "Mochi Ramen Bar",
+      "rating": 4.7,
+      "review_count": 3781,
+      "primary_type": "ramen_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6658
+    },
+    {
+      "name": "Burgallio",
+      "rating": 4.9,
+      "review_count": 546,
+      "primary_type": "hamburger_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6642
+    },
+    {
+      "name": "Leberkas-Pepi Wien Operngasse",
+      "rating": 4.7,
+      "review_count": 3573,
+      "primary_type": "austrian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.664
+    },
+    {
+      "name": "Cavaliere Pizzeria Ristorante",
+      "rating": 4.7,
+      "review_count": 3511,
+      "primary_type": "italian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6634
+    },
+    {
+      "name": "Das Augustin",
+      "rating": 4.7,
+      "review_count": 3467,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.663
+    },
+    {
+      "name": "Cafe Restaurant Lemon",
+      "rating": 4.9,
+      "review_count": 541,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.663
+    },
+    {
+      "name": "575 Sagmeister",
+      "rating": 4.8,
+      "review_count": 934,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6628
+    },
+    {
+      "name": "Bella Compagnia Erdbergstraße",
+      "rating": 4.7,
+      "review_count": 3280,
+      "primary_type": "italian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6611
+    },
+    {
+      "name": "Zum alten Fassl",
+      "rating": 4.7,
+      "review_count": 3271,
+      "primary_type": "austrian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.661
+    },
+    {
+      "name": "Pulkautaler Winehouse and Restaurant",
+      "rating": 4.7,
+      "review_count": 3251,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6608
+    },
+    {
+      "name": "Hua Qiang",
+      "rating": 4.8,
+      "review_count": 913,
+      "primary_type": "chinese_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6606
+    },
+    {
+      "name": "Gasthaus Schwaigerwirt",
+      "rating": 4.7,
+      "review_count": 3214,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6604
+    },
+    {
+      "name": "Kaido Sushi Bar",
+      "rating": 4.8,
+      "review_count": 909,
+      "primary_type": "sushi_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6602
+    },
+    {
+      "name": "Wiener Wiazhaus",
+      "rating": 4.7,
+      "review_count": 3023,
+      "primary_type": "austrian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6582
+    },
+    {
+      "name": "Z‘Som Restaurant",
+      "rating": 4.9,
+      "review_count": 522,
+      "primary_type": "fine_dining_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6581
+    },
+    {
+      "name": "Yume",
+      "rating": 4.7,
+      "review_count": 2936,
+      "primary_type": "asian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6571
+    },
+    {
+      "name": "Stadtsaal",
+      "rating": 4.7,
+      "review_count": 2855,
+      "primary_type": "comedy_club",
+      "district": null,
+      "price_level": null,
+      "score": 4.6561
+    },
+    {
+      "name": "Nalin KeepUp",
+      "rating": 4.7,
+      "review_count": 2826,
+      "primary_type": "kebab_shop",
+      "district": null,
+      "price_level": null,
+      "score": 4.6557
+    },
+    {
+      "name": "Miros Kebab & Pizza",
+      "rating": 4.8,
+      "review_count": 866,
+      "primary_type": "turkish_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6554
+    },
+    {
+      "name": "ATLANTIS Fisch Restaurant",
+      "rating": 4.8,
+      "review_count": 864,
+      "primary_type": "mediterranean_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6552
+    },
+    {
+      "name": "Pitara Oroz",
+      "rating": 4.9,
+      "review_count": 510,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6549
+    },
+    {
+      "name": "Buffet Trzesniewski Dorotheergasse",
+      "rating": 4.7,
+      "review_count": 2722,
+      "primary_type": "sandwich_shop",
+      "district": null,
+      "price_level": null,
+      "score": 4.6542
+    },
+    {
+      "name": "Gastwirtschaft Wolfsberger",
+      "rating": 4.8,
+      "review_count": 854,
+      "primary_type": "austrian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.654
+    },
+    {
+      "name": "Gasthaus Lebenstraum",
+      "rating": 4.8,
+      "review_count": 852,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6538
+    },
+    {
+      "name": "Westpol",
+      "rating": 4.8,
+      "review_count": 842,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6526
+    },
+    {
+      "name": "DOOR No. 8 - The Steakhouse",
+      "rating": 4.7,
+      "review_count": 2621,
+      "primary_type": "steak_house",
+      "district": null,
+      "price_level": null,
+      "score": 4.6526
+    },
+    {
+      "name": "Eritrean & Ethiopian Cuisine - Red Sea Restaurant",
+      "rating": 4.9,
+      "review_count": 500,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6522
+    },
+    {
+      "name": "Senhor Vinho - Das portugiesische Restaurant in Wien.",
+      "rating": 4.8,
+      "review_count": 835,
+      "primary_type": "portuguese_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6518
+    },
+    {
+      "name": "mani im vierten",
+      "rating": 4.7,
+      "review_count": 2546,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6514
+    },
+    {
+      "name": "Johans Küche",
+      "rating": 4.9,
+      "review_count": 492,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6499
+    },
+    {
+      "name": "Café Restaurant Markt58",
+      "rating": 4.9,
+      "review_count": 487,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6485
+    },
+    {
+      "name": "Ferhatovic Austria",
+      "rating": 4.7,
+      "review_count": 2325,
+      "primary_type": "wholesaler",
+      "district": null,
+      "price_level": null,
+      "score": 4.6475
+    },
+    {
+      "name": "Curry Vibes - Spice Up Your Life!",
+      "rating": 4.8,
+      "review_count": 795,
+      "primary_type": "indian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6468
+    },
+    {
+      "name": "THE DISTRICT KEBAB | PIDE | LAHMACUN | PIZZA",
+      "rating": 4.7,
+      "review_count": 2252,
+      "primary_type": "turkish_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6461
+    },
+    {
+      "name": "Il Bacio Pizzeria",
+      "rating": 4.9,
+      "review_count": 478,
+      "primary_type": "pizza_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.646
+    },
+    {
+      "name": "Magic Stixx",
+      "rating": 4.9,
+      "review_count": 476,
+      "primary_type": "vietnamese_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6454
+    },
+    {
+      "name": "Jarita‘s Indian Kitchen",
+      "rating": 4.8,
+      "review_count": 781,
+      "primary_type": "indian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.645
+    },
+    {
+      "name": "MOZAIK Cafe & Restaurant Vienna",
+      "rating": 4.7,
+      "review_count": 2194,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6449
+    },
+    {
+      "name": "Kult Kebap",
+      "rating": 4.8,
+      "review_count": 780,
+      "primary_type": "turkish_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6449
+    },
+    {
+      "name": "Tat Schnitzel",
+      "rating": 4.9,
+      "review_count": 473,
+      "primary_type": "family_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6445
+    },
+    {
+      "name": "Coconut Curry Praterstrasse",
+      "rating": 4.7,
+      "review_count": 2158,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6441
+    },
+    {
+      "name": "TanTan",
+      "rating": 4.8,
+      "review_count": 773,
+      "primary_type": "chinese_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6439
+    },
+    {
+      "name": "Tau Vegan Restaurant",
+      "rating": 4.8,
+      "review_count": 768,
+      "primary_type": "vegan_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6433
+    },
+    {
+      "name": "Passione-Da Ferdinando",
+      "rating": 4.7,
+      "review_count": 2097,
+      "primary_type": "italian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6427
+    },
+    {
+      "name": "Vi&Vie Gourmet Kitchen & Café",
+      "rating": 4.9,
+      "review_count": 466,
+      "primary_type": "bistro",
+      "district": null,
+      "price_level": null,
+      "score": 4.6424
+    },
+    {
+      "name": "Sajado Zollergasse",
+      "rating": 4.8,
+      "review_count": 758,
+      "primary_type": "asian_fusion_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6419
+    },
+    {
+      "name": "OSES Çiğ Köfte 1100 Wien",
+      "rating": 4.9,
+      "review_count": 462,
+      "primary_type": "vegetarian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6412
+    },
+    {
+      "name": "Medl-Bräu Penzinger Gasthofbrauerei",
+      "rating": 4.7,
+      "review_count": 2028,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6411
+    },
+    {
+      "name": "Restaurant Mahlzeit",
+      "rating": 4.8,
+      "review_count": 749,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6407
+    },
+    {
+      "name": "Cheat Day",
+      "rating": 4.8,
+      "review_count": 739,
+      "primary_type": "hamburger_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6393
+    },
+    {
+      "name": "Adriano",
+      "rating": 4.7,
+      "review_count": 1932,
+      "primary_type": "pizza_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6387
+    },
+    {
+      "name": "Chinacy",
+      "rating": 4.7,
+      "review_count": 1907,
+      "primary_type": "chinese_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.638
+    },
+    {
+      "name": "Restaurant Wiener",
+      "rating": 4.7,
+      "review_count": 1906,
+      "primary_type": "austrian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.638
+    },
+    {
+      "name": "Lins Kitchen",
+      "rating": 4.9,
+      "review_count": 449,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6373
+    },
+    {
+      "name": "Nara",
+      "rating": 4.7,
+      "review_count": 1829,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6358
+    },
+    {
+      "name": "Gasthaus Quell",
+      "rating": 4.7,
+      "review_count": 1777,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6343
+    },
+    {
+      "name": "Papaya",
+      "rating": 4.8,
+      "review_count": 689,
+      "primary_type": "asian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6319
+    },
+    {
+      "name": "Yee Dooy Kebap - Pizza - Grill",
+      "rating": 4.9,
+      "review_count": 430,
+      "primary_type": "kebab_shop",
+      "district": null,
+      "price_level": null,
+      "score": 4.6313
+    },
+    {
+      "name": "Ali's GemüseKebap",
+      "rating": 4.8,
+      "review_count": 684,
+      "primary_type": "kebab_shop",
+      "district": null,
+      "price_level": null,
+      "score": 4.6311
+    },
+    {
+      "name": "Vevi Vegan Rolls & Pots",
+      "rating": 4.9,
+      "review_count": 428,
+      "primary_type": "vegan_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6306
+    },
+    {
+      "name": "Mr.Du Ramen&bar",
+      "rating": 4.8,
+      "review_count": 678,
+      "primary_type": "asian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6302
+    },
+    {
+      "name": "Al Castello - Pizzeria Napoletana",
+      "rating": 4.8,
+      "review_count": 669,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6288
+    },
+    {
+      "name": "Fine Fine all'Italiana",
+      "rating": 4.7,
+      "review_count": 1604,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6286
+    },
+    {
+      "name": "Xu's Cooking Vegetarische Spezialitäten",
+      "rating": 4.7,
+      "review_count": 1591,
+      "primary_type": "chinese_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6282
+    },
+    {
+      "name": "Vevi Restaurant",
+      "rating": 4.7,
+      "review_count": 1586,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.628
+    },
+    {
+      "name": "Turbo Grill - Balkanische Grillspezialitäten, Authentische Balkanische Grilltradition",
+      "rating": 4.9,
+      "review_count": 420,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.628
+    },
+    {
+      "name": "Yido",
+      "rating": 4.9,
+      "review_count": 420,
+      "primary_type": "asian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.628
+    },
+    {
+      "name": "Markt.grätzL",
+      "rating": 4.9,
+      "review_count": 419,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6277
+    },
+    {
+      "name": "nest",
+      "rating": 4.8,
+      "review_count": 662,
+      "primary_type": "bistro",
+      "district": null,
+      "price_level": null,
+      "score": 4.6276
+    },
+    {
+      "name": "byçıtır Etliekmek & Grill",
+      "rating": 4.8,
+      "review_count": 660,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6273
+    },
+    {
+      "name": "SMASHBOX 1040",
+      "rating": 4.7,
+      "review_count": 1530,
+      "primary_type": "hamburger_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6259
+    },
+    {
+      "name": "Skopik & Lohn",
+      "rating": 4.7,
+      "review_count": 1526,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6257
+    },
+    {
+      "name": "Stuwer - Neues Wiener Beisl",
+      "rating": 4.7,
+      "review_count": 1509,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6251
+    },
+    {
+      "name": "Gasthaus zur Grünen Laterne",
+      "rating": 4.7,
+      "review_count": 1510,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6251
+    },
+    {
+      "name": "Rocky Docky's Western-Steak-House",
+      "rating": 4.7,
+      "review_count": 1482,
+      "primary_type": "steak_house",
+      "district": null,
+      "price_level": null,
+      "score": 4.624
+    },
+    {
+      "name": "Niški Merak Restaurant",
+      "rating": 4.7,
+      "review_count": 1410,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.621
+    },
+    {
+      "name": "STEAK DÖNER",
+      "rating": 4.7,
+      "review_count": 1407,
+      "primary_type": "turkish_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6208
+    },
+    {
+      "name": "Gasthaus Nachbarn",
+      "rating": 4.8,
+      "review_count": 617,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.62
+    },
+    {
+      "name": "Rado's Gasthaus",
+      "rating": 4.7,
+      "review_count": 1385,
+      "primary_type": "austrian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6199
+    },
+    {
+      "name": "Dazwischen",
+      "rating": 4.9,
+      "review_count": 395,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6194
+    },
+    {
+      "name": "Das Vivet",
+      "rating": 4.7,
+      "review_count": 1371,
+      "primary_type": "breakfast_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6192
+    },
+    {
+      "name": "Pitawerk",
+      "rating": 4.7,
+      "review_count": 1342,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6179
+    },
+    {
+      "name": "Maxingstüberl",
+      "rating": 4.7,
+      "review_count": 1338,
+      "primary_type": "austrian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6177
+    },
+    {
+      "name": "Manolos",
+      "rating": 4.8,
+      "review_count": 597,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6164
+    },
+    {
+      "name": "Bahn KEBAP & PIZZA",
+      "rating": 4.7,
+      "review_count": 1310,
+      "primary_type": "kebab_shop",
+      "district": null,
+      "price_level": null,
+      "score": 4.6163
+    },
+    {
+      "name": "Gasthaus Robert Lichtenstöger",
+      "rating": 4.8,
+      "review_count": 596,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6162
+    },
+    {
+      "name": "HERNALS. Kebap Pizza",
+      "rating": 4.7,
+      "review_count": 1299,
+      "primary_type": "kebab_shop",
+      "district": null,
+      "price_level": null,
+      "score": 4.6158
+    },
+    {
+      "name": "Etiler Smash Burger",
+      "rating": 4.7,
+      "review_count": 1283,
+      "primary_type": "hamburger_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.615
+    },
+    {
+      "name": "Simit Palace",
+      "rating": 4.8,
+      "review_count": 589,
+      "primary_type": "breakfast_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6149
+    },
+    {
+      "name": "Kanyon Restaurant",
+      "rating": 4.7,
+      "review_count": 1279,
+      "primary_type": "turkish_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6148
+    },
+    {
+      "name": "Mat's Würstelstand",
+      "rating": 4.8,
+      "review_count": 583,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6138
+    },
+    {
+      "name": "Zum lieben Augustin",
+      "rating": 4.7,
+      "review_count": 1255,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6136
+    },
+    {
+      "name": "Gasthaus Mariabrunn",
+      "rating": 4.7,
+      "review_count": 1249,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6133
+    },
+    {
+      "name": "Pizzeria Lievito 48 am Markt",
+      "rating": 4.8,
+      "review_count": 579,
+      "primary_type": "pizza_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.613
+    },
+    {
+      "name": "PHÖNIX CAFETERIA",
+      "rating": 4.9,
+      "review_count": 373,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6115
+    },
+    {
+      "name": "Dem's Gourmet",
+      "rating": 4.7,
+      "review_count": 1214,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6114
+    },
+    {
+      "name": "Brünner's Restaurant",
+      "rating": 4.7,
+      "review_count": 1214,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6114
+    },
+    {
+      "name": "Velobis",
+      "rating": 4.8,
+      "review_count": 566,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6105
+    },
+    {
+      "name": "DiningRuhm",
+      "rating": 4.7,
+      "review_count": 1197,
+      "primary_type": "fusion_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6104
+    },
+    {
+      "name": "Wiener Genuss Knödel",
+      "rating": 4.8,
+      "review_count": 558,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6089
+    },
+    {
+      "name": "Vienna Bunsik",
+      "rating": 4.9,
+      "review_count": 366,
+      "primary_type": "korean_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6088
+    },
+    {
+      "name": "Om Namo",
+      "rating": 4.7,
+      "review_count": 1166,
+      "primary_type": "indian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6087
+    },
+    {
+      "name": "Sajado Invalidenstraße",
+      "rating": 4.9,
+      "review_count": 365,
+      "primary_type": "asian_fusion_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6084
+    },
+    {
+      "name": "EL’GEMINI Lebanese Restaurant, Burger & Bar",
+      "rating": 4.8,
+      "review_count": 553,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6079
+    },
+    {
+      "name": "Würstelstand - Zum scharfen René",
+      "rating": 4.7,
+      "review_count": 1148,
+      "primary_type": "hot_dog_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6076
+    },
+    {
+      "name": "LOLA - Spanisches Restaurant",
+      "rating": 4.7,
+      "review_count": 1138,
+      "primary_type": "tapas_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.607
+    },
+    {
+      "name": "Gasthaus Elsner",
+      "rating": 4.7,
+      "review_count": 1137,
+      "primary_type": "austrian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6069
+    },
+    {
+      "name": "Velani",
+      "rating": 4.7,
+      "review_count": 1132,
+      "primary_type": "vegan_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6066
+    },
+    {
+      "name": "Al Capriccio",
+      "rating": 4.8,
+      "review_count": 538,
+      "primary_type": "italian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6049
+    },
+    {
+      "name": "Hotel MOTTO",
+      "rating": 4.7,
+      "review_count": 1084,
+      "primary_type": "hotel",
+      "district": null,
+      "price_level": null,
+      "score": 4.6036
+    },
+    {
+      "name": "Stasta",
+      "rating": 4.7,
+      "review_count": 1081,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6034
+    },
+    {
+      "name": "kantine - thai & bar",
+      "rating": 4.8,
+      "review_count": 530,
+      "primary_type": "thai_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6032
+    },
+    {
+      "name": "Cafe Little Britain",
+      "rating": 4.7,
+      "review_count": 1076,
+      "primary_type": "british_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6031
+    },
+    {
+      "name": "Beisl in der Sigmundsgasse",
+      "rating": 4.7,
+      "review_count": 1075,
+      "primary_type": "austrian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.603
+    },
+    {
+      "name": "Crepeteria Crepes & Coffee",
+      "rating": 5.0,
+      "review_count": 262,
+      "primary_type": "dessert_shop",
+      "district": null,
+      "price_level": null,
+      "score": 4.6026
+    },
+    {
+      "name": "Be Fresh - Bowls & Healthy Food",
+      "rating": 4.9,
+      "review_count": 350,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6026
+    },
+    {
+      "name": "Viva la Vita Pizzeria Trattoria",
+      "rating": 4.7,
+      "review_count": 1059,
+      "primary_type": "pizza_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.602
+    },
+    {
+      "name": "Poncho Vienna - French Tacos",
+      "rating": 4.9,
+      "review_count": 348,
+      "primary_type": "fast_food_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6018
+    },
+    {
+      "name": "SHIYU creative vegan kitchen",
+      "rating": 4.9,
+      "review_count": 346,
+      "primary_type": "vegan_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.601
+    },
+    {
+      "name": "GUSTOLAB - WIEN 03",
+      "rating": 4.8,
+      "review_count": 519,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6008
+    },
+    {
+      "name": "Kaiser's – Kaiser'schmarrn",
+      "rating": 4.8,
+      "review_count": 519,
+      "primary_type": "dessert_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6008
+    },
+    {
+      "name": "Fat George - Gasthaus",
+      "rating": 4.7,
+      "review_count": 1040,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6007
+    },
+    {
+      "name": "Cucina Sebastiano",
+      "rating": 4.8,
+      "review_count": 517,
+      "primary_type": "italian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6004
+    },
+    {
+      "name": "Beats & Beans",
+      "rating": 4.9,
+      "review_count": 344,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6002
+    },
+    {
+      "name": "Jin's Ramen Hietzing",
+      "rating": 4.7,
+      "review_count": 1032,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.6001
+    },
+    {
+      "name": "Prater",
+      "rating": 4.6,
+      "review_count": 138129,
+      "primary_type": "amusement_park",
+      "district": null,
+      "price_level": null,
+      "score": 4.5993
+    },
+    {
+      "name": "Le Pearl Restaurant",
+      "rating": 4.7,
+      "review_count": 1014,
+      "primary_type": "lebanese_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5988
+    },
+    {
+      "name": "Das Lokal im Hof",
+      "rating": 4.7,
+      "review_count": 1012,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5987
+    },
+    {
+      "name": "Kekko Wien Favoriten",
+      "rating": 4.8,
+      "review_count": 509,
+      "primary_type": "sushi_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5986
+    },
+    {
+      "name": "Pizzeria il Rione",
+      "rating": 4.7,
+      "review_count": 1010,
+      "primary_type": "pizza_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5985
+    },
+    {
+      "name": "Kolonitz Beisl",
+      "rating": 4.7,
+      "review_count": 1006,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5983
+    },
+    {
+      "name": "2nd Street Burger",
+      "rating": 4.7,
+      "review_count": 1002,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.598
+    },
+    {
+      "name": "Vevi Restaurant Albertgasse",
+      "rating": 4.8,
+      "review_count": 506,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.598
+    },
+    {
+      "name": "Shiso Burger 1060",
+      "rating": 4.7,
+      "review_count": 1000,
+      "primary_type": "hamburger_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5978
+    },
+    {
+      "name": "Vienna Wirtshaus",
+      "rating": 4.7,
+      "review_count": 983,
+      "primary_type": "austrian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5966
+    },
+    {
+      "name": "Chinarestaurant Sunny (Golden Palace China-Restaurant Betriebs GmbH)",
+      "rating": 4.7,
+      "review_count": 980,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5963
+    },
+    {
+      "name": "JAFFA Street Food",
+      "rating": 4.8,
+      "review_count": 494,
+      "primary_type": "vegetarian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5952
+    },
+    {
+      "name": "Mesze_Vienna",
+      "rating": 4.7,
+      "review_count": 962,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.595
+    },
+    {
+      "name": "Ichi go Ichi e - Ramen Bar",
+      "rating": 4.8,
+      "review_count": 492,
+      "primary_type": "japanese_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5948
+    },
+    {
+      "name": "MaranVEGAN",
+      "rating": 4.7,
+      "review_count": 960,
+      "primary_type": "supermarket",
+      "district": null,
+      "price_level": null,
+      "score": 4.5948
+    },
+    {
+      "name": "Lucky Pavillion - Asiatisches All you can eat Buffet / A la carte",
+      "rating": 4.7,
+      "review_count": 954,
+      "primary_type": "chinese_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5944
+    },
+    {
+      "name": "Leopoldauer Alm",
+      "rating": 4.6,
+      "review_count": 15708,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5936
+    },
+    {
+      "name": "Sadem Döner",
+      "rating": 4.7,
+      "review_count": 939,
+      "primary_type": "turkish_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5932
+    },
+    {
+      "name": "Casa Mora",
+      "rating": 4.9,
+      "review_count": 326,
+      "primary_type": "bistro",
+      "district": null,
+      "price_level": null,
+      "score": 4.5928
+    },
+    {
+      "name": "Gasthaus zum Holunderstrauch",
+      "rating": 4.7,
+      "review_count": 927,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5922
+    },
+    {
+      "name": "Hotel Indigo Vienna - Naschmarkt by IHG",
+      "rating": 4.7,
+      "review_count": 925,
+      "primary_type": "hotel",
+      "district": null,
+      "price_level": null,
+      "score": 4.592
+    },
+    {
+      "name": "Ni Jo simply asian",
+      "rating": 4.8,
+      "review_count": 480,
+      "primary_type": "asian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.592
+    },
+    {
+      "name": "Little India",
+      "rating": 4.7,
+      "review_count": 922,
+      "primary_type": "indian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5918
+    },
+    {
+      "name": "Dönermeister Hernalser Gürtel",
+      "rating": 4.7,
+      "review_count": 920,
+      "primary_type": "turkish_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5916
+    },
+    {
+      "name": "Santoor (modernes persisches Restaurant in Wien)",
+      "rating": 4.7,
+      "review_count": 920,
+      "primary_type": "persian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5916
+    },
+    {
+      "name": "Zum Englischen Reiter",
+      "rating": 4.6,
+      "review_count": 11176,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5911
+    },
+    {
+      "name": "Pichlmaiers zum Herkner",
+      "rating": 4.7,
+      "review_count": 908,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5906
+    },
+    {
+      "name": "Yusis Kebabhaus",
+      "rating": 4.8,
+      "review_count": 474,
+      "primary_type": "fast_food_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5906
+    },
+    {
+      "name": "Kaiser's",
+      "rating": 4.7,
+      "review_count": 907,
+      "primary_type": "dessert_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5906
+    },
+    {
+      "name": "Fiero Restaurant",
+      "rating": 4.7,
+      "review_count": 905,
+      "primary_type": "italian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5904
+    },
+    {
+      "name": "Ochei",
+      "rating": 4.9,
+      "review_count": 320,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5902
+    },
+    {
+      "name": "Zur böhmischen Kuchl",
+      "rating": 4.7,
+      "review_count": 900,
+      "primary_type": "czech_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.59
+    },
+    {
+      "name": "Lin House Chinarestaurant",
+      "rating": 4.7,
+      "review_count": 900,
+      "primary_type": "chinese_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.59
+    },
+    {
+      "name": "Wirtshaus Am Wasserpark",
+      "rating": 4.7,
+      "review_count": 899,
+      "primary_type": "austrian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5899
+    },
+    {
+      "name": "My Secret Garden - Vegetarian Café & Restaurant Vienna",
+      "rating": 4.7,
+      "review_count": 893,
+      "primary_type": "vegetarian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5894
+    },
+    {
+      "name": "DEVAL",
+      "rating": 4.9,
+      "review_count": 318,
+      "primary_type": "fine_dining_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5893
+    },
+    {
+      "name": "Pia's Wohlleben – Hausgemachte Bio-Spätzle: klassisch, vegan & mehr",
+      "rating": 4.8,
+      "review_count": 468,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5891
+    },
+    {
+      "name": "The Everest Restaurant (Nepalese & Indian Cuisine)",
+      "rating": 4.7,
+      "review_count": 883,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5885
+    },
+    {
+      "name": "Bayram Pizza",
+      "rating": 4.8,
+      "review_count": 461,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5874
+    },
+    {
+      "name": "NT BÁNH MÌ",
+      "rating": 4.9,
+      "review_count": 313,
+      "primary_type": "vietnamese_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5872
+    },
+    {
+      "name": "Mr. Nam",
+      "rating": 4.8,
+      "review_count": 460,
+      "primary_type": "vietnamese_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5872
+    },
+    {
+      "name": "Al Zaytouna Restaurant",
+      "rating": 4.6,
+      "review_count": 6106,
+      "primary_type": "lebanese_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5842
+    },
+    {
+      "name": "Sini Restaurant",
+      "rating": 4.7,
+      "review_count": 833,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.584
+    },
+    {
+      "name": "Yedigün Döner",
+      "rating": 4.7,
+      "review_count": 829,
+      "primary_type": "kebab_shop",
+      "district": null,
+      "price_level": null,
+      "score": 4.5836
+    },
+    {
+      "name": "Nikolsdorfer BURGER",
+      "rating": 4.8,
+      "review_count": 445,
+      "primary_type": "hamburger_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5834
+    },
+    {
+      "name": "mani Yppenplatz",
+      "rating": 4.8,
+      "review_count": 440,
+      "primary_type": "middle_eastern_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5821
+    },
+    {
+      "name": "NIGLS Gastwirtschaft",
+      "rating": 4.7,
+      "review_count": 812,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.582
+    },
+    {
+      "name": "Spaghetteria Il Mercato KG",
+      "rating": 4.8,
+      "review_count": 438,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5816
+    },
+    {
+      "name": "Griechische Taverne Am Sachsengang",
+      "rating": 4.6,
+      "review_count": 5165,
+      "primary_type": "greek_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5815
+    },
+    {
+      "name": "Rhulo Cigköfte Favoriten",
+      "rating": 4.8,
+      "review_count": 436,
+      "primary_type": "vegan_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.581
+    },
+    {
+      "name": "DAST Restaurant",
+      "rating": 4.8,
+      "review_count": 436,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.581
+    },
+    {
+      "name": "Muss'ty Food Point Restaurant",
+      "rating": 4.7,
+      "review_count": 798,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5806
+    },
+    {
+      "name": "Restaurant Eckel",
+      "rating": 4.7,
+      "review_count": 798,
+      "primary_type": "austrian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5806
+    },
+    {
+      "name": "Apron",
+      "rating": 4.8,
+      "review_count": 434,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5805
+    },
+    {
+      "name": "KAYAN",
+      "rating": 4.9,
+      "review_count": 298,
+      "primary_type": "fusion_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5804
+    },
+    {
+      "name": "Schank zum Reichsapfel",
+      "rating": 4.7,
+      "review_count": 795,
+      "primary_type": "austrian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5803
+    },
+    {
+      "name": "Lili's Kitchen",
+      "rating": 4.8,
+      "review_count": 433,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5803
+    },
+    {
+      "name": "o.m.k 1020",
+      "rating": 4.7,
+      "review_count": 791,
+      "primary_type": "deli",
+      "district": null,
+      "price_level": null,
+      "score": 4.5799
+    },
+    {
+      "name": "Modern Korean",
+      "rating": 4.7,
+      "review_count": 791,
+      "primary_type": "korean_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5799
+    },
+    {
+      "name": "Mraz & Sohn",
+      "rating": 4.7,
+      "review_count": 790,
+      "primary_type": "fine_dining_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5798
+    },
+    {
+      "name": "Le’s",
+      "rating": 4.8,
+      "review_count": 431,
+      "primary_type": "vietnamese_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5797
+    },
+    {
+      "name": "Inn Reinthaler",
+      "rating": 4.6,
+      "review_count": 4555,
+      "primary_type": "austrian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5792
+    },
+    {
+      "name": "Schneiders Hendl-Schmaus",
+      "rating": 4.9,
+      "review_count": 295,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5791
+    },
+    {
+      "name": "Gasthaus Peschta",
+      "rating": 4.7,
+      "review_count": 781,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5789
+    },
+    {
+      "name": "GANESHA Indian cuisine",
+      "rating": 4.6,
+      "review_count": 4181,
+      "primary_type": "indian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5775
+    },
+    {
+      "name": "El Gaucho at the Rochusmarkt",
+      "rating": 4.6,
+      "review_count": 4143,
+      "primary_type": "steak_house",
+      "district": null,
+      "price_level": null,
+      "score": 4.5773
+    },
+    {
+      "name": "Bona LaMeLi",
+      "rating": 4.7,
+      "review_count": 755,
+      "primary_type": "kebab_shop",
+      "district": null,
+      "price_level": null,
+      "score": 4.5761
+    },
+    {
+      "name": "Hotel Schani UNO City Wien",
+      "rating": 4.7,
+      "review_count": 753,
+      "primary_type": "hotel",
+      "district": null,
+      "price_level": null,
+      "score": 4.5759
+    },
+    {
+      "name": "Disco Volante",
+      "rating": 4.6,
+      "review_count": 3816,
+      "primary_type": "pizza_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5756
+    },
+    {
+      "name": "Gelateria La Romana dal 1947",
+      "rating": 4.7,
+      "review_count": 745,
+      "primary_type": "ice_cream_shop",
+      "district": null,
+      "price_level": null,
+      "score": 4.5751
+    },
+    {
+      "name": "Pizza Mari",
+      "rating": 4.6,
+      "review_count": 3615,
+      "primary_type": "pizza_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5743
+    },
+    {
+      "name": "Mars-Imbiss",
+      "rating": 4.9,
+      "review_count": 282,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.573
+    },
+    {
+      "name": "Restaurant Lebenbauer",
+      "rating": 4.7,
+      "review_count": 724,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5727
+    },
+    {
+      "name": "Restaurant Sokače",
+      "rating": 4.6,
+      "review_count": 3361,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5726
+    },
+    {
+      "name": "BONTRI (SmashBurger-Pizza-Pide-Suppen-Vorspeisen-Nachspeisen-)",
+      "rating": 4.9,
+      "review_count": 281,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5725
+    },
+    {
+      "name": "Pizza Napoles Vienna",
+      "rating": 5.0,
+      "review_count": 215,
+      "primary_type": "european_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5723
+    },
+    {
+      "name": "Restaurant Hu",
+      "rating": 4.7,
+      "review_count": 717,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5719
+    },
+    {
+      "name": "Der Wiener Deewan",
+      "rating": 4.6,
+      "review_count": 3259,
+      "primary_type": "pakistani_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5718
+    },
+    {
+      "name": "Mamas Crêpes&Shakes",
+      "rating": 4.9,
+      "review_count": 279,
+      "primary_type": "dessert_shop",
+      "district": null,
+      "price_level": null,
+      "score": 4.5715
+    },
+    {
+      "name": "DURU KEBAP",
+      "rating": 4.6,
+      "review_count": 3188,
+      "primary_type": "kebab_shop",
+      "district": null,
+      "price_level": null,
+      "score": 4.5713
+    },
+    {
+      "name": "Taste of India Margaretenstraße",
+      "rating": 4.6,
+      "review_count": 3154,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.571
+    },
+    {
+      "name": "Huth Gastwirtschaft",
+      "rating": 4.6,
+      "review_count": 3144,
+      "primary_type": "austrian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5709
+    },
+    {
+      "name": "Figls",
+      "rating": 4.6,
+      "review_count": 3118,
+      "primary_type": "austrian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5707
+    },
+    {
+      "name": "Ecklokal",
+      "rating": 4.8,
+      "review_count": 397,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5703
+    },
+    {
+      "name": "Dampha Kitchen",
+      "rating": 4.8,
+      "review_count": 397,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5703
+    },
+    {
+      "name": "Le Burger Donau Zentrum",
+      "rating": 4.6,
+      "review_count": 2980,
+      "primary_type": "hamburger_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5695
+    },
+    {
+      "name": "SMASHBOX 1070",
+      "rating": 4.7,
+      "review_count": 692,
+      "primary_type": "hamburger_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.569
+    },
+    {
+      "name": "Sentepe Bistro & Café",
+      "rating": 4.8,
+      "review_count": 392,
+      "primary_type": "turkish_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5689
+    },
+    {
+      "name": "Shirokiya - All you can eat Sushi & More",
+      "rating": 4.8,
+      "review_count": 392,
+      "primary_type": "asian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5689
+    },
+    {
+      "name": "Mochi",
+      "rating": 4.6,
+      "review_count": 2898,
+      "primary_type": "japanese_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5688
+    },
+    {
+      "name": "Apadana Restaurant",
+      "rating": 4.6,
+      "review_count": 2865,
+      "primary_type": "persian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5684
+    },
+    {
+      "name": "Samran Thai Restaurant",
+      "rating": 4.8,
+      "review_count": 390,
+      "primary_type": "thai_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5683
+    },
+    {
+      "name": "PROSI South & North Indian Restaurant",
+      "rating": 4.6,
+      "review_count": 2839,
+      "primary_type": "indian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5682
+    },
+    {
+      "name": "SHOYU PAN",
+      "rating": 4.8,
+      "review_count": 389,
+      "primary_type": "japanese_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.568
+    },
+    {
+      "name": "Melker Stiftskeller",
+      "rating": 4.6,
+      "review_count": 2792,
+      "primary_type": "austrian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5677
+    },
+    {
+      "name": "Schnitzel Reich",
+      "rating": 4.8,
+      "review_count": 387,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5674
+    },
+    {
+      "name": "Alt Wiener Stuben",
+      "rating": 4.6,
+      "review_count": 2755,
+      "primary_type": "austrian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5673
+    },
+    {
+      "name": "Meister Lángos",
+      "rating": 4.7,
+      "review_count": 676,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5671
+    },
+    {
+      "name": "fischerie",
+      "rating": 4.8,
+      "review_count": 386,
+      "primary_type": "fusion_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5671
+    },
+    {
+      "name": "Gasthaus Rebhuhn",
+      "rating": 4.6,
+      "review_count": 2721,
+      "primary_type": "austrian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.567
+    },
+    {
+      "name": "KitchA - Sticks & Rolls",
+      "rating": 4.6,
+      "review_count": 2658,
+      "primary_type": "asian_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5663
+    },
+    {
+      "name": "Ramasuri",
+      "rating": 4.6,
+      "review_count": 2626,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5659
+    },
+    {
+      "name": "Odysseus Restaurant",
+      "rating": 4.6,
+      "review_count": 2611,
+      "primary_type": "greek_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5658
+    },
+    {
+      "name": "Waldviertlerhof",
+      "rating": 4.6,
+      "review_count": 2615,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5658
+    },
+    {
+      "name": "Swing Kitchen",
+      "rating": 4.6,
+      "review_count": 2580,
+      "primary_type": "vegan_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5654
+    },
+    {
+      "name": "The Burgero",
+      "rating": 4.8,
+      "review_count": 380,
+      "primary_type": "hamburger_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5653
+    },
+    {
+      "name": "Am Himmel",
+      "rating": 4.6,
+      "review_count": 2570,
+      "primary_type": "park",
+      "district": null,
+      "price_level": null,
+      "score": 4.5653
+    },
+    {
+      "name": "TABERNA DE LA MANCHA * CAFE, TAPAS BAR & RESTAURANT *",
+      "rating": 4.8,
+      "review_count": 379,
+      "primary_type": "spanish_restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.565
+    },
+    {
+      "name": "Gasthaus Bauer",
+      "rating": 4.7,
+      "review_count": 657,
+      "primary_type": "restaurant",
+      "district": null,
+      "price_level": null,
+      "score": 4.5647
     }
   ],
-  "rising_stars": [],
-  "breakouts": []
+  "trending": []
 }
