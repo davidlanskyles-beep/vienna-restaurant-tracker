@@ -1,0 +1,48 @@
+name: rebuild-rankings
+
+# One-off helper: re-applies the database migration (columns + the latest views)
+# and regenerates public/rankings.json from data already in the database.
+# Makes NO Google API calls, so it is free. Trigger by hand from the Actions tab
+# whenever the ranking logic changes.
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install deps
+        run: pip install -r requirements.txt
+
+      - name: Migrate schema (columns + views)
+        env:
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          python - <<'PY'
+          import os, psycopg2, scan
+          conn = psycopg2.connect(os.environ["DATABASE_URL"])
+          scan.ensure_schema(conn)
+          conn.close()
+          print("schema migrated")
+          PY
+
+      - name: Export rankings.json
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: python export.py
+
+      - name: Commit updated rankings
+        run: |
+          git config user.name  "trend-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add public/rankings.json
+          git diff --staged --quiet || git commit -m "rebuild rankings (two-metric model)"
+          git push
