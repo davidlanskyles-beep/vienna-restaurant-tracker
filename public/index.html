@@ -12,82 +12,65 @@
     --bg:#ffffff; --bg-soft:#f5f5f7; --panel:#ffffff;
     --ink:#1d1d1f; --ink-soft:#6e6e73; --ink-faint:#86868b;
     --line:#d2d2d7; --line-soft:#e8e8ed;
-    --btn:#1d1d1f; --btn-ink:#ffffff;
-    --radius:18px;
+    --btn:#1d1d1f; --btn-ink:#ffffff; --radius:18px;
   }
   @media (prefers-color-scheme: dark){
     :root{ --bg:#000000; --bg-soft:#161617; --panel:#1c1c1e;
            --ink:#f5f5f7; --ink-soft:#a1a1a6; --ink-faint:#86868b;
-           --line:#3a3a3c; --line-soft:#2a2a2c;
-           --btn:#f5f5f7; --btn-ink:#1d1d1f; }
+           --line:#3a3a3c; --line-soft:#2a2a2c; --btn:#f5f5f7; --btn-ink:#1d1d1f; }
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{
-    margin:0; background:var(--bg); color:var(--ink);
-    font-family:-apple-system, BlinkMacSystemFont, "SF Pro Text", ui-sans-serif,
-      system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    line-height:1.47; -webkit-font-smoothing:antialiased; letter-spacing:-.003em;
-  }
+  body{margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",ui-sans-serif,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.47; -webkit-font-smoothing:antialiased; letter-spacing:-.003em}
   .wrap{max-width:820px; margin:0 auto; padding:0 22px 100px}
 
   .nav{position:sticky; top:0; z-index:10;
-    background:color-mix(in srgb, var(--bg) 80%, transparent);
-    backdrop-filter:saturate(180%) blur(20px);
-    border-bottom:1px solid var(--line-soft); padding:0 22px}
-  .nav-inner{max-width:820px; margin:0 auto; height:50px; display:flex;
-    align-items:center; justify-content:space-between; gap:14px}
-  .wordmark{font-weight:600; font-size:15px; letter-spacing:-.01em}
-  .meta{font-size:12px; color:var(--ink-faint); font-variant-numeric:tabular-nums}
-
-  .hero{padding:64px 0 36px; text-align:center}
-  .hero h1{font-size:clamp(34px,6vw,52px); line-height:1.06; font-weight:680;
-    letter-spacing:-.025em; margin:0 0 16px}
-  .hero .lede{max-width:34ch; margin:0 auto; color:var(--ink-soft);
-    font-size:clamp(16px,2.4vw,19px); line-height:1.5}
+    background:color-mix(in srgb,var(--bg) 80%,transparent);
+    backdrop-filter:saturate(180%) blur(20px); border-bottom:1px solid var(--line-soft)}
+  .nav-top{max-width:820px; margin:0 auto; padding:11px 22px 0; display:flex;
+    align-items:baseline; justify-content:space-between; gap:12px}
+  .wordmark{font-weight:600; font-size:14px; letter-spacing:-.01em; color:var(--ink)}
+  .meta{font-size:11.5px; color:var(--ink-faint); font-variant-numeric:tabular-nums; text-align:right}
+  .tabs{max-width:820px; margin:0 auto; padding:7px 18px 9px; display:flex; gap:3px; flex-wrap:wrap}
+  .tab{font:inherit; font-size:14px; font-weight:550; color:var(--ink-soft); background:none;
+    border:none; cursor:pointer; padding:8px 13px; border-radius:980px; white-space:nowrap}
+  .tab:hover{color:var(--ink)}
+  .tab.active{color:var(--ink); background:var(--bg-soft)}
 
   .filters{display:flex; gap:12px 16px; flex-wrap:wrap; align-items:flex-end;
-    margin:18px 0 0; padding:16px 18px; background:var(--bg-soft);
-    border-radius:var(--radius)}
+    margin:26px 0 0; padding:16px 18px; background:var(--bg-soft); border-radius:var(--radius)}
   .field{display:flex; flex-direction:column; gap:6px}
-  .field label{font-size:11px; letter-spacing:.04em; text-transform:uppercase;
-    color:var(--ink-faint); font-weight:600}
-  select, input[type=search], input[type=email]{
-    appearance:none; -webkit-appearance:none; font:inherit; font-size:15px; color:var(--ink);
-    background:var(--panel); border:1px solid var(--line); border-radius:11px;
-    padding:11px 13px; outline:none;
-  }
+  .field label{font-size:11px; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-faint); font-weight:600}
+  select, input[type=search], input[type=email]{appearance:none; -webkit-appearance:none;
+    font:inherit; font-size:15px; color:var(--ink); background:var(--panel);
+    border:1px solid var(--line); border-radius:11px; padding:11px 13px; outline:none}
   select:focus, input:focus{border-color:var(--ink-faint)}
   .field select{min-width:180px; padding-right:32px; cursor:pointer;
-    background-image:linear-gradient(45deg,transparent 50%,var(--ink-faint) 50%),
-      linear-gradient(135deg,var(--ink-faint) 50%,transparent 50%);
-    background-position:calc(100% - 17px) 20px, calc(100% - 12px) 20px;
-    background-size:5px 5px,5px 5px; background-repeat:no-repeat}
-  .field.hidden, .filters.hidden{display:none}
-  .reset{font:inherit; font-size:13px; color:var(--ink); background:none; border:none;
-    cursor:pointer; padding:9px 4px; text-decoration:underline; text-underline-offset:3px;
-    text-decoration-color:var(--line)}
+    background-image:linear-gradient(45deg,transparent 50%,var(--ink-faint) 50%),linear-gradient(135deg,var(--ink-faint) 50%,transparent 50%);
+    background-position:calc(100% - 17px) 20px,calc(100% - 12px) 20px; background-size:5px 5px,5px 5px; background-repeat:no-repeat}
+  .field.hidden, .filters.hidden, .filterwrap.hidden{display:none}
+  .reset{font:inherit; font-size:13px; color:var(--ink); background:none; border:none; cursor:pointer;
+    padding:9px 4px; text-decoration:underline; text-underline-offset:3px; text-decoration-color:var(--line)}
   .count{font-size:13px; color:var(--ink-faint); margin:14px 2px 0}
 
-  section{ margin:46px 0 0 }
-  .eyebrow{font-size:12px; letter-spacing:.02em; text-transform:uppercase;
-    color:var(--ink-faint); font-weight:600}
-  h2{font-size:clamp(24px,3.4vw,30px); letter-spacing:-.02em; font-weight:660; margin:8px 0 4px}
+  .panel[hidden]{display:none}
+  .panel{padding-top:34px}
+  .eyebrow{font-size:12px; letter-spacing:.02em; text-transform:uppercase; color:var(--ink-faint); font-weight:600}
+  h2{font-size:clamp(26px,3.6vw,33px); letter-spacing:-.02em; font-weight:660; margin:8px 0 4px}
   .def{font-size:15px; color:var(--ink-soft); margin:0 0 18px; max-width:60ch}
 
   .explore-controls{display:flex; gap:10px; flex-wrap:wrap; margin:0 0 14px}
   .explore-controls input[type=search]{flex:1 1 240px; min-width:0; cursor:text}
   .explore-controls select{flex:0 0 auto; padding-right:32px; cursor:pointer;
-    background-image:linear-gradient(45deg,transparent 50%,var(--ink-faint) 50%),
-      linear-gradient(135deg,var(--ink-faint) 50%,transparent 50%);
-    background-position:calc(100% - 17px) 20px, calc(100% - 12px) 20px;
-    background-size:5px 5px,5px 5px; background-repeat:no-repeat}
-  .scrollbox{max-height:64vh; overflow-y:auto; margin:0 -4px; padding:0 4px}
+    background-image:linear-gradient(45deg,transparent 50%,var(--ink-faint) 50%),linear-gradient(135deg,var(--ink-faint) 50%,transparent 50%);
+    background-position:calc(100% - 17px) 20px,calc(100% - 12px) 20px; background-size:5px 5px,5px 5px; background-repeat:no-repeat}
+  .scrollbox{max-height:66vh; overflow-y:auto; margin:0 -4px; padding:0 4px}
 
   table{width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums}
-  th{font-size:11px; letter-spacing:.03em; text-transform:uppercase; color:var(--ink-faint);
-    font-weight:600; text-align:right; padding:8px 10px; border-bottom:1px solid var(--line);
-    position:sticky; top:0; background:var(--bg)}
+  th{font-size:11px; letter-spacing:.03em; text-transform:uppercase; color:var(--ink-faint); font-weight:600;
+    text-align:right; padding:8px 10px; border-bottom:1px solid var(--line); position:sticky; top:0; background:var(--bg)}
   th.l, td.l{text-align:left}
   th.active{color:var(--ink)}
   td{padding:13px 10px; border-bottom:1px solid var(--line-soft); font-size:15px}
@@ -99,43 +82,47 @@
   .score{color:var(--ink-soft)}
   .mom{font-weight:600; white-space:nowrap; color:var(--ink)}
   .mom.flat{color:var(--ink-faint)}
-  .mom .bar{display:inline-block; height:6px; border-radius:3px; vertical-align:middle;
-    margin-left:8px; background:var(--ink); opacity:.18}
+  .mom .bar{display:inline-block; height:6px; border-radius:3px; vertical-align:middle; margin-left:8px; background:var(--ink); opacity:.18}
   .empty{color:var(--ink-soft); font-size:14.5px; padding:8px 2px 18px; max-width:60ch}
   .empty b{color:var(--ink); font-weight:600}
   .rank{color:var(--ink-faint); width:36px; font-size:13px}
 
-  details.explain{border-top:1px solid var(--line-soft); margin:14px 0 0}
-  details.explain summary{cursor:pointer; list-style:none; padding:15px 2px; font-size:14px;
-    font-weight:560; color:var(--ink); display:flex; align-items:center; gap:9px}
+  details.explain{border-top:1px solid var(--line-soft); margin:18px 0 0}
+  details.explain summary{cursor:pointer; list-style:none; padding:15px 2px; font-size:14px; font-weight:560;
+    color:var(--ink); display:flex; align-items:center; gap:9px}
   details.explain summary::-webkit-details-marker{display:none}
   details.explain summary::before{content:"+"; font-size:17px; line-height:1; width:13px; color:var(--ink-faint)}
   details.explain[open] summary::before{content:"–"}
-  .explain-body{font-size:14.5px; color:var(--ink-soft); line-height:1.62; padding:0 2px 18px; max-width:70ch}
+  .explain-body{font-size:14.5px; color:var(--ink-soft); line-height:1.62; padding:0 2px 6px; max-width:70ch}
   .explain-body p{margin:0 0 12px}
   .explain-body b{color:var(--ink)}
-  .explain-body .formula{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-    font-size:13px; background:var(--bg-soft); border-radius:11px; padding:12px 14px;
-    margin:0 0 12px; display:block; color:var(--ink)}
+  .explain-body .formula{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:13px;
+    background:var(--bg-soft); border-radius:11px; padding:12px 14px; margin:0 0 12px; display:block; color:var(--ink)}
   .explain-body table{width:auto; margin:2px 0 12px}
-  .explain-body td, .explain-body th{padding:5px 16px 5px 0; border:none; font-size:13px;
-    text-align:left; position:static; background:none; text-transform:none; letter-spacing:0}
+  .explain-body td, .explain-body th{padding:5px 16px 5px 0; border:none; font-size:13px; text-align:left;
+    position:static; background:none; text-transform:none; letter-spacing:0}
 
-  .newsletter{margin-top:56px; background:var(--bg-soft); border-radius:28px;
-    padding:54px 28px; text-align:center}
+  .prose{max-width:62ch; font-size:16px; color:var(--ink-soft); line-height:1.62}
+  .prose h2{margin-bottom:14px}
+  .prose h3{font-size:18px; font-weight:620; color:var(--ink); margin:30px 0 8px; letter-spacing:-.01em}
+  .prose p{margin:0 0 13px}
+  .prose b{color:var(--ink)}
+  .prose a{color:var(--ink)}
+
+  .newsletter{margin-top:56px; background:var(--bg-soft); border-radius:28px; padding:54px 28px; text-align:center}
   .newsletter h2{margin:0 0 10px}
   .newsletter p.sub{color:var(--ink-soft); font-size:16px; max-width:42ch; margin:0 auto 24px}
   .nl-form{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin:0 auto; max-width:460px}
   .nl-form input[type=email]{flex:1 1 240px; min-width:0; text-align:left; padding:13px 15px; border-radius:12px}
-  .nl-btn{font:inherit; font-size:15px; font-weight:560; cursor:pointer;
-    background:var(--btn); color:var(--btn-ink); border:none; border-radius:12px; padding:13px 22px}
-  .nl-btn:disabled{opacity:.5; cursor:default}
+  .nl-btn{font:inherit; font-size:15px; font-weight:560; cursor:pointer; background:var(--btn); color:var(--btn-ink);
+    border:none; border-radius:12px; padding:13px 22px}
   .nl-note{font-size:12px; color:var(--ink-faint); margin:14px auto 0; max-width:42ch}
   .nl-status{font-size:14px; margin:14px 0 0; min-height:1em}
+  .newsletter.hidden{display:none}
 
-  .site-foot{max-width:820px; margin:60px auto 0; padding:26px 22px 0;
-    border-top:1px solid var(--line-soft); color:var(--ink-faint); font-size:13px; text-align:center}
-  .site-foot a{color:var(--ink)}
+  .site-foot{max-width:820px; margin:54px auto 0; padding:26px 22px 0; border-top:1px solid var(--line-soft);
+    color:var(--ink-faint); font-size:12.5px; text-align:center}
+  .site-foot a{color:var(--ink-faint); cursor:pointer; text-decoration:underline; text-underline-offset:2px}
 
   @media (max-width:620px){
     .hide-sm{display:none}
@@ -143,67 +130,110 @@
     .field select{min-width:0; width:100%}
     .field{flex:1 1 130px}
     .newsletter{padding:40px 20px; border-radius:22px}
+    .tab{padding:8px 11px; font-size:13.5px}
   }
 </style>
 </head>
 <body>
   <header class="nav">
-    <div class="nav-inner">
-      <div class="wordmark">Wien Restaurant-Bewegung</div>
-      <div class="meta" id="meta">lädt &hellip;</div>
+    <div class="nav-top">
+      <span class="wordmark">Wien Restaurant-Bewegung</span>
+      <span class="meta" id="meta">lädt &hellip;</span>
     </div>
+    <nav class="tabs" id="tabs">
+      <button class="tab" data-tab="best">Beste insgesamt</button>
+      <button class="tab" data-tab="trend">Im Trend</button>
+      <button class="tab" data-tab="explore">Entdecken</button>
+      <button class="tab" data-tab="impressum">Impressum</button>
+    </nav>
   </header>
 
   <main class="wrap">
-    <section class="hero">
-      <h1>Wohin Wien gerade essen geht.</h1>
-      <p class="lede">Wiens Restaurants, monatlich neu aus den Google-Bewertungen
-        berechnet. Welche insgesamt am stärksten überzeugen, welche gerade Fahrt
-        aufnehmen – und die ganze Stadt zum Selber-Durchsuchen.</p>
-    </section>
-
-    <div class="filters hidden" id="filters">
-      <div class="field hidden" id="field-district">
-        <label for="f-district">Bezirk</label>
-        <select id="f-district"><option value="">Alle Bezirke</option></select>
+    <div class="filterwrap" id="filterwrap">
+      <div class="filters hidden" id="filters">
+        <div class="field hidden" id="field-district">
+          <label for="f-district">Bezirk</label>
+          <select id="f-district"><option value="">Alle Bezirke</option></select>
+        </div>
+        <div class="field hidden" id="field-price">
+          <label for="f-price">Preis</label>
+          <select id="f-price"><option value="">Alle Preise</option></select>
+        </div>
+        <button class="reset" id="reset" type="button">Filter zur&uuml;cksetzen</button>
       </div>
-      <div class="field hidden" id="field-price">
-        <label for="f-price">Preis</label>
-        <select id="f-price"><option value="">Alle Preise</option></select>
-      </div>
-      <button class="reset" id="reset" type="button">Filter zur&uuml;cksetzen</button>
+      <div class="count" id="count"></div>
     </div>
-    <div class="count" id="count"></div>
 
-    <section id="best"></section>
-    <details class="explain">
-      <summary>Wie wird &bdquo;Beste insgesamt&ldquo; berechnet?</summary>
-      <div class="explain-body" id="explain-best"></div>
-    </details>
+    <div class="panel" id="panel-best" data-panel="best">
+      <section id="best"></section>
+      <details class="explain">
+        <summary>Wie wird &bdquo;Beste insgesamt&ldquo; berechnet?</summary>
+        <div class="explain-body" id="explain-best"></div>
+      </details>
+    </div>
 
-    <section id="trend"></section>
-    <details class="explain">
-      <summary>Wie wird &bdquo;Im Trend&ldquo; berechnet?</summary>
-      <div class="explain-body" id="explain-trend"></div>
-    </details>
+    <div class="panel" id="panel-trend" data-panel="trend" hidden>
+      <section id="trend"></section>
+      <details class="explain">
+        <summary>Wie wird &bdquo;Im Trend&ldquo; berechnet?</summary>
+        <div class="explain-body" id="explain-trend"></div>
+      </details>
+    </div>
 
-    <section id="explore-sec">
-      <div class="eyebrow">Entdecken</div>
-      <h2>Entdecken</h2>
-      <p class="def">Suche ein bestimmtes Lokal nach Namen, oder sortiere die ganze
-        Stadt nach dem, was dich interessiert. Bis zu 200 Treffer.</p>
-      <div class="explore-controls">
-        <input id="q" type="search" placeholder="Restaurant suchen &hellip;" autocomplete="off">
-        <select id="sort">
-          <option value="score">Sortieren: Bayes-Punktzahl</option>
-          <option value="rating">Sortieren: Bewertung (Sterne)</option>
-          <option value="reviews">Sortieren: Anzahl Bewertungen</option>
-        </select>
-      </div>
-      <div class="scrollbox" id="explore"></div>
-    </section>
+    <div class="panel" id="panel-explore" data-panel="explore" hidden>
+      <section id="explore-sec">
+        <div class="eyebrow">Entdecken</div>
+        <h2>Entdecken</h2>
+        <p class="def">Suche ein bestimmtes Lokal nach Namen, oder sortiere die ganze
+          Stadt nach dem, was dich interessiert. Bis zu 200 Treffer.</p>
+        <div class="explore-controls">
+          <input id="q" type="search" placeholder="Restaurant suchen &hellip;" autocomplete="off">
+          <select id="sort">
+            <option value="score">Sortieren: Bayes-Punktzahl</option>
+            <option value="rating">Sortieren: Bewertung (Sterne)</option>
+            <option value="reviews">Sortieren: Anzahl Bewertungen</option>
+          </select>
+        </div>
+        <div class="scrollbox" id="explore"></div>
+      </section>
+    </div>
 
-    <section class="newsletter">
+    <div class="panel" id="panel-impressum" data-panel="impressum" hidden>
+      <section class="prose">
+        <h2>Impressum &amp; Datenschutz</h2>
+        <p>Hallo! Ich bin <b>David Lansky</b> – kein Gastrokritiker, sondern einfach ein
+          Hobby-Foodie mit einer Schwäche für Daten. Diese Seite ist ein privates,
+          nicht-kommerzielles Projekt: Wiens Restaurants, einmal im Monat aus
+          öffentlichen Google-Maps-Bewertungen ausgewertet.</p>
+
+        <h3>Kontakt</h3>
+        <p>David Lansky<br>
+          Biberstraße 5, 1010 Wien, Österreich<br>
+          E-Mail: <a href="mailto:davidlanskyles@gmail.com">davidlanskyles@gmail.com</a></p>
+
+        <h3>Datenschutz</h3>
+        <p><b>Keine Tracker.</b> Diese Seite setzt keine Tracking-Cookies und verwendet
+          keine Analyse- oder Werbedienste. Von Besucherinnen und Besuchern werden
+          keine personenbezogenen Daten erhoben oder gespeichert.</p>
+        <p><b>Newsletter.</b> Wenn du dich für den Newsletter einträgst, wird
+          ausschließlich deine E-Mail-Adresse gespeichert – allein zu dem Zweck, dir den
+          Newsletter zu schicken. Rechtsgrundlage ist deine Einwilligung
+          (Art. 6 Abs. 1 lit. a DSGVO). Du kannst diese Einwilligung jederzeit
+          widerrufen, dich abmelden und die Löschung deiner Adresse verlangen – formlos
+          per E-Mail an die oben genannte Adresse. Die Anmeldung wird technisch über
+          einen Formular-Dienstleister abgewickelt, bei dem deine Adresse zu diesem
+          Zweck ebenfalls gespeichert wird.</p>
+        <p><b>Hosting.</b> Die Seite wird über GitHub Pages (GitHub, Inc.) bereitgestellt.
+          Dabei können technische Zugriffsdaten wie die IP-Adresse verarbeitet werden,
+          die für den Betrieb und die Sicherheit der Seite erforderlich sind.</p>
+        <p><b>Datenquelle.</b> Die Restaurant-Daten – Sternebewertung und Anzahl der
+          Bewertungen – stammen aus Google Maps bzw. der Google Places API und sind
+          Näherungswerte. Diese Seite steht in keiner Verbindung zu Google und ist
+          kein offizielles Google-Produkt.</p>
+      </section>
+    </div>
+
+    <section class="newsletter" id="newsletter">
       <h2>Bleib auf dem Laufenden.</h2>
       <p class="sub">Trag dich ein und bekomm die neuen Listen und Trends, sobald der
         Newsletter startet. Kein Spam, jederzeit abbestellbar.</p>
@@ -213,148 +243,97 @@
       </form>
       <div class="nl-status" id="nl-status"></div>
       <p class="nl-note">Mit dem Abonnieren stimmst du zu, gelegentlich E-Mails zu
-        erhalten. Deine Adresse wird nur dafür verwendet.</p>
+        erhalten. Mehr dazu im <a data-go="impressum">Impressum &amp; Datenschutz</a>.</p>
     </section>
   </main>
 
   <footer class="site-foot">
-    Fragen, Hinweise oder Korrekturen? Schreib an
-    <a id="contact" href="#">&#8230;</a>.
+    Daten aus Google Maps · Näherungswerte · kein offizielles Google-Produkt ·
+    <a data-go="impressum">Impressum</a>
   </footer>
 
 <script>
-const BEZIRKE = {
-  1:"Innere Stadt", 2:"Leopoldstadt", 3:"Landstraße", 4:"Wieden", 5:"Margareten",
-  6:"Mariahilf", 7:"Neubau", 8:"Josefstadt", 9:"Alsergrund", 10:"Favoriten",
-  11:"Simmering", 12:"Meidling", 13:"Hietzing", 14:"Penzing", 15:"Rudolfsheim-Fünfhaus",
-  16:"Ottakring", 17:"Hernals", 18:"Währing", 19:"Döbling", 20:"Brigittenau",
-  21:"Floridsdorf", 22:"Donaustadt", 23:"Liesing"
-};
-const CUISINE = {
-  restaurant:"Restaurant (allgemein)", austrian_restaurant:"Österreichisch",
-  italian_restaurant:"Italienisch", pizza_restaurant:"Pizza", hamburger_restaurant:"Burger",
-  american_restaurant:"Amerikanisch", turkish_restaurant:"Türkisch", kebab_shop:"Kebab",
-  japanese_restaurant:"Japanisch", ramen_restaurant:"Ramen", sushi_restaurant:"Sushi",
-  chinese_restaurant:"Chinesisch", asian_restaurant:"Asiatisch", thai_restaurant:"Thailändisch",
-  vietnamese_restaurant:"Vietnamesisch", korean_restaurant:"Koreanisch", indian_restaurant:"Indisch",
-  greek_restaurant:"Griechisch", croatian_restaurant:"Kroatisch", spanish_restaurant:"Spanisch",
-  french_restaurant:"Französisch", mexican_restaurant:"Mexikanisch", taco_restaurant:"Tacos",
-  steak_house:"Steakhouse", barbecue_restaurant:"BBQ", seafood_restaurant:"Fisch & Meeresfrüchte",
-  sandwich_shop:"Sandwiches", hot_dog_restaurant:"Hot Dog", fast_food_restaurant:"Fast Food",
-  fine_dining_restaurant:"Fine Dining", breakfast_restaurant:"Frühstück",
-  brunch_restaurant:"Brunch", vegetarian_restaurant:"Vegetarisch", vegan_restaurant:"Vegan"
-};
-const EXPLORE_LIMIT = 200, LIST_LIMIT = 50;
-
-// ── Newsletter signup (collect emails) ───────────────────────────────────
-// Easiest setup: create a free form at https://formspree.io — it emails you
-// every address that signs up. Paste the form endpoint it gives you here to
-// switch signups on. While this is empty, the form shows a friendly
-// "coming soon" message instead of posting anywhere.
-const FORM_ENDPOINT = "";          // e.g. "https://formspree.io/f/abcdwxyz"
+const BEZIRKE = {1:"Innere Stadt",2:"Leopoldstadt",3:"Landstraße",4:"Wieden",5:"Margareten",6:"Mariahilf",7:"Neubau",8:"Josefstadt",9:"Alsergrund",10:"Favoriten",11:"Simmering",12:"Meidling",13:"Hietzing",14:"Penzing",15:"Rudolfsheim-Fünfhaus",16:"Ottakring",17:"Hernals",18:"Währing",19:"Döbling",20:"Brigittenau",21:"Floridsdorf",22:"Donaustadt",23:"Liesing"};
+const CUISINE = {restaurant:"Restaurant (allgemein)",austrian_restaurant:"Österreichisch",italian_restaurant:"Italienisch",pizza_restaurant:"Pizza",hamburger_restaurant:"Burger",american_restaurant:"Amerikanisch",turkish_restaurant:"Türkisch",kebab_shop:"Kebab",japanese_restaurant:"Japanisch",ramen_restaurant:"Ramen",sushi_restaurant:"Sushi",chinese_restaurant:"Chinesisch",asian_restaurant:"Asiatisch",thai_restaurant:"Thailändisch",vietnamese_restaurant:"Vietnamesisch",korean_restaurant:"Koreanisch",indian_restaurant:"Indisch",greek_restaurant:"Griechisch",croatian_restaurant:"Kroatisch",spanish_restaurant:"Spanisch",french_restaurant:"Französisch",mexican_restaurant:"Mexikanisch",taco_restaurant:"Tacos",steak_house:"Steakhouse",barbecue_restaurant:"BBQ",seafood_restaurant:"Fisch & Meeresfrüchte",sandwich_shop:"Sandwiches",hot_dog_restaurant:"Hot Dog",fast_food_restaurant:"Fast Food",fine_dining_restaurant:"Fine Dining",breakfast_restaurant:"Frühstück",brunch_restaurant:"Brunch",vegetarian_restaurant:"Vegetarisch",vegan_restaurant:"Vegan"};
+const EXPLORE_LIMIT=200, LIST_LIMIT=50;
+const FORM_ENDPOINT="";   // paste your Formspree endpoint here to switch signups on
 
 function cuisineLabel(t){ if(!t) return "Sonstige"; if(CUISINE[t]) return CUISINE[t];
   let x=t.replace(/_restaurant$/,"").replace(/_/g," ").trim(); return x.charAt(0).toUpperCase()+x.slice(1); }
-function priceSymbol(n){ return (n>=1&&n<=4)? "€".repeat(n):""; }
-const fmt = n => (n==null? "—" : n.toLocaleString("de-AT"));
-const de1 = n => (n==null? "—" : n.toFixed(1).replace(".",","));
-const de2 = n => (n==null? "—" : n.toFixed(2).replace(".",","));
-
+function priceSymbol(n){ return (n>=1&&n<=4)?"€".repeat(n):""; }
+const fmt=n=>(n==null?"—":n.toLocaleString("de-AT"));
+const de1=n=>(n==null?"—":n.toFixed(1).replace(".",","));
+const de2=n=>(n==null?"—":n.toFixed(2).replace(".",","));
 let DATA=null, ALL=[];
-const state = { district:"", price:"", q:"", sort:"score" };
+const state={district:"",price:"",q:"",sort:"score"};
 
 function rowMatches(r){
-  if(state.district && String(r.district||"") !== state.district) return false;
-  if(state.price && String(r.price_level||"") !== state.price) return false;
+  if(state.district && String(r.district||"")!==state.district) return false;
+  if(state.price && String(r.price_level||"")!==state.price) return false;
   return true;
 }
-function subline(r){
-  const b=[cuisineLabel(r.primary_type)];
+function subline(r){ const b=[cuisineLabel(r.primary_type)];
   if(r.price_level) b.push(priceSymbol(r.price_level));
-  if(r.district) b.push(`${r.district}. ${BEZIRKE[r.district]||""}`);
-  return b.join(" · ");
-}
-function scoreRowsTable(rows, activeCol){
-  const body = rows.map((r,i)=>`
-    <tr><td class="l rank num">${i+1}</td>
-      <td class="l"><span class="name">${r.name||"—"}</span>
-        <div class="cuisine hide-sm">${subline(r)}</div></td>
-      <td class="rating num hide-sm">${de1(r.rating)}</td>
-      <td class="num">${fmt(r.review_count)}</td>
-      <td class="num score hide-sm">${r.score!=null? de2(r.score):"—"}</td></tr>`).join("");
-  const A=c=>activeCol===c?" active":"";
+  if(r.district) b.push(`${r.district}. ${BEZIRKE[r.district]||""}`); return b.join(" · "); }
+function scoreTable(rows,active){
+  const body=rows.map((r,i)=>`<tr><td class="l rank num">${i+1}</td>
+    <td class="l"><span class="name">${r.name||"—"}</span><div class="cuisine hide-sm">${subline(r)}</div></td>
+    <td class="rating num hide-sm">${de1(r.rating)}</td><td class="num">${fmt(r.review_count)}</td>
+    <td class="num score hide-sm">${r.score!=null?de2(r.score):"—"}</td></tr>`).join("");
+  const A=c=>active===c?" active":"";
   return `<table><thead><tr><th class="l rank"></th><th class="l">Restaurant</th>
-      <th class="hide-sm${A('rating')}">★★★</th><th class="${A('reviews')}"># Bewertungen</th>
-      <th class="hide-sm${A('score')}">Punktzahl</th></tr></thead><tbody>${body}</tbody></table>`;
+    <th class="hide-sm${A('rating')}">★★★</th><th class="${A('reviews')}"># Bewertungen</th>
+    <th class="hide-sm${A('score')}">Punktzahl</th></tr></thead><tbody>${body}</tbody></table>`;
 }
-function trendCell(a,maxAbs){
-  if(a==null) return `<span class="mom flat">—</span>`;
-  const cls=a>0?"":"flat", arrow=a>0?"▲":(a<0?"▼":"·");
-  const w=(a>0&&maxAbs)? Math.max(6,Math.round(60*a/maxAbs)):0;
-  return `<span class="mom ${cls}">${arrow} ${a>0?"+":""}${fmt(a)}<span class="bar" style="width:${w}px"></span></span>`;
-}
+function trendCell(a,maxAbs){ if(a==null) return `<span class="mom flat">—</span>`;
+  const cls=a>0?"":"flat", arrow=a>0?"▲":(a<0?"▼":"·"); const w=(a>0&&maxAbs)?Math.max(6,Math.round(60*a/maxAbs)):0;
+  return `<span class="mom ${cls}">${arrow} ${a>0?"+":""}${fmt(a)}<span class="bar" style="width:${w}px"></span></span>`; }
+
 function renderExplore(){
   const q=state.q.trim().toLowerCase();
-  let rows=ALL.filter(rowMatches);
-  if(q) rows=rows.filter(r=>(r.name||"").toLowerCase().includes(q));
-  const key=state.sort, val=r=> key==="rating"? r.rating : key==="reviews"? r.review_count : r.score;
+  let rows=ALL.filter(rowMatches); if(q) rows=rows.filter(r=>(r.name||"").toLowerCase().includes(q));
+  const key=state.sort, val=r=>key==="rating"?r.rating:key==="reviews"?r.review_count:r.score;
   rows=rows.slice().sort((a,b)=>(val(b)??-1)-(val(a)??-1));
   const total=rows.length; rows=rows.slice(0,EXPLORE_LIMIT);
   const node=document.getElementById("explore");
-  if(!total){ node.innerHTML = q
-      ? `<p class="empty">Kein Lokal mit „${state.q}“ gefunden. Hinweis: Cafés, Bars und
-         Bäckereien sind nicht im Datensatz – manche Lokale fehlen deshalb.</p>`
-      : `<p class="empty">Keine Treffer für diese Filter.</p>`; return; }
-  const note= total>EXPLORE_LIMIT? `<div class="count" style="margin:0 0 8px">Zeige Top ${EXPLORE_LIMIT} von ${fmt(total)} Treffern</div>`:"";
-  node.innerHTML = note + scoreRowsTable(rows, key);
+  if(!total){ node.innerHTML=q
+    ? `<p class="empty">Kein Lokal mit „${state.q}“ gefunden. Hinweis: Cafés, Bars und Bäckereien sind nicht im Datensatz.</p>`
+    : `<p class="empty">Keine Treffer für diese Filter.</p>`; return; }
+  const note=total>EXPLORE_LIMIT?`<div class="count" style="margin:0 0 8px">Zeige Top ${EXPLORE_LIMIT} von ${fmt(total)} Treffern</div>`:"";
+  node.innerHTML=note+scoreTable(rows,key);
 }
 function renderBest(){
   const rows=ALL.filter(rowMatches).slice(0,LIST_LIMIT);
-  const node=document.getElementById("best");
   const head=`<div class="eyebrow">Beste insgesamt</div><h2>Beste insgesamt</h2>
     <p class="def">Durchgehend hoch bewertet und durch viele Bewertungen bestätigt –
-      Qualität, gewichtet nach der Anzahl der Bewertungen.</p>`;
-  node.innerHTML = head + (rows.length? scoreRowsTable(rows,"score")
-    : `<p class="empty">Keine Treffer für diese Filter.</p>`);
+    Qualität, gewichtet nach der Anzahl der Bewertungen.</p>`;
+  document.getElementById("best").innerHTML=head+(rows.length?scoreTable(rows,"score"):`<p class="empty">Keine Treffer für diese Filter.</p>`);
 }
 function renderTrend(){
-  const node=document.getElementById("trend");
   const head=`<div class="eyebrow">Im Trend</div><h2>Im Trend</h2>
     <p class="def">Gut bewertete Lokale, die gerade am schnellsten neue Bewertungen sammeln.</p>`;
-  let rows=ALL.filter(r=> rowMatches(r) && r.rating>=4.3 && r.growth_abs!=null && r.growth_abs>0)
-              .sort((a,b)=>b.growth_abs-a.growth_abs).slice(0,LIST_LIMIT);
-  if(!rows.length){
-    const f=(state.district||state.price);
-    node.innerHTML = head + (f
-      ? `<p class="empty">Keine Treffer für diese Filter in dieser Liste.</p>`
-      : `<p class="empty"><b>Hier noch nichts.</b> Diese Liste vergleicht diesen Monat mit
-         dem Vormonat und braucht daher zwei Monats-Schnappschüsse – sie füllt sich ab dem
-         zweiten Scan (1. Juli 2026).</p>`);
-    return;
-  }
+  let rows=ALL.filter(r=>rowMatches(r)&&r.rating>=4.3&&r.growth_abs!=null&&r.growth_abs>0)
+    .sort((a,b)=>b.growth_abs-a.growth_abs).slice(0,LIST_LIMIT);
+  const node=document.getElementById("trend");
+  if(!rows.length){ const f=(state.district||state.price);
+    node.innerHTML=head+(f?`<p class="empty">Keine Treffer für diese Filter in dieser Liste.</p>`
+      :`<p class="empty"><b>Hier noch nichts.</b> Diese Liste vergleicht diesen Monat mit dem Vormonat und braucht daher zwei Monats-Schnappschüsse – sie füllt sich ab dem zweiten Scan (1. Juli 2026).</p>`);
+    return; }
   const maxAbs=Math.max(1,...rows.map(r=>r.growth_abs));
-  const body=rows.map((r,i)=>`
-    <tr><td class="l rank num">${i+1}</td>
-      <td class="l"><span class="name">${r.name||"—"}</span>
-        <div class="cuisine hide-sm">${subline(r)}</div></td>
-      <td class="rating num hide-sm">${de1(r.rating)}</td>
-      <td class="num">${fmt(r.review_count)}</td>
-      <td>${trendCell(r.growth_abs,maxAbs)}</td></tr>`).join("");
-  node.innerHTML = head + `<table><thead><tr><th class="l rank"></th><th class="l">Restaurant</th>
-      <th class="hide-sm">★★★</th><th># Bewertungen</th><th>Δ Bewertungen</th></tr></thead>
-      <tbody>${body}</tbody></table>`;
+  const body=rows.map((r,i)=>`<tr><td class="l rank num">${i+1}</td>
+    <td class="l"><span class="name">${r.name||"—"}</span><div class="cuisine hide-sm">${subline(r)}</div></td>
+    <td class="rating num hide-sm">${de1(r.rating)}</td><td class="num">${fmt(r.review_count)}</td>
+    <td>${trendCell(r.growth_abs,maxAbs)}</td></tr>`).join("");
+  node.innerHTML=head+`<table><thead><tr><th class="l rank"></th><th class="l">Restaurant</th>
+    <th class="hide-sm">★★★</th><th># Bewertungen</th><th>Δ Bewertungen</th></tr></thead><tbody>${body}</tbody></table>`;
 }
-function applyLists(){
-  renderBest(); renderTrend();
-  const bits=[];
-  if(state.district) bits.push(`${state.district}. ${BEZIRKE[state.district]||""}`);
+function applyLists(){ renderBest(); renderTrend();
+  const bits=[]; if(state.district) bits.push(`${state.district}. ${BEZIRKE[state.district]||""}`);
   if(state.price) bits.push(priceSymbol(Number(state.price)));
-  document.getElementById("count").textContent = bits.length? `Gefiltert nach: ${bits.join(" · ")}`:"";
-}
+  document.getElementById("count").textContent=bits.length?`Gefiltert nach: ${bits.join(" · ")}`:""; }
 function applyAll(){ renderExplore(); applyLists(); }
 
-function fillSelect(sel,vals,fn){ vals.forEach(v=>{const o=document.createElement("option");
-  o.value=String(v); o.textContent=fn(v); sel.appendChild(o);}); }
+function fillSelect(sel,vals,fn){ vals.forEach(v=>{const o=document.createElement("option"); o.value=String(v); o.textContent=fn(v); sel.appendChild(o);}); }
 function buildFilters(){
   const districts=[...new Set(ALL.map(r=>r.district).filter(d=>d!=null))].map(Number).sort((a,b)=>a-b);
   const dsel=document.getElementById("f-district");
@@ -367,65 +346,64 @@ function buildFilters(){
     psel.addEventListener("change",e=>{state.price=e.target.value;applyAll();});
     document.getElementById("field-price").classList.remove("hidden"); }
   if(districts.length||prices.length) document.getElementById("filters").classList.remove("hidden");
-  document.getElementById("reset").addEventListener("click",()=>{ state.district="";state.price="";
-    dsel.value="";psel.value="";applyAll(); });
+  document.getElementById("reset").addEventListener("click",()=>{state.district="";state.price="";dsel.value="";psel.value="";applyAll();});
   document.getElementById("q").addEventListener("input",e=>{state.q=e.target.value;renderExplore();});
   document.getElementById("sort").addEventListener("change",e=>{state.sort=e.target.value;renderExplore();});
 }
-function fillExplainers(data){
-  const C=(data.city_avg_rating!=null?data.city_avg_rating:4.4), m=(data.bayes_m!=null?data.bayes_m:400), n=data.restaurant_count||0;
+function fillExplainers(d){
+  const C=(d.city_avg_rating!=null?d.city_avg_rating:4.4), m=(d.bayes_m!=null?d.bayes_m:400), n=d.restaurant_count||0;
   const ex=[{name:"4,9 ★ · 80 Bew.",r:4.9,v:80},{name:"4,7 ★ · 5.000 Bew.",r:4.7,v:5000},{name:"4,5 ★ · 12.000 Bew.",r:4.5,v:12000}];
   ex.forEach(e=>e.s=(e.v*e.r+m*C)/(e.v+m));
   const exRows=ex.map(e=>`<tr><td>${e.name}</td><td><b>${de2(e.s)}</b></td></tr>`).join("");
   document.getElementById("explain-best").innerHTML=`
-    <p>„Beste insgesamt“ nutzt eine <b>gewichtete Bewertung</b> (auch „Bayes-Bewertung“,
-       dieselbe Methode wie die IMDb-Top-250). Eine reine Sternebewertung täuscht: 4,9 aus
-       30 Bewertungen wirkt besser als 4,7 aus 5.000, obwohl Letzteres viel stärker bestätigt ist.</p>
-    <p>Deshalb wird die eigene Bewertung mit dem Stadtdurchschnitt gemischt. <b>Je mehr
-       Bewertungen, desto stärker zählt die eigene Bewertung; je weniger, desto mehr wird sie
-       zum Stadtdurchschnitt hingezogen.</b></p>
+    <p>„Beste insgesamt“ nutzt eine <b>gewichtete Bewertung</b> (auch „Bayes-Bewertung“, dieselbe Methode wie die IMDb-Top-250). Eine reine Sternebewertung täuscht: 4,9 aus 30 Bewertungen wirkt besser als 4,7 aus 5.000, obwohl Letzteres viel stärker bestätigt ist.</p>
+    <p>Deshalb wird die eigene Bewertung mit dem Stadtdurchschnitt gemischt. <b>Je mehr Bewertungen, desto stärker zählt die eigene Bewertung; je weniger, desto mehr wird sie zum Stadtdurchschnitt hingezogen.</b></p>
     <span class="formula">Punktzahl = (Anzahl Bewertungen × eigene Bewertung + m × Stadtdurchschnitt) ÷ (Anzahl Bewertungen + m)</span>
-    <p>Aktuell: <b>Stadtdurchschnitt = ${de2(C)} Sterne</b> (über ${fmt(n)} Lokale), <b>m = ${m}</b>
-       (die „Vertrauensschwelle“: ungefähr so viele Bewertungen braucht ein Lokal, damit seiner
-       eigenen Bewertung voll vertraut wird).</p>
+    <p>Aktuell: <b>Stadtdurchschnitt = ${de2(C)} Sterne</b> (über ${fmt(n)} Lokale), <b>m = ${m}</b> (die „Vertrauensschwelle“: ungefähr so viele Bewertungen braucht ein Lokal, damit seiner eigenen Bewertung voll vertraut wird).</p>
     <table><thead><tr><th>Lokal</th><th>Punktzahl</th></tr></thead><tbody>${exRows}</tbody></table>
-    <p>Das 4,9-Lokal mit nur 80 Bewertungen landet <b>unter</b> dem 4,7-Lokal mit 5.000. Im
-       „Entdecken“-Bereich kannst du stattdessen nach reiner Bewertung oder reiner Anzahl sortieren.</p>
-    <p><b>Datenquelle:</b> Sternebewertung (★★★) und Anzahl der Bewertungen (#) sind
-       <b>Näherungswerte aus Google Maps</b>. Sie können sich von Monat zu Monat leicht ändern,
-       etwa wenn Google Spam-Bewertungen entfernt.</p>`;
+    <p>Das 4,9-Lokal mit nur 80 Bewertungen landet <b>unter</b> dem 4,7-Lokal mit 5.000. Im „Entdecken“-Tab kannst du stattdessen nach reiner Bewertung oder reiner Anzahl sortieren.</p>
+    <p><b>Datenquelle:</b> Sternebewertung (★★★) und Anzahl der Bewertungen (#) sind <b>Näherungswerte aus Google Maps</b> und können sich von Monat zu Monat leicht ändern, etwa wenn Google Spam-Bewertungen entfernt.</p>`;
   document.getElementById("explain-trend").innerHTML=`
     <p>„Im Trend“ zeigt die Lokale mit dem <b>stärksten Bewertungszuwachs zuletzt</b>.</p>
-    <p>Google liefert keine „Bewertungen der letzten Wochen“. Stattdessen zählen wir jeden Monat
-       die <b>Gesamtzahl der Bewertungen</b> und bilden die <b>Differenz zum Vormonat</b> – die
-       Zahl der neu hinzugekommenen Bewertungen. Danach wird sortiert.</p>
+    <p>Google liefert keine „Bewertungen der letzten Wochen“. Stattdessen zählen wir jeden Monat die <b>Gesamtzahl der Bewertungen</b> und bilden die <b>Differenz zum Vormonat</b> – die Zahl der neu hinzugekommenen Bewertungen. Danach wird sortiert.</p>
     <span class="formula">Zuwachs = Bewertungen (dieser Monat) − Bewertungen (Vormonat)</span>
-    <p>Damit kein schwaches Lokal oben landet, zählen nur Lokale ab <b>4,3 Sternen</b>. Weil ein
-       Vormonat zum Vergleich nötig ist, füllt sich die Liste ab dem <b>zweiten Monat</b>
-       (Scan am 1. Juli 2026).</p>
+    <p>Damit kein schwaches Lokal oben landet, zählen nur Lokale ab <b>4,3 Sternen</b>. Weil ein Vormonat zum Vergleich nötig ist, füllt sich die Liste ab dem <b>zweiten Monat</b> (Scan am 1. Juli 2026).</p>
     <p><b>Datenquelle:</b> Alle Zahlen sind Näherungswerte aus Google Maps.</p>`;
 }
 function initNewsletter(){
   const form=document.getElementById("nl-form"), status=document.getElementById("nl-status");
-  form.addEventListener("submit", async (e)=>{
+  form.addEventListener("submit",async(e)=>{
     e.preventDefault();
     const email=document.getElementById("nl-email").value.trim();
-    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ status.style.color="var(--ink-faint)";
-      status.textContent="Bitte gib eine gültige E-Mail-Adresse ein."; return; }
-    if(!FORM_ENDPOINT){ status.style.color="var(--ink-soft)";
-      status.textContent="Danke für dein Interesse! Die Anmeldung wird gerade eingerichtet und ist in Kürze aktiv."; return; }
-    try{
-      const res=await fetch(FORM_ENDPOINT,{method:"POST",
-        headers:{"Content-Type":"application/json","Accept":"application/json"},
-        body:JSON.stringify({email})});
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ status.style.color="var(--ink-faint)"; status.textContent="Bitte gib eine gültige E-Mail-Adresse ein."; return; }
+    if(!FORM_ENDPOINT){ status.style.color="var(--ink-soft)"; status.textContent="Danke für dein Interesse! Die Anmeldung wird gerade eingerichtet und ist in Kürze aktiv."; return; }
+    try{ const res=await fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({email})});
       if(res.ok){ status.style.color="var(--ink)"; status.textContent="Danke! Du bist eingetragen."; form.reset(); }
       else { status.style.color="var(--ink-faint)"; status.textContent="Hat nicht geklappt – bitte später nochmal versuchen."; }
-    }catch(err){ status.style.color="var(--ink-faint)";
-      status.textContent="Hat nicht geklappt – bitte später nochmal versuchen."; }
+    }catch(err){ status.style.color="var(--ink-faint)"; status.textContent="Hat nicht geklappt – bitte später nochmal versuchen."; }
   });
 }
-(function(){ const u="davidlanskyles", d="gmail.com"; const a=document.getElementById("contact");
-  a.href="mailto:"+u+"@"+d; a.textContent=u+"@"+d; })();
+
+// ── Tabs ──────────────────────────────────────────────────────────────────
+const TABS=["best","trend","explore","impressum"];
+function showTab(name){
+  if(!TABS.includes(name)) name="best";
+  document.querySelectorAll(".panel").forEach(p=> p.hidden = (p.dataset.panel!==name));
+  document.querySelectorAll(".tab").forEach(t=> t.classList.toggle("active", t.dataset.tab===name));
+  const isData = name!=="impressum";
+  document.getElementById("filterwrap").style.display = isData? "" : "none";
+  document.getElementById("newsletter").classList.toggle("hidden", !isData);
+  if(location.hash.slice(1)!==name) history.replaceState(null,"","#"+name);
+  window.scrollTo({top:0});
+}
+function initTabs(){
+  document.querySelectorAll(".tab").forEach(t=> t.addEventListener("click",()=>showTab(t.dataset.tab)));
+  document.querySelectorAll("[data-go]").forEach(a=> a.addEventListener("click",e=>{e.preventDefault();showTab(a.dataset.go);}));
+  window.addEventListener("hashchange",()=>showTab(location.hash.slice(1)));
+  showTab(location.hash.slice(1)||"best");
+}
+
+(function(){ const a=document.querySelector('.prose a[href^="mailto"]'); })();
 
 fetch("rankings.json",{cache:"no-store"})
   .then(r=>{ if(!r.ok) throw new Error(r.status); return r.json(); })
@@ -435,12 +413,12 @@ fetch("rankings.json",{cache:"no-store"})
     const gen=data.generated_at? new Date(data.generated_at).toLocaleString("de-AT",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}):"";
     const monthLabel=week? new Date(week).toLocaleString("de-AT",{month:"long",year:"numeric"}):null;
     document.getElementById("meta").textContent=(monthLabel?monthLabel:"Noch keine Daten")+(gen?` · aktualisiert ${gen}`:"");
-    buildFilters(); fillExplainers(data); initNewsletter(); applyAll();
+    buildFilters(); fillExplainers(data); initNewsletter(); initTabs(); applyAll();
   })
   .catch(err=>{
     document.getElementById("meta").textContent="rankings.json nicht gefunden";
-    document.getElementById("best").innerHTML=`<p class="empty"><b>Noch keine Datendatei.</b> Führe den Monats-Scan und Export einmal aus. (Fehler: ${err.message})</p>`;
-    initNewsletter();
+    document.getElementById("best").innerHTML=`<p class="empty"><b>Noch keine Datendatei.</b> (Fehler: ${err.message})</p>`;
+    initNewsletter(); initTabs();
   });
 </script>
 </body>
