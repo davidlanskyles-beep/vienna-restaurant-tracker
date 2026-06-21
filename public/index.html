@@ -61,7 +61,7 @@
 
   section{
     background:var(--panel); border:1px solid var(--line); border-radius:14px;
-    box-shadow:var(--shadow); padding:20px 20px 8px; margin:18px 0;
+    box-shadow:var(--shadow); padding:20px 20px 8px; margin:18px 0 0;
   }
   .eyebrow{font-size:11.5px; letter-spacing:.09em; text-transform:uppercase;
     color:var(--ink-soft); font-weight:600}
@@ -78,6 +78,7 @@
   .cuisine{color:var(--ink-soft); font-size:12.5px}
   .rating::before{content:"\2605 "; color:var(--hot)}
   .num{font-feature-settings:"tnum" 1}
+  .score{color:var(--ink-soft); font-size:12.5px}
 
   .mom{font-weight:600; white-space:nowrap}
   .mom.up{color:var(--up)} .mom.hot{color:var(--hot)} .mom.flat{color:var(--flat)}
@@ -87,6 +88,24 @@
   .empty{color:var(--ink-soft); font-size:13.5px; padding:6px 10px 16px; max-width:60ch}
   .empty b{color:var(--ink); font-weight:600}
   .rank{color:var(--flat); width:24px; font-size:12.5px}
+
+  details.explain{background:var(--panel); border:1px solid var(--line); border-top:none;
+    border-radius:0 0 14px 14px; box-shadow:var(--shadow); margin:0 0 18px; padding:0 20px}
+  details.explain summary{cursor:pointer; list-style:none; padding:13px 0; font-size:12.5px;
+    font-weight:600; color:var(--up); display:flex; align-items:center; gap:7px}
+  details.explain summary::-webkit-details-marker{display:none}
+  details.explain summary::before{content:"+"; font-size:15px; line-height:1; width:13px}
+  details.explain[open] summary::before{content:"–"}
+  .explain-body{font-size:13.5px; color:var(--ink-soft); line-height:1.6;
+    padding:0 0 18px; max-width:70ch}
+  .explain-body p{margin:0 0 11px}
+  .explain-body b{color:var(--ink)}
+  .explain-body .formula{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:12.5px; background:var(--ground); border:1px solid var(--line);
+    border-radius:8px; padding:9px 11px; margin:0 0 11px; display:block; color:var(--ink)}
+  .explain-body table{width:auto; margin:2px 0 11px}
+  .explain-body td, .explain-body th{padding:4px 14px 4px 0; border:none; font-size:12.5px; text-align:left}
+  .explain-body th{color:var(--ink-soft); text-transform:none; letter-spacing:0}
 
   .site-foot{max-width:920px; margin:8px auto 0; padding:22px 20px 0;
     border-top:1px solid var(--line); color:var(--ink-soft); font-size:13px}
@@ -110,10 +129,9 @@
   </header>
 
   <div class="wrap">
-    <p class="lede">Drei Blickwinkel darauf, wohin sich die kulinarische Aufmerksamkeit
-      in Wien bewegt, monatlich neu aus den Google-Bewertungszahlen berechnet. Die
-      Schwellenwerte beziehen sich auf die ganze Stadt im jeweiligen Monat, nicht auf
-      feste Zahlen &ndash; die Messlatte wandert also mit der Szene mit.</p>
+    <p class="lede">Zwei Blickwinkel auf Wiens Restaurants, monatlich neu aus den
+      Google-Bewertungszahlen berechnet: welche insgesamt am stärksten überzeugen,
+      und welche gerade am meisten Aufmerksamkeit gewinnen.</p>
 
     <div class="filters" id="filters">
       <div class="field" id="field-cuisine">
@@ -132,9 +150,17 @@
     </div>
     <div class="count" id="count"></div>
 
-    <section id="blue"></section>
-    <section id="rising"></section>
-    <section id="breakout"></section>
+    <section id="best"></section>
+    <details class="explain">
+      <summary>Wie wird &bdquo;Beste insgesamt&ldquo; berechnet?</summary>
+      <div class="explain-body" id="explain-best"></div>
+    </details>
+
+    <section id="trend"></section>
+    <details class="explain">
+      <summary>Wie wird &bdquo;Im Trend&ldquo; berechnet?</summary>
+      <div class="explain-body" id="explain-trend"></div>
+    </details>
   </div>
 
   <footer class="site-foot">
@@ -144,18 +170,16 @@
 
 <script>
 const SECTIONS = [
-  { key:"blue_chips", el:"blue", eyebrow:"Etabliert · Top 15% bei Bewertung & Anzahl",
-    title:"Etablierte Favoriten", def:"Die verlässlich beliebten Institutionen – hoch bewertet und vielfach besucht.",
-    momentum:"abs" },
-  { key:"rising_stars", el:"rising", eyebrow:"Dynamik · Qualität + schnellster Bewertungszuwachs",
-    title:"Aufsteiger", def:"Schon gut bewertet – und sammeln Bewertungen schneller als der Rest.",
-    momentum:"abs" },
-  { key:"breakout", el:"breakout", eyebrow:"Frühsignal · 100–1.500 Bewertungen, beschleunigend",
-    title:"Geheimtipps", def:"Kleinere Lokale mit dem steilsten Wachstum von Monat zu Monat.",
-    momentum:"rate", srcKey:"breakouts" },
+  { key:"best_overall", el:"best", kind:"score",
+    eyebrow:"Beste insgesamt · Qualität, gewichtet nach Anzahl der Bewertungen",
+    title:"Beste insgesamt",
+    def:"Durchgehend hoch bewertet und durch viele Bewertungen bestätigt." },
+  { key:"trending", el:"trend", kind:"trend",
+    eyebrow:"Im Trend · stärkster Bewertungszuwachs zuletzt",
+    title:"Im Trend",
+    def:"Gut bewertete Lokale, die gerade am schnellsten neue Bewertungen sammeln." },
 ];
 
-// Vienna districts (Bezirke), number -> name.
 const BEZIRKE = {
   1:"Innere Stadt", 2:"Leopoldstadt", 3:"Landstraße", 4:"Wieden", 5:"Margareten",
   6:"Mariahilf", 7:"Neubau", 8:"Josefstadt", 9:"Alsergrund", 10:"Favoriten",
@@ -164,7 +188,6 @@ const BEZIRKE = {
   21:"Floridsdorf", 22:"Donaustadt", 23:"Liesing"
 };
 
-// Google primaryType -> friendly German label.
 const CUISINE = {
   restaurant:"Restaurant (allgemein)", austrian_restaurant:"Österreichisch",
   italian_restaurant:"Italienisch", pizza_restaurant:"Pizza", hamburger_restaurant:"Burger",
@@ -180,6 +203,8 @@ const CUISINE = {
   brunch_restaurant:"Brunch", vegetarian_restaurant:"Vegetarisch", vegan_restaurant:"Vegan"
 };
 
+const DISPLAY_LIMIT = 50;
+
 function cuisineLabel(type){
   if(!type) return "Sonstige";
   if(CUISINE[type]) return CUISINE[type];
@@ -187,35 +212,20 @@ function cuisineLabel(type){
   return t.charAt(0).toUpperCase() + t.slice(1);
 }
 function priceSymbol(n){ return (n>=1 && n<=4) ? "€".repeat(n) : ""; }
-
 const fmt = n => (n==null? "—" : n.toLocaleString("de-AT"));
-const pct = r => (r==null? "—" : (r*100).toFixed(1).replace(".",",")+"%");
+const de1 = n => (n==null? "—" : n.toFixed(1).replace(".",","));
+const de2 = n => (n==null? "—" : n.toFixed(2).replace(".",","));
 
 let DATA = null;
 const state = { cuisine:"", district:"", price:"" };
 
-function allRows(){ return SECTIONS.flatMap(s => DATA[s.srcKey||s.key] || []); }
+function allRows(){ return SECTIONS.flatMap(s => DATA[s.key] || []); }
 
 function rowMatches(r){
   if(state.cuisine && (r.primary_type||"") !== state.cuisine) return false;
   if(state.district && String(r.district||"") !== state.district) return false;
   if(state.price && String(r.price_level||"") !== state.price) return false;
   return true;
-}
-
-function momentumCell(row, mode, maxAbs, maxRate){
-  if(mode==="rate"){
-    const r = row.growth_rate;
-    if(r==null) return `<span class="mom flat">—</span>`;
-    const w = maxRate? Math.max(6, Math.round(60*r/maxRate)) : 0;
-    return `<span class="mom hot">▲ ${pct(r)}<span class="bar" style="width:${w}px"></span></span>`;
-  }
-  const a = row.growth_abs;
-  if(a==null) return `<span class="mom flat">—</span>`;
-  const cls = a>0? "up" : "flat";
-  const arrow = a>0? "▲" : (a<0? "▼" : "·");
-  const w = (a>0 && maxAbs)? Math.max(6, Math.round(60*a/maxAbs)) : 0;
-  return `<span class="mom ${cls}">${arrow} ${a>0?"+":""}${fmt(a)}<span class="bar" style="width:${w}px"></span></span>`;
 }
 
 function subline(r){
@@ -225,11 +235,19 @@ function subline(r){
   return bits.join(" · ");
 }
 
+function trendCell(row, maxAbs){
+  const a = row.growth_abs;
+  if(a==null) return `<span class="mom flat">—</span>`;
+  const cls = a>0? "up" : "flat";
+  const arrow = a>0? "▲" : (a<0? "▼" : "·");
+  const w = (a>0 && maxAbs)? Math.max(6, Math.round(60*a/maxAbs)) : 0;
+  return `<span class="mom ${cls}">${arrow} ${a>0?"+":""}${fmt(a)}<span class="bar" style="width:${w}px"></span></span>`;
+}
+
 function render(sec, rows, week){
   const node = document.getElementById(sec.el);
-  const rateMode = sec.momentum==="rate";
+  const isTrend = sec.kind==="trend";
   const maxAbs = Math.max(1, ...rows.map(r => r.growth_abs>0? r.growth_abs:0));
-  const maxRate = Math.max(0.0001, ...rows.map(r => r.growth_rate>0? r.growth_rate:0));
 
   let head = `
     <div class="eyebrow">${sec.eyebrow}</div>
@@ -238,25 +256,30 @@ function render(sec, rows, week){
 
   const filtered = (state.cuisine||state.district||state.price);
   if(!rows.length){
-    const msg = filtered
-      ? `<p class="empty">Keine Treffer für diese Filter in dieser Liste.</p>`
-      : `<p class="empty"><b>Hier noch nichts.</b> Dynamik-Listen brauchen zwei
-         Monats-Schnappschüsse, bevor sie aussagekräftig sind. Die etablierten
-         Favoriten funktionieren ab dem ersten Monat; diese Liste füllt sich, sobald
-         es einen Vormonat zum Vergleich gibt${week?` (Erfassung seit ${week})`:""}.</p>`;
+    let msg;
+    if(filtered){
+      msg = `<p class="empty">Keine Treffer für diese Filter in dieser Liste.</p>`;
+    } else if(isTrend){
+      msg = `<p class="empty"><b>Hier noch nichts.</b> Diese Liste vergleicht diesen
+        Monat mit dem Vormonat und braucht daher zwei Monats-Schnappschüsse, bevor sie
+        sich füllt${week?` (Erfassung seit ${week})`:""} – also ab dem zweiten Scan.</p>`;
+    } else {
+      msg = `<p class="empty"><b>Noch keine Daten.</b></p>`;
+    }
     node.innerHTML = head + msg;
     return;
   }
 
-  const momHead = rateMode? "Tempo" : "Δ Bewertungen";
   const rowsHtml = rows.map((r,i)=>`
     <tr>
       <td class="l rank num">${i+1}</td>
       <td class="l"><span class="name">${r.name||"—"}</span>
         <div class="cuisine hide-sm">${subline(r)}</div></td>
-      <td class="rating num hide-sm">${r.rating!=null? r.rating.toFixed(1).replace(".",","):"—"}</td>
+      <td class="rating num hide-sm">${de1(r.rating)}</td>
       <td class="num">${fmt(r.review_count)}</td>
-      <td>${momentumCell(r, sec.momentum, maxAbs, maxRate)}</td>
+      ${isTrend
+        ? `<td>${trendCell(r, maxAbs)}</td>`
+        : `<td class="num score hide-sm">${r.score!=null? de2(r.score):"—"}</td>`}
     </tr>`).join("");
 
   node.innerHTML = head + `
@@ -266,7 +289,7 @@ function render(sec, rows, week){
         <th class="l">Restaurant</th>
         <th class="hide-sm">Bewertung</th>
         <th>Bewertungen</th>
-        <th>${momHead}</th>
+        <th${isTrend?"":" class=\"hide-sm\""}>${isTrend? "Δ Bewertungen" : "Punktzahl"}</th>
       </tr></thead>
       <tbody>${rowsHtml}</tbody>
     </table>`;
@@ -276,7 +299,7 @@ function apply(){
   const week = DATA.week_start_date;
   let shown = 0;
   SECTIONS.forEach(sec => {
-    const rows = (DATA[sec.srcKey||sec.key]||[]).filter(rowMatches);
+    const rows = (DATA[sec.key]||[]).filter(rowMatches).slice(0, DISPLAY_LIMIT);
     shown += rows.length;
     render(sec, rows, week);
   });
@@ -285,7 +308,7 @@ function apply(){
   if(state.cuisine) bits.push(cuisineLabel(state.cuisine));
   if(state.district) bits.push(`${state.district}. ${BEZIRKE[state.district]||""}`);
   if(state.price) bits.push(priceSymbol(Number(state.price)));
-  cnt.textContent = bits.length ? `${shown} Treffer für: ${bits.join(" · ")}` : "";
+  cnt.textContent = bits.length ? `Gefiltert nach: ${bits.join(" · ")}` : "";
 }
 
 function fillSelect(sel, values, labelFn){
@@ -330,7 +353,54 @@ function buildFilters(){
   });
 }
 
-// Assemble the contact link at runtime (light spam-bot deterrent).
+function fillExplainers(data){
+  const C = (data.city_avg_rating!=null? data.city_avg_rating : 4.4);
+  const m = (data.bayes_m!=null? data.bayes_m : 400);
+  const n = data.restaurant_count || 0;
+
+  const ex = [
+    {name:"4,9 ★ · 80 Bew.", r:4.9, v:80},
+    {name:"4,7 ★ · 5.000 Bew.", r:4.7, v:5000},
+    {name:"4,5 ★ · 12.000 Bew.", r:4.5, v:12000},
+  ];
+  ex.forEach(e => e.s = (e.v*e.r + m*C)/(e.v+m));
+  const exRows = ex.map(e =>
+    `<tr><td>${e.name}</td><td><b>${de2(e.s)}</b></td></tr>`).join("");
+
+  document.getElementById("explain-best").innerHTML = `
+    <p>„Beste insgesamt“ nutzt eine <b>gewichtete Bewertung</b> (auch „Bayes-Bewertung“,
+       dieselbe Methode wie die IMDb-Top-250). Hintergrund: Die reine Sternebewertung
+       täuscht, denn ein Lokal mit 4,9 aus 30 Bewertungen wirkt besser als eines mit
+       4,7 aus 5.000 – obwohl Letzteres viel stärker bestätigt ist.</p>
+    <p>Die Lösung: Die eigene Bewertung jedes Lokals wird mit dem Stadtdurchschnitt
+       gemischt. <b>Je mehr Bewertungen, desto stärker zählt die eigene Bewertung;
+       je weniger, desto mehr wird sie zum Stadtdurchschnitt hingezogen.</b></p>
+    <span class="formula">Punktzahl = (Anzahl Bewertungen × eigene Bewertung
+       + m × Stadtdurchschnitt) ÷ (Anzahl Bewertungen + m)</span>
+    <p>Aktuell: <b>Stadtdurchschnitt = ${de2(C)} Sterne</b> (über ${fmt(n)} Lokale),
+       <b>m = ${m}</b>. m ist die „Vertrauensschwelle“: ungefähr so viele Bewertungen
+       braucht ein Lokal, damit seiner eigenen Bewertung voll vertraut wird.</p>
+    <p>Beispiel mit diesen Werten:</p>
+    <table><thead><tr><th>Lokal</th><th>Punktzahl</th></tr></thead>
+      <tbody>${exRows}</tbody></table>
+    <p>Das 4,9-Lokal mit nur 80 Bewertungen landet <b>unter</b> dem bestätigten
+       4,7-Lokal mit 5.000 – genau das gewünschte Verhalten. Ein höheres m wäre
+       strenger (bevorzugt vielfach bewertete Lokale), ein niedrigeres ließe kleinere
+       Newcomer schneller aufsteigen.</p>`;
+
+  document.getElementById("explain-trend").innerHTML = `
+    <p>„Im Trend“ zeigt die Lokale mit dem <b>stärksten Bewertungszuwachs zuletzt</b>.</p>
+    <p>Google liefert keine „Bewertungen der letzten Wochen“. Stattdessen zählen wir
+       jeden Monat die <b>Gesamtzahl der Bewertungen</b> jedes Lokals und bilden die
+       <b>Differenz zum Vormonat</b> – das ist die Zahl der in diesem Monat neu
+       hinzugekommenen Bewertungen. Nach diesem Zuwachs wird sortiert.</p>
+    <span class="formula">Zuwachs = Bewertungen (dieser Monat) − Bewertungen (Vormonat)</span>
+    <p>Damit kein schwaches Lokal mit vielen neuen Bewertungen oben landet, zählen nur
+       Lokale ab <b>4,3 Sternen</b>. Weil dafür ein Vormonat zum Vergleich nötig ist,
+       füllt sich diese Liste erst ab dem <b>zweiten Monat</b> (also ab dem Scan am
+       1. Juli 2026).</p>`;
+}
+
 (function(){
   const u = "davidlanskyles", d = "gmail.com";
   const a = document.getElementById("contact");
@@ -349,11 +419,12 @@ fetch("rankings.json", {cache:"no-store"})
     document.getElementById("meta").textContent =
       (monthLabel? `${monthLabel}` : "Noch keine Daten") + (gen? ` · erstellt ${gen}`:"");
     buildFilters();
+    fillExplainers(data);
     apply();
   })
   .catch(err => {
     document.getElementById("meta").textContent = "rankings.json nicht gefunden";
-    document.getElementById("blue").innerHTML =
+    document.getElementById("best").innerHTML =
       `<p class="empty"><b>Noch keine Datendatei.</b> Führe den Monats-Scan und Export
        einmal aus, dann füllt sich diese Seite. (Fehler: ${err.message})</p>`;
   });
