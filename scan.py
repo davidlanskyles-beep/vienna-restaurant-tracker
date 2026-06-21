@@ -173,26 +173,20 @@ def ensure_schema(conn):
                       else null end as growth_rate
           from v_current c left join v_prior p using (place_id);
 
-        -- BEST OVERALL: Bayesian weighted rating. A place's score blends its own
-        -- rating with the city average, weighted by how many reviews it has, so a
-        -- high rating only ranks top once enough people have voted. m = 400.
-        create view v_best_overall as
+        -- Single source for the website: every operational restaurant, each with
+        -- its Bayesian best-overall score (m = 400: rating blended with the city
+        -- average, weighted by review count) AND its month-over-month review gain.
+        -- The page derives the search tool, the "Beste insgesamt" list and the
+        -- "Im Trend" list all from this one view.
+        create view v_all as
         with stats as (select avg(rating) as c_mean from v_current)
-        select c.name, c.rating, c.review_count, c.primary_type, c.district, c.price_level,
-               round(((c.review_count * c.rating + 400 * s.c_mean)
-                      / (c.review_count + 400))::numeric, 4) as score
-        from v_current c, stats s
-        where c.review_count is not null
-        order by score desc;
-
-        -- IM TREND: fastest recent review gain (this month vs last), among places
-        -- rated 4.3+ so a fast-growing mediocre spot does not top the list.
-        create view v_trending as
         select g.name, g.rating, g.review_count, g.primary_type, g.district, g.price_level,
-               g.growth_abs, g.growth_rate
-        from v_growth g
-        where g.rating >= 4.3 and g.growth_abs is not null and g.growth_abs > 0
-        order by g.growth_abs desc;
+               g.growth_abs, g.growth_rate,
+               round(((g.review_count * g.rating + 400 * s.c_mean)
+                      / (g.review_count + 400))::numeric, 4) as score
+        from v_growth g, stats s
+        where g.review_count is not null
+        order by score desc;
     """)
     conn.commit()
     cur.close()
