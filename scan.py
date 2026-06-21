@@ -151,15 +151,21 @@ def ensure_schema(conn):
         alter table restaurants add column if not exists district smallint;
         alter table restaurants add column if not exists price_level smallint;
 
-        create or replace view v_current as
-          select s.place_id, r.name, r.primary_type, r.district, r.price_level,
-                 s.rating, s.review_count, s.week_start_date
+        -- Rebuild the view chain so the new district/price columns and the
+        -- two-metric model take effect. CREATE OR REPLACE cannot reorder or insert
+        -- columns, so we drop the chain (CASCADE clears the dependent views,
+        -- including the retired three-list views) and recreate it.
+        drop view if exists v_current cascade;
+
+        create view v_current as
+          select s.place_id, r.name, r.primary_type, s.rating, s.review_count,
+                 s.week_start_date, r.district, r.price_level
           from weekly_snapshots s
           join restaurants r using (place_id)
           join v_weeks_ranked w on w.week_start_date = s.week_start_date and w.wk_rank = 1
           where r.business_status = 'OPERATIONAL' and s.review_count is not null;
 
-        create or replace view v_growth as
+        create view v_growth as
           select c.*, p.review_count as review_count_prior,
                  (c.review_count - p.review_count) as growth_abs,
                  case when p.review_count > 0
@@ -167,34 +173,26 @@ def ensure_schema(conn):
                       else null end as growth_rate
           from v_current c left join v_prior p using (place_id);
 
-        create or replace view v_blue_chips as
-        with thresholds as (
-          select percentile_cont(0.85) within group (order by rating)       as rating_thr,
-                 percentile_cont(0.85) within group (order by review_count) as review_thr
-          from v_current )
-        select g.name, g.rating, g.review_count, g.primary_type, g.district, g.price_level,
-               g.growth_abs, g.growth_rate
-        from v_growth g, thresholds t
-        where g.rating >= t.rating_thr and g.review_count >= t.review_thr
-        order by g.review_count desc;
+        -- BEST OVERALL: Bayesian weighted rating. A place's score blends its own
+        -- rating with the city average, weighted by how many reviews it has, so a
+        -- high rating only ranks top once enough people have voted. m = 400.
+        create view v_best_overall as
+        with stats as (select avg(rating) as c_mean from v_current)
+        select c.name, c.rating, c.review_count, c.primary_type, c.district, c.price_level,
+               round(((c.review_count * c.rating + 400 * s.c_mean)
+                      / (c.review_count + 400))::numeric, 4) as score
+        from v_current c, stats s
+        where c.review_count is not null
+        order by score desc;
 
-        create or replace view v_rising_stars as
-        with thr as (
-          select percentile_cont(0.60) within group (order by rating) as rating_thr
-          from v_current )
-        select g.name, g.rating, g.review_count, g.primary_type, g.district, g.price_level,
-               g.growth_abs, g.growth_rate
-        from v_growth g, thr
-        where g.rating >= thr.rating_thr and g.growth_abs is not null and g.growth_abs > 0
-        order by g.growth_abs desc;
-
-        create or replace view v_breakouts as
+        -- IM TREND: fastest recent review gain (this month vs last), among places
+        -- rated 4.3+ so a fast-growing mediocre spot does not top the list.
+        create view v_trending as
         select g.name, g.rating, g.review_count, g.primary_type, g.district, g.price_level,
                g.growth_abs, g.growth_rate
         from v_growth g
-        where g.review_count between 100 and 1500
-          and g.growth_abs is not null and g.growth_abs >= 10 and g.growth_rate is not null
-        order by g.growth_rate desc;
+        where g.rating >= 4.3 and g.growth_abs is not null and g.growth_abs > 0
+        order by g.growth_abs desc;
     """)
     conn.commit()
     cur.close()
