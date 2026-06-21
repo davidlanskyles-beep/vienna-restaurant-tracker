@@ -44,17 +44,19 @@
   .field{display:flex; flex-direction:column; gap:5px}
   .field label{font-size:11px; letter-spacing:.06em; text-transform:uppercase;
     color:var(--ink-soft); font-weight:600}
-  .field select{
+  select, input[type=search]{
     appearance:none; -webkit-appearance:none;
     font:inherit; font-size:14px; color:var(--ink);
     background:var(--ground); border:1px solid var(--line); border-radius:9px;
-    padding:8px 30px 8px 11px; min-width:180px; cursor:pointer;
+    padding:8px 11px; cursor:pointer;
+  }
+  .field select{min-width:180px; padding-right:30px;
     background-image:linear-gradient(45deg, transparent 50%, var(--ink-soft) 50%),
       linear-gradient(135deg, var(--ink-soft) 50%, transparent 50%);
     background-position:calc(100% - 16px) 17px, calc(100% - 11px) 17px;
     background-size:5px 5px, 5px 5px; background-repeat:no-repeat;
   }
-  .field.hidden{display:none}
+  .field.hidden, .filters.hidden{display:none}
   .reset{font:inherit; font-size:13px; color:var(--up); background:none; border:none;
     cursor:pointer; padding:8px 4px; text-decoration:underline; text-underline-offset:3px}
   .count{font-size:12.5px; color:var(--ink-soft); margin:2px 2px 18px}
@@ -68,17 +70,28 @@
   h2{font-size:21px; letter-spacing:-.02em; margin:6px 0 2px}
   .def{font-size:13px; color:var(--ink-soft); margin:0 0 14px}
 
+  .explore-controls{display:flex; gap:10px; flex-wrap:wrap; margin:0 0 12px}
+  .explore-controls input[type=search]{flex:1 1 220px; cursor:text; min-width:0}
+  .explore-controls select{flex:0 0 auto; padding-right:30px;
+    background-image:linear-gradient(45deg, transparent 50%, var(--ink-soft) 50%),
+      linear-gradient(135deg, var(--ink-soft) 50%, transparent 50%);
+    background-position:calc(100% - 16px) 17px, calc(100% - 11px) 17px;
+    background-size:5px 5px, 5px 5px; background-repeat:no-repeat;}
+  .scrollbox{max-height:62vh; overflow-y:auto; margin:0 -6px; padding:0 6px}
+
   table{width:100%; border-collapse:collapse; font-variant-numeric:tabular-nums}
   th{font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--flat);
-    font-weight:600; text-align:right; padding:6px 10px; border-bottom:1px solid var(--line)}
+    font-weight:600; text-align:right; padding:6px 10px; border-bottom:1px solid var(--line);
+    position:sticky; top:0; background:var(--panel)}
   th.l, td.l{text-align:left}
+  th.active{color:var(--up)}
   td{padding:11px 10px; border-bottom:1px solid var(--line-soft); font-size:14.5px}
   tr:last-child td{border-bottom:none}
   .name{font-weight:560; letter-spacing:-.01em}
   .cuisine{color:var(--ink-soft); font-size:12.5px}
   .rating::before{content:"\2605 "; color:var(--hot)}
   .num{font-feature-settings:"tnum" 1}
-  .score{color:var(--ink-soft); font-size:12.5px}
+  .score{color:var(--ink-soft)}
 
   .mom{font-weight:600; white-space:nowrap}
   .mom.up{color:var(--up)} .mom.hot{color:var(--hot)} .mom.flat{color:var(--flat)}
@@ -87,7 +100,7 @@
 
   .empty{color:var(--ink-soft); font-size:13.5px; padding:6px 10px 16px; max-width:60ch}
   .empty b{color:var(--ink); font-weight:600}
-  .rank{color:var(--flat); width:24px; font-size:12.5px}
+  .rank{color:var(--flat); width:34px; font-size:12.5px}
 
   details.explain{background:var(--panel); border:1px solid var(--line); border-top:none;
     border-radius:0 0 14px 14px; box-shadow:var(--shadow); margin:0 0 18px; padding:0 20px}
@@ -104,8 +117,8 @@
     font-size:12.5px; background:var(--ground); border:1px solid var(--line);
     border-radius:8px; padding:9px 11px; margin:0 0 11px; display:block; color:var(--ink)}
   .explain-body table{width:auto; margin:2px 0 11px}
-  .explain-body td, .explain-body th{padding:4px 14px 4px 0; border:none; font-size:12.5px; text-align:left}
-  .explain-body th{color:var(--ink-soft); text-transform:none; letter-spacing:0}
+  .explain-body td, .explain-body th{padding:4px 14px 4px 0; border:none; font-size:12.5px;
+    text-align:left; position:static; background:none}
 
   .site-foot{max-width:920px; margin:8px auto 0; padding:22px 20px 0;
     border-top:1px solid var(--line); color:var(--ink-soft); font-size:13px}
@@ -129,15 +142,12 @@
   </header>
 
   <div class="wrap">
-    <p class="lede">Zwei Blickwinkel auf Wiens Restaurants, monatlich neu aus den
-      Google-Bewertungszahlen berechnet: welche insgesamt am stärksten überzeugen,
-      und welche gerade am meisten Aufmerksamkeit gewinnen.</p>
+    <p class="lede">Wiens Restaurants, monatlich neu aus den Google-Bewertungszahlen
+      berechnet. Durchsuche und sortiere unten die ganze Stadt selbst – oder sieh dir
+      die fertigen Listen an: welche insgesamt am stärksten überzeugen, und welche
+      gerade am meisten Aufmerksamkeit gewinnen.</p>
 
-    <div class="filters" id="filters">
-      <div class="field" id="field-cuisine">
-        <label for="f-cuisine">K&uuml;che</label>
-        <select id="f-cuisine"><option value="">Alle K&uuml;chen</option></select>
-      </div>
+    <div class="filters hidden" id="filters">
       <div class="field hidden" id="field-district">
         <label for="f-district">Bezirk</label>
         <select id="f-district"><option value="">Alle Bezirke</option></select>
@@ -149,6 +159,22 @@
       <button class="reset" id="reset" type="button">Filter zur&uuml;cksetzen</button>
     </div>
     <div class="count" id="count"></div>
+
+    <section id="explore-sec">
+      <div class="eyebrow">Entdecken · alle Lokale durchsuchen und sortieren</div>
+      <h2>Entdecken</h2>
+      <p class="def">Suche ein bestimmtes Lokal nach Namen, oder sortiere die ganze
+        Stadt nach dem, was dich interessiert. Bis zu 200 Treffer.</p>
+      <div class="explore-controls">
+        <input id="q" type="search" placeholder="Restaurant suchen &hellip;" autocomplete="off">
+        <select id="sort">
+          <option value="score">Sortieren: Bayes-Punktzahl</option>
+          <option value="rating">Sortieren: Bewertung (Sterne)</option>
+          <option value="reviews">Sortieren: Anzahl Bewertungen</option>
+        </select>
+      </div>
+      <div class="scrollbox" id="explore"></div>
+    </section>
 
     <section id="best"></section>
     <details class="explain">
@@ -169,17 +195,6 @@
   </footer>
 
 <script>
-const SECTIONS = [
-  { key:"best_overall", el:"best", kind:"score",
-    eyebrow:"Beste insgesamt · Qualität, gewichtet nach Anzahl der Bewertungen",
-    title:"Beste insgesamt",
-    def:"Durchgehend hoch bewertet und durch viele Bewertungen bestätigt." },
-  { key:"trending", el:"trend", kind:"trend",
-    eyebrow:"Im Trend · stärkster Bewertungszuwachs zuletzt",
-    title:"Im Trend",
-    def:"Gut bewertete Lokale, die gerade am schnellsten neue Bewertungen sammeln." },
-];
-
 const BEZIRKE = {
   1:"Innere Stadt", 2:"Leopoldstadt", 3:"Landstraße", 4:"Wieden", 5:"Margareten",
   6:"Mariahilf", 7:"Neubau", 8:"Josefstadt", 9:"Alsergrund", 10:"Favoriten",
@@ -187,7 +202,6 @@ const BEZIRKE = {
   16:"Ottakring", 17:"Hernals", 18:"Währing", 19:"Döbling", 20:"Brigittenau",
   21:"Floridsdorf", 22:"Donaustadt", 23:"Liesing"
 };
-
 const CUISINE = {
   restaurant:"Restaurant (allgemein)", austrian_restaurant:"Österreichisch",
   italian_restaurant:"Italienisch", pizza_restaurant:"Pizza", hamburger_restaurant:"Burger",
@@ -203,7 +217,8 @@ const CUISINE = {
   brunch_restaurant:"Brunch", vegetarian_restaurant:"Vegetarisch", vegan_restaurant:"Vegan"
 };
 
-const DISPLAY_LIMIT = 50;
+const EXPLORE_LIMIT = 200;
+const LIST_LIMIT = 50;
 
 function cuisineLabel(type){
   if(!type) return "Sonstige";
@@ -216,60 +231,21 @@ const fmt = n => (n==null? "—" : n.toLocaleString("de-AT"));
 const de1 = n => (n==null? "—" : n.toFixed(1).replace(".",","));
 const de2 = n => (n==null? "—" : n.toFixed(2).replace(".",","));
 
-let DATA = null;
-const state = { cuisine:"", district:"", price:"" };
-
-function allRows(){ return SECTIONS.flatMap(s => DATA[s.key] || []); }
+let DATA = null, ALL = [];
+const state = { district:"", price:"", q:"", sort:"score" };
 
 function rowMatches(r){
-  if(state.cuisine && (r.primary_type||"") !== state.cuisine) return false;
   if(state.district && String(r.district||"") !== state.district) return false;
   if(state.price && String(r.price_level||"") !== state.price) return false;
   return true;
 }
-
 function subline(r){
   const bits = [cuisineLabel(r.primary_type)];
   if(r.price_level) bits.push(priceSymbol(r.price_level));
   if(r.district) bits.push(`${r.district}. ${BEZIRKE[r.district]||""}`);
   return bits.join(" · ");
 }
-
-function trendCell(row, maxAbs){
-  const a = row.growth_abs;
-  if(a==null) return `<span class="mom flat">—</span>`;
-  const cls = a>0? "up" : "flat";
-  const arrow = a>0? "▲" : (a<0? "▼" : "·");
-  const w = (a>0 && maxAbs)? Math.max(6, Math.round(60*a/maxAbs)) : 0;
-  return `<span class="mom ${cls}">${arrow} ${a>0?"+":""}${fmt(a)}<span class="bar" style="width:${w}px"></span></span>`;
-}
-
-function render(sec, rows, week){
-  const node = document.getElementById(sec.el);
-  const isTrend = sec.kind==="trend";
-  const maxAbs = Math.max(1, ...rows.map(r => r.growth_abs>0? r.growth_abs:0));
-
-  let head = `
-    <div class="eyebrow">${sec.eyebrow}</div>
-    <h2>${sec.title}</h2>
-    <p class="def">${sec.def}</p>`;
-
-  const filtered = (state.cuisine||state.district||state.price);
-  if(!rows.length){
-    let msg;
-    if(filtered){
-      msg = `<p class="empty">Keine Treffer für diese Filter in dieser Liste.</p>`;
-    } else if(isTrend){
-      msg = `<p class="empty"><b>Hier noch nichts.</b> Diese Liste vergleicht diesen
-        Monat mit dem Vormonat und braucht daher zwei Monats-Schnappschüsse, bevor sie
-        sich füllt${week?` (Erfassung seit ${week})`:""} – also ab dem zweiten Scan.</p>`;
-    } else {
-      msg = `<p class="empty"><b>Noch keine Daten.</b></p>`;
-    }
-    node.innerHTML = head + msg;
-    return;
-  }
-
+function scoreRowsTable(rows, activeCol){
   const rowsHtml = rows.map((r,i)=>`
     <tr>
       <td class="l rank num">${i+1}</td>
@@ -277,96 +253,147 @@ function render(sec, rows, week){
         <div class="cuisine hide-sm">${subline(r)}</div></td>
       <td class="rating num hide-sm">${de1(r.rating)}</td>
       <td class="num">${fmt(r.review_count)}</td>
-      ${isTrend
-        ? `<td>${trendCell(r, maxAbs)}</td>`
-        : `<td class="num score hide-sm">${r.score!=null? de2(r.score):"—"}</td>`}
+      <td class="num score hide-sm">${r.score!=null? de2(r.score):"—"}</td>
     </tr>`).join("");
-
-  node.innerHTML = head + `
-    <table>
+  const A = c => activeCol===c? " active":"";
+  return `<table>
       <thead><tr>
         <th class="l rank"></th>
         <th class="l">Restaurant</th>
-        <th class="hide-sm">Bewertung</th>
-        <th>Bewertungen</th>
-        <th${isTrend?"":" class=\"hide-sm\""}>${isTrend? "Δ Bewertungen" : "Punktzahl"}</th>
-      </tr></thead>
-      <tbody>${rowsHtml}</tbody>
-    </table>`;
+        <th class="hide-sm${A('rating')}">Bewertung</th>
+        <th class="${A('reviews')}">Bewertungen</th>
+        <th class="hide-sm${A('score')}">Punktzahl</th>
+      </tr></thead><tbody>${rowsHtml}</tbody></table>`;
+}
+function trendCell(a, maxAbs){
+  if(a==null) return `<span class="mom flat">—</span>`;
+  const cls = a>0? "up":"flat", arrow = a>0? "▲":(a<0?"▼":"·");
+  const w = (a>0 && maxAbs)? Math.max(6, Math.round(60*a/maxAbs)) : 0;
+  return `<span class="mom ${cls}">${arrow} ${a>0?"+":""}${fmt(a)}<span class="bar" style="width:${w}px"></span></span>`;
 }
 
-function apply(){
-  const week = DATA.week_start_date;
-  let shown = 0;
-  SECTIONS.forEach(sec => {
-    const rows = (DATA[sec.key]||[]).filter(rowMatches).slice(0, DISPLAY_LIMIT);
-    shown += rows.length;
-    render(sec, rows, week);
-  });
+function renderExplore(){
+  const q = state.q.trim().toLowerCase();
+  let rows = ALL.filter(rowMatches);
+  if(q) rows = rows.filter(r => (r.name||"").toLowerCase().includes(q));
+  const key = state.sort;
+  const val = r => key==="rating"? r.rating : key==="reviews"? r.review_count : r.score;
+  rows = rows.slice().sort((a,b)=> (val(b)??-1) - (val(a)??-1));
+  const total = rows.length;
+  rows = rows.slice(0, EXPLORE_LIMIT);
+  const node = document.getElementById("explore");
+  if(!total){
+    node.innerHTML = q
+      ? `<p class="empty">Kein Lokal mit „${state.q}“ gefunden. Hinweis: Cafés, Bars
+         und Bäckereien sind nicht im Datensatz – manche Lokale fehlen deshalb.</p>`
+      : `<p class="empty">Keine Treffer für diese Filter.</p>`;
+    return;
+  }
+  const shownNote = total>EXPLORE_LIMIT
+    ? `<div class="count" style="margin:0 0 8px">Zeige Top ${EXPLORE_LIMIT} von ${fmt(total)} Treffern</div>` : "";
+  node.innerHTML = shownNote + scoreRowsTable(rows, key);
+}
+
+function renderBest(){
+  const rows = ALL.filter(rowMatches).slice(0, LIST_LIMIT); // ALL is pre-sorted by score
+  const node = document.getElementById("best");
+  let head = `
+    <div class="eyebrow">Beste insgesamt · Qualität, gewichtet nach Anzahl der Bewertungen</div>
+    <h2>Beste insgesamt</h2>
+    <p class="def">Durchgehend hoch bewertet und durch viele Bewertungen bestätigt.</p>`;
+  if(!rows.length){ node.innerHTML = head + `<p class="empty">Keine Treffer für diese Filter.</p>`; return; }
+  node.innerHTML = head + scoreRowsTable(rows, "score");
+}
+
+function renderTrend(){
+  const node = document.getElementById("trend");
+  let head = `
+    <div class="eyebrow">Im Trend · stärkster Bewertungszuwachs zuletzt</div>
+    <h2>Im Trend</h2>
+    <p class="def">Gut bewertete Lokale, die gerade am schnellsten neue Bewertungen sammeln.</p>`;
+  let rows = ALL.filter(r => rowMatches(r) && r.rating>=4.3 && r.growth_abs!=null && r.growth_abs>0)
+                .sort((a,b)=> b.growth_abs - a.growth_abs).slice(0, LIST_LIMIT);
+  if(!rows.length){
+    const filtered = (state.cuisine||state.district||state.price);
+    node.innerHTML = head + (filtered
+      ? `<p class="empty">Keine Treffer für diese Filter in dieser Liste.</p>`
+      : `<p class="empty"><b>Hier noch nichts.</b> Diese Liste vergleicht diesen Monat
+         mit dem Vormonat und braucht daher zwei Monats-Schnappschüsse, bevor sie sich
+         füllt – also ab dem zweiten Scan (1. Juli 2026).</p>`);
+    return;
+  }
+  const maxAbs = Math.max(1, ...rows.map(r => r.growth_abs));
+  const rowsHtml = rows.map((r,i)=>`
+    <tr>
+      <td class="l rank num">${i+1}</td>
+      <td class="l"><span class="name">${r.name||"—"}</span>
+        <div class="cuisine hide-sm">${subline(r)}</div></td>
+      <td class="rating num hide-sm">${de1(r.rating)}</td>
+      <td class="num">${fmt(r.review_count)}</td>
+      <td>${trendCell(r.growth_abs, maxAbs)}</td>
+    </tr>`).join("");
+  node.innerHTML = head + `<table>
+      <thead><tr><th class="l rank"></th><th class="l">Restaurant</th>
+        <th class="hide-sm">Bewertung</th><th>Bewertungen</th><th>Δ Bewertungen</th></tr></thead>
+      <tbody>${rowsHtml}</tbody></table>`;
+}
+
+function applyLists(){
+  renderBest(); renderTrend();
   const cnt = document.getElementById("count");
   const bits = [];
-  if(state.cuisine) bits.push(cuisineLabel(state.cuisine));
   if(state.district) bits.push(`${state.district}. ${BEZIRKE[state.district]||""}`);
   if(state.price) bits.push(priceSymbol(Number(state.price)));
   cnt.textContent = bits.length ? `Gefiltert nach: ${bits.join(" · ")}` : "";
 }
+function applyAll(){ renderExplore(); applyLists(); }
 
 function fillSelect(sel, values, labelFn){
-  values.forEach(v => {
-    const o = document.createElement("option");
-    o.value = String(v); o.textContent = labelFn(v);
-    sel.appendChild(o);
-  });
+  values.forEach(v => { const o=document.createElement("option");
+    o.value=String(v); o.textContent=labelFn(v); sel.appendChild(o); });
 }
-
 function buildFilters(){
-  const rows = allRows();
-
-  const types = [...new Set(rows.map(r => r.primary_type).filter(Boolean))]
-    .sort((a,b)=> cuisineLabel(a).localeCompare(cuisineLabel(b),"de"));
-  const csel = document.getElementById("f-cuisine");
-  fillSelect(csel, types, cuisineLabel);
-  csel.addEventListener("change", e => { state.cuisine = e.target.value; apply(); });
-
-  const districts = [...new Set(rows.map(r => r.district).filter(d => d!=null))]
+  const districts = [...new Set(ALL.map(r => r.district).filter(d => d!=null))]
     .map(Number).sort((a,b)=>a-b);
   const dsel = document.getElementById("f-district");
   if(districts.length){
     fillSelect(dsel, districts, d => `${d}. ${BEZIRKE[d]||""}`);
-    dsel.addEventListener("change", e => { state.district = e.target.value; apply(); });
+    dsel.addEventListener("change", e => { state.district=e.target.value; applyAll(); });
     document.getElementById("field-district").classList.remove("hidden");
   }
-
-  const prices = [...new Set(rows.map(r => r.price_level).filter(p => p!=null))]
+  const prices = [...new Set(ALL.map(r => r.price_level).filter(p => p!=null))]
     .map(Number).sort((a,b)=>a-b);
   const psel = document.getElementById("f-price");
   if(prices.length){
     fillSelect(psel, prices, p => priceSymbol(p));
-    psel.addEventListener("change", e => { state.price = e.target.value; apply(); });
+    psel.addEventListener("change", e => { state.price=e.target.value; applyAll(); });
     document.getElementById("field-price").classList.remove("hidden");
   }
-
+  if(districts.length || prices.length){
+    document.getElementById("filters").classList.remove("hidden");
+  }
   document.getElementById("reset").addEventListener("click", () => {
-    state.cuisine = ""; state.district = ""; state.price = "";
-    csel.value = ""; dsel.value = ""; psel.value = "";
-    apply();
+    state.district=""; state.price="";
+    dsel.value=""; psel.value=""; applyAll();
   });
+
+  const qin = document.getElementById("q");
+  qin.addEventListener("input", e => { state.q=e.target.value; renderExplore(); });
+  const sin = document.getElementById("sort");
+  sin.addEventListener("change", e => { state.sort=e.target.value; renderExplore(); });
 }
 
 function fillExplainers(data){
   const C = (data.city_avg_rating!=null? data.city_avg_rating : 4.4);
   const m = (data.bayes_m!=null? data.bayes_m : 400);
   const n = data.restaurant_count || 0;
-
   const ex = [
     {name:"4,9 ★ · 80 Bew.", r:4.9, v:80},
     {name:"4,7 ★ · 5.000 Bew.", r:4.7, v:5000},
     {name:"4,5 ★ · 12.000 Bew.", r:4.5, v:12000},
   ];
   ex.forEach(e => e.s = (e.v*e.r + m*C)/(e.v+m));
-  const exRows = ex.map(e =>
-    `<tr><td>${e.name}</td><td><b>${de2(e.s)}</b></td></tr>`).join("");
-
+  const exRows = ex.map(e => `<tr><td>${e.name}</td><td><b>${de2(e.s)}</b></td></tr>`).join("");
   document.getElementById("explain-best").innerHTML = `
     <p>„Beste insgesamt“ nutzt eine <b>gewichtete Bewertung</b> (auch „Bayes-Bewertung“,
        dieselbe Methode wie die IMDb-Top-250). Hintergrund: Die reine Sternebewertung
@@ -381,13 +408,10 @@ function fillExplainers(data){
        <b>m = ${m}</b>. m ist die „Vertrauensschwelle“: ungefähr so viele Bewertungen
        braucht ein Lokal, damit seiner eigenen Bewertung voll vertraut wird.</p>
     <p>Beispiel mit diesen Werten:</p>
-    <table><thead><tr><th>Lokal</th><th>Punktzahl</th></tr></thead>
-      <tbody>${exRows}</tbody></table>
+    <table><thead><tr><th>Lokal</th><th>Punktzahl</th></tr></thead><tbody>${exRows}</tbody></table>
     <p>Das 4,9-Lokal mit nur 80 Bewertungen landet <b>unter</b> dem bestätigten
-       4,7-Lokal mit 5.000 – genau das gewünschte Verhalten. Ein höheres m wäre
-       strenger (bevorzugt vielfach bewertete Lokale), ein niedrigeres ließe kleinere
-       Newcomer schneller aufsteigen.</p>`;
-
+       4,7-Lokal mit 5.000 – genau das gewünschte Verhalten. Tipp: Im „Entdecken“-Bereich
+       oben kannst du stattdessen nach reiner Bewertung oder reiner Anzahl sortieren.</p>`;
   document.getElementById("explain-trend").innerHTML = `
     <p>„Im Trend“ zeigt die Lokale mit dem <b>stärksten Bewertungszuwachs zuletzt</b>.</p>
     <p>Google liefert keine „Bewertungen der letzten Wochen“. Stattdessen zählen wir
@@ -397,21 +421,16 @@ function fillExplainers(data){
     <span class="formula">Zuwachs = Bewertungen (dieser Monat) − Bewertungen (Vormonat)</span>
     <p>Damit kein schwaches Lokal mit vielen neuen Bewertungen oben landet, zählen nur
        Lokale ab <b>4,3 Sternen</b>. Weil dafür ein Vormonat zum Vergleich nötig ist,
-       füllt sich diese Liste erst ab dem <b>zweiten Monat</b> (also ab dem Scan am
-       1. Juli 2026).</p>`;
+       füllt sich diese Liste erst ab dem <b>zweiten Monat</b> (Scan am 1. Juli 2026).</p>`;
 }
 
-(function(){
-  const u = "davidlanskyles", d = "gmail.com";
-  const a = document.getElementById("contact");
-  a.href = "mailto:" + u + "@" + d;
-  a.textContent = u + "@" + d;
-})();
+(function(){ const u="davidlanskyles", d="gmail.com";
+  const a=document.getElementById("contact"); a.href="mailto:"+u+"@"+d; a.textContent=u+"@"+d; })();
 
 fetch("rankings.json", {cache:"no-store"})
   .then(r => { if(!r.ok) throw new Error(r.status); return r.json(); })
   .then(data => {
-    DATA = data;
+    DATA = data; ALL = data.restaurants || [];
     const week = data.week_start_date;
     const gen = data.generated_at? new Date(data.generated_at).toLocaleString("de-AT",
       {day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}) : "";
@@ -420,11 +439,11 @@ fetch("rankings.json", {cache:"no-store"})
       (monthLabel? `${monthLabel}` : "Noch keine Daten") + (gen? ` · erstellt ${gen}`:"");
     buildFilters();
     fillExplainers(data);
-    apply();
+    applyAll();
   })
   .catch(err => {
     document.getElementById("meta").textContent = "rankings.json nicht gefunden";
-    document.getElementById("best").innerHTML =
+    document.getElementById("explore").innerHTML =
       `<p class="empty"><b>Noch keine Datendatei.</b> Führe den Monats-Scan und Export
        einmal aus, dann füllt sich diese Seite. (Fehler: ${err.message})</p>`;
   });
