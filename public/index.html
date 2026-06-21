@@ -84,6 +84,7 @@
   .rating::before{content:"\2605 "; color:var(--ink-soft)}
   .num{font-feature-settings:"tnum" 1}
   .score{color:var(--ink-soft)}
+  .lg{display:inline} .sm{display:none}
   .mom{font-weight:600; white-space:nowrap; color:var(--ink)}
   .mom.flat{color:var(--ink-faint)}
   .mom .bar{display:inline-block; height:6px; border-radius:3px; vertical-align:middle; margin-left:8px; background:var(--ink); opacity:.18}
@@ -130,7 +131,10 @@
 
   @media (max-width:620px){
     .hide-sm{display:none}
-    td,th{padding-left:6px; padding-right:6px}
+    .lg{display:none} .sm{display:inline}
+    table{font-size:13px}
+    th{font-size:10px; letter-spacing:.02em}
+    td,th{padding-left:5px; padding-right:5px}
     .field select{min-width:0; width:100%}
     .field{flex:1 1 130px}
     .newsletter{padding:40px 20px; border-radius:22px}
@@ -282,12 +286,14 @@ function subline(r){ const b=[cuisineLabel(r.primary_type)];
 function scoreTable(rows,active){
   const body=rows.map((r,i)=>`<tr><td class="l rank num">${i+1}</td>
     <td class="l"><span class="name">${r.name||"—"}</span><div class="cuisine hide-sm">${subline(r)}</div></td>
-    <td class="rating num hide-sm">${de1(r.rating)}</td><td class="num">${fmt(r.review_count)}</td>
-    <td class="num score hide-sm">${r.score!=null?de2(r.score):"—"}</td></tr>`).join("");
+    <td class="rating num">${de1(r.rating)}</td><td class="num">${fmt(r.review_count)}</td>
+    <td class="num score">${r.score!=null?de2(r.score):"—"}</td></tr>`).join("");
   const A=c=>active===c?" active":"";
   return `<table><thead><tr><th class="l rank"></th><th class="l">Restaurant</th>
-    <th class="hide-sm${A('rating')}">★★★</th><th class="${A('reviews')}"># Bewertungen</th>
-    <th class="hide-sm${A('score')}">Gewichtet</th></tr></thead><tbody>${body}</tbody></table>`;
+    <th class="${A('rating')}">★★★</th>
+    <th class="${A('reviews')}"><span class="lg"># Bewertungen</span><span class="sm">#</span></th>
+    <th class="${A('score')}"><span class="lg">Gewichtet</span><span class="sm">Gew.</span></th>
+    </tr></thead><tbody>${body}</tbody></table>`;
 }
 function trendCell(a,maxAbs){ if(a==null) return `<span class="mom flat">—</span>`;
   const cls=a>0?"":"flat", arrow=a>0?"▲":(a<0?"▼":"·"); const w=(a>0&&maxAbs)?Math.max(6,Math.round(60*a/maxAbs)):0;
@@ -326,10 +332,11 @@ function renderTrend(){
   const maxAbs=Math.max(1,...rows.map(r=>r.growth_abs));
   const body=rows.map((r,i)=>`<tr><td class="l rank num">${i+1}</td>
     <td class="l"><span class="name">${r.name||"—"}</span><div class="cuisine hide-sm">${subline(r)}</div></td>
-    <td class="rating num hide-sm">${de1(r.rating)}</td><td class="num">${fmt(r.review_count)}</td>
+    <td class="rating num">${de1(r.rating)}</td><td class="num">${fmt(r.review_count)}</td>
     <td>${trendCell(r.growth_abs,maxAbs)}</td></tr>`).join("");
   node.innerHTML=head+`<table><thead><tr><th class="l rank"></th><th class="l">Restaurant</th>
-    <th class="hide-sm">★★★</th><th># Bewertungen</th><th>Δ Bewertungen</th></tr></thead><tbody>${body}</tbody></table>`;
+    <th>★★★</th><th><span class="lg"># Bewertungen</span><span class="sm">#</span></th>
+    <th><span class="lg">Δ Bewertungen</span><span class="sm">Δ</span></th></tr></thead><tbody>${body}</tbody></table>`;
 }
 function applyLists(){ renderBest(); renderTrend();
   const bits=[]; if(state.district) bits.push(`${state.district}. ${BEZIRKE[state.district]||""}`);
