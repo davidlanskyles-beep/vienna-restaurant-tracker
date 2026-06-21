@@ -6,7 +6,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
-<title>Wien Restaurant-Bewegung</title>
+<title>Wien's Restaurant Barometer</title>
 <style>
   :root{
     --bg:#ffffff; --bg-soft:#f5f5f7; --panel:#ffffff;
@@ -137,11 +137,11 @@
 <body>
   <header class="nav">
     <div class="nav-top">
-      <span class="wordmark">Wien Restaurant-Bewegung</span>
+      <span class="wordmark">Wien's Restaurant Barometer</span>
       <span class="meta" id="meta">lädt &hellip;</span>
     </div>
     <nav class="tabs" id="tabs">
-      <button class="tab" data-tab="best">Beste insgesamt</button>
+      <button class="tab" data-tab="best">Die Beliebtesten</button>
       <button class="tab" data-tab="trend">Im Trend</button>
       <button class="tab" data-tab="explore">Entdecken</button>
       <button class="tab" data-tab="impressum">Impressum</button>
@@ -167,7 +167,7 @@
     <div class="panel" id="panel-best" data-panel="best">
       <section id="best"></section>
       <details class="explain">
-        <summary>Wie wird &bdquo;Beste insgesamt&ldquo; berechnet?</summary>
+        <summary>Wie werden &bdquo;Die Beliebtesten&ldquo; berechnet?</summary>
         <div class="explain-body" id="explain-best"></div>
       </details>
     </div>
@@ -182,7 +182,6 @@
 
     <div class="panel" id="panel-explore" data-panel="explore" hidden>
       <section id="explore-sec">
-        <div class="eyebrow">Entdecken</div>
         <h2>Entdecken</h2>
         <p class="def">Suche ein bestimmtes Lokal nach Namen, oder sortiere die ganze
           Stadt nach dem, was dich interessiert. Bis zu 200 Treffer.</p>
@@ -304,13 +303,13 @@ function renderExplore(){
 }
 function renderBest(){
   const rows=ALL.filter(rowMatches).slice(0,LIST_LIMIT);
-  const head=`<div class="eyebrow">Beste insgesamt</div><h2>Beste insgesamt</h2>
-    <p class="def">Durchgehend hoch bewertet und durch viele Bewertungen bestätigt –
-    Qualität, gewichtet nach der Anzahl der Bewertungen.</p>`;
+  const head=`<h2>Die Beliebtesten</h2>
+    <p class="def">Lokale, die von vielen Gästen immer wieder begeistert bewertet werden –
+    hoch bewertet und durch viele Bewertungen bestätigt.</p>`;
   document.getElementById("best").innerHTML=head+(rows.length?scoreTable(rows,"score"):`<p class="empty">Keine Treffer für diese Filter.</p>`);
 }
 function renderTrend(){
-  const head=`<div class="eyebrow">Im Trend</div><h2>Im Trend</h2>
+  const head=`<h2>Im Trend</h2>
     <p class="def">Gut bewertete Lokale, die gerade am schnellsten neue Bewertungen sammeln.</p>`;
   let rows=ALL.filter(r=>rowMatches(r)&&r.rating>=4.3&&r.growth_abs!=null&&r.growth_abs>0)
     .sort((a,b)=>b.growth_abs-a.growth_abs).slice(0,LIST_LIMIT);
@@ -356,7 +355,7 @@ function fillExplainers(d){
   ex.forEach(e=>e.s=(e.v*e.r+m*C)/(e.v+m));
   const exRows=ex.map(e=>`<tr><td>${e.name}</td><td><b>${de2(e.s)}</b></td></tr>`).join("");
   document.getElementById("explain-best").innerHTML=`
-    <p>„Beste insgesamt“ nutzt eine <b>gewichtete Bewertung</b> (auch „Bayes-Bewertung“, dieselbe Methode wie die IMDb-Top-250). Eine reine Sternebewertung täuscht: 4,9 aus 30 Bewertungen wirkt besser als 4,7 aus 5.000, obwohl Letzteres viel stärker bestätigt ist.</p>
+    <p>Die Liste „Die Beliebtesten“ nutzt eine <b>gewichtete Bewertung</b> (auch „Bayes-Bewertung“, dieselbe Methode wie die IMDb-Top-250). Eine reine Sternebewertung täuscht: 4,9 aus 30 Bewertungen wirkt besser als 4,7 aus 5.000, obwohl Letzteres viel stärker bestätigt ist.</p>
     <p>Deshalb wird die eigene Bewertung mit dem Stadtdurchschnitt gemischt. <b>Je mehr Bewertungen, desto stärker zählt die eigene Bewertung; je weniger, desto mehr wird sie zum Stadtdurchschnitt hingezogen.</b></p>
     <span class="formula">Punktzahl = (Anzahl Bewertungen × eigene Bewertung + m × Stadtdurchschnitt) ÷ (Anzahl Bewertungen + m)</span>
     <p>Aktuell: <b>Stadtdurchschnitt = ${de2(C)} Sterne</b> (über ${fmt(n)} Lokale), <b>m = ${m}</b> (die „Vertrauensschwelle“: ungefähr so viele Bewertungen braucht ein Lokal, damit seiner eigenen Bewertung voll vertraut wird).</p>
