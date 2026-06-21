@@ -287,7 +287,7 @@ function scoreTable(rows,active){
   const A=c=>active===c?" active":"";
   return `<table><thead><tr><th class="l rank"></th><th class="l">Restaurant</th>
     <th class="hide-sm${A('rating')}">★★★</th><th class="${A('reviews')}"># Bewertungen</th>
-    <th class="hide-sm${A('score')}">Punktzahl</th></tr></thead><tbody>${body}</tbody></table>`;
+    <th class="hide-sm${A('score')}">Gewichtet</th></tr></thead><tbody>${body}</tbody></table>`;
 }
 function trendCell(a,maxAbs){ if(a==null) return `<span class="mom flat">—</span>`;
   const cls=a>0?"":"flat", arrow=a>0?"▲":(a<0?"▼":"·"); const w=(a>0&&maxAbs)?Math.max(6,Math.round(60*a/maxAbs)):0;
