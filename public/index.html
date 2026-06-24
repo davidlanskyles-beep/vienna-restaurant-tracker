@@ -151,6 +151,7 @@
     <nav class="tabs" id="tabs">
       <button class="tab" data-tab="best">Die Beliebtesten</button>
       <button class="tab" data-tab="trend">Im Trend</button>
+      <button class="tab" data-tab="luft">Luft nach oben</button>
       <button class="tab" data-tab="explore">Entdecken</button>
       <button class="tab" data-tab="impressum">Impressum</button>
       <a class="donate" href="https://buymeacoffee.com/davidlansky" target="_blank" rel="noopener">Unterst&uuml;tzen</a>
@@ -186,6 +187,14 @@
       <details class="explain">
         <summary>Wie wird &bdquo;Im Trend&ldquo; berechnet?</summary>
         <div class="explain-body" id="explain-trend"></div>
+      </details>
+    </div>
+
+    <div class="panel" id="panel-luft" data-panel="luft" hidden>
+      <section id="luft"></section>
+      <details class="explain">
+        <summary>Wie wird &bdquo;Luft nach oben&ldquo; berechnet?</summary>
+        <div class="explain-body" id="explain-luft"></div>
       </details>
     </div>
 
@@ -319,6 +328,15 @@ function renderBest(){
     hoch bewertet und durch viele Bewertungen bestätigt.</p>`;
   document.getElementById("best").innerHTML=head+(rows.length?scoreTable(rows,"score"):`<p class="empty">Keine Treffer für diese Filter.</p>`);
 }
+function renderLuft(){
+  const rows=ALL.filter(rowMatches).slice().sort((a,b)=>(a.score??Infinity)-(b.score??Infinity)).slice(0,LIST_LIMIT);
+  const head=`<h2>Luft nach oben</h2>
+    <p class="def">Das Gegenstück zu „Die Beliebtesten“: Lokale mit der niedrigsten
+    gewichteten Bewertung. Dieselbe Bayes-Methode, nur von unten – wenige Bewertungen
+    allein genügen nicht, ein Lokal landet erst dann hier, wenn es von genügend Gästen
+    schwach bewertet wurde.</p>`;
+  document.getElementById("luft").innerHTML=head+(rows.length?scoreTable(rows,"score"):`<p class="empty">Keine Treffer für diese Filter.</p>`);
+}
 function renderTrend(){
   const head=`<h2>Im Trend</h2>
     <p class="def">Gut bewertete Lokale, die gerade am schnellsten neue Bewertungen sammeln.</p>`;
@@ -338,7 +356,7 @@ function renderTrend(){
     <th>★★★</th><th><span class="lg"># Bewertungen</span><span class="sm">#</span></th>
     <th><span class="lg">Δ Bewertungen</span><span class="sm">Δ</span></th></tr></thead><tbody>${body}</tbody></table>`;
 }
-function applyLists(){ renderBest(); renderTrend();
+function applyLists(){ renderBest(); renderTrend(); renderLuft();
   const bits=[]; if(state.district) bits.push(`${state.district}. ${BEZIRKE[state.district]||""}`);
   if(state.price) bits.push(priceSymbol(Number(state.price)));
   document.getElementById("count").textContent=bits.length?`Gefiltert nach: ${bits.join(" · ")}`:""; }
@@ -374,6 +392,12 @@ function fillExplainers(d){
     <table><thead><tr><th>Lokal</th><th>Punktzahl</th></tr></thead><tbody>${exRows}</tbody></table>
     <p>Das 4,9-Lokal mit nur 80 Bewertungen landet <b>unter</b> dem 4,7-Lokal mit 5.000. Im „Entdecken“-Tab kannst du stattdessen nach reiner Bewertung oder reiner Anzahl sortieren.</p>
     <p><b>Datenquelle:</b> Sternebewertung (★★★) und Anzahl der Bewertungen (#) sind <b>Näherungswerte aus Google Maps</b> und können sich von Monat zu Monat leicht ändern, etwa wenn Google Spam-Bewertungen entfernt.</p>`;
+  document.getElementById("explain-luft").innerHTML=`
+    <p>„Luft nach oben“ ist das <b>Gegenstück zu „Die Beliebtesten“</b> und nutzt dieselbe <b>gewichtete Bewertung</b> (Bayes-Methode wie die IMDb-Top-250) – nur sortiert vom niedrigsten Wert aufwärts.</p>
+    <p>Eine reine Sternebewertung wäre hier irreführend: 2,0 aus nur 3 Bewertungen sagt kaum etwas aus. Deshalb wird die eigene Bewertung mit dem Stadtdurchschnitt gemischt. <b>Je weniger Bewertungen, desto stärker wird ein Lokal zum Stadtdurchschnitt hingezogen</b> – ein Lokal landet also erst dann hier unten, wenn es von genügend Gästen schwach bewertet wurde.</p>
+    <span class="formula">Punktzahl = (Anzahl Bewertungen × eigene Bewertung + m × Stadtdurchschnitt) ÷ (Anzahl Bewertungen + m)</span>
+    <p>Aktuell: <b>Stadtdurchschnitt = ${de2(C)} Sterne</b> (über ${fmt(n)} Lokale), <b>m = ${m}</b>. Berücksichtigt werden nur Lokale mit mindestens einer Bewertung.</p>
+    <p><b>Datenquelle:</b> Sternebewertung und Anzahl der Bewertungen sind Näherungswerte aus Google Maps und können sich von Monat zu Monat leicht ändern.</p>`;
   document.getElementById("explain-trend").innerHTML=`
     <p>„Im Trend“ zeigt die Lokale mit dem <b>stärksten Bewertungszuwachs zuletzt</b>.</p>
     <p>Google liefert keine „Bewertungen der letzten Wochen“. Stattdessen zählen wir jeden Monat die <b>Gesamtzahl der Bewertungen</b> und bilden die <b>Differenz zum Vormonat</b> – die Zahl der neu hinzugekommenen Bewertungen. Danach wird sortiert.</p>
@@ -399,7 +423,7 @@ function initNewsletter(){
 }
 
 // ── Tabs ──────────────────────────────────────────────────────────────────
-const TABS=["best","trend","explore","impressum"];
+const TABS=["best","trend","luft","explore","impressum"];
 function showTab(name){
   if(!TABS.includes(name)) name="best";
   document.querySelectorAll(".panel").forEach(p=> p.hidden = (p.dataset.panel!==name));
